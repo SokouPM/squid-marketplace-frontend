@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Article 1",
+    "imgUrl": "https://place-hold.it/500x300",
+    "price": 53,
+    "stock": 17,
+    "rating": 2.5,
+    "voteNumber": 54
+  },
+  {
+    "id": 2,
+    "name": "Article 2",
+    "imgUrl": "https://place-hold.it/500x300",
+    "price": 78,
+    "stock": 3,
+    "rating": 3,
+    "voteNumber": 12
+  },
+  {
+    "id": 3,
+    "name": "Article 3",
+    "imgUrl": "https://place-hold.it/500x300",
+    "price": 123,
+    "stock": 0,
+    "rating": 4.5,
+    "voteNumber": 54
+  },
+  {
+    "id": 4,
+    "name": "Article 4",
+    "imgUrl": "https://place-hold.it/500x300",
+    "price": 32,
+    "stock": 13,
+    "rating": 1.5,
+    "voteNumber": 45
+  }
+]

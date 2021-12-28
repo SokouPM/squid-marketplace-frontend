@@ -1,0 +1,33 @@
+.breadcrumbs {
+  border-bottom: solid var(--secondary-color) 3px;
+  margin: 0 auto 20px;
+  height: 30px;
+}
+
+.breadcrumbs * {
+  color: var(--secondary-color);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.breadcrumbs ol {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumbs li:not(li:first-of-type):before {
+  content: "<";
+  margin: 0 10px;
+}
+
+@media screen and (max-width: 1500px) {
+  .breadcrumbs {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .breadcrumbs {
+    width: 100%;
+  }
+}

@@ -1,0 +1,39 @@
+.legalNoticePage {
+  padding-bottom: 40px;
+}
+
+.legalNoticeText {
+  margin: auto;
+}
+
+.legalNoticeText p,
+.legalNoticeText h3 {
+  margin-top: 20px;
+  text-align: justify;
+}
+
+.legalNoticeText h3 {
+  font-size: 15px;
+}
+
+.legalNoticeText a {
+  font-weight: bold;
+  color: var(--secondary-color);
+}
+
+.legalNoticeText a:hover {
+  text-decoration: underline;
+}
+
+.legalNoticeText p br:nth-child(2n) {
+  margin: 10px;
+}
+
+.legalNoticeText ul {
+  margin-left: 5%;
+  list-style: disc;
+}
+
+.legalNoticeText ul li {
+  margin-top: 10px;
+}

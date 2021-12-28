@@ -1,0 +1,88 @@
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  margin-top: 50px;
+}
+
+.loading p {
+  margin-left: 10px;
+  color: var(--primary-color);
+}
+
+.articleList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.articleItem {
+  margin: 20px auto;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.articleItem img {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.articleItem:hover {
+  transform: scale(110%);
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
+    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.articleItem img {
+  max-width: 500px;
+  max-height: 300px;
+  width: 100%;
+}
+
+.articleName {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 5px;
+}
+
+.priceAndStockLine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px;
+  font-size: 18px;
+}
+
+.inStock {
+  font-weight: bold;
+  color: green;
+}
+
+.lessThanSix {
+  font-weight: bold;
+  color: orange;
+}
+
+.outOfStock {
+  font-weight: bold;
+  color: red;
+}
+
+.ratingLine {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 5px;
+}
+
+.ratingLine span {
+  width: max-content;
+}
+
+.voteNumber {
+  font-style: italic;
+  font-size: 12px;
+  margin-right: 10px;
+  color: gray;
+}

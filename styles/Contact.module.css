@@ -1,0 +1,39 @@
+.contactPage form,
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.contactPage form {
+  width: 80%;
+  margin: auto;
+}
+
+.formGroup {
+  margin-bottom: 10px;
+}
+
+.formGroup input,
+.formGroup textarea {
+  border: solid 1px gray;
+  border-radius: 5px;
+}
+
+.formGroup label {
+  margin-bottom: 2px;
+}
+
+.contactPage form button {
+  width: 100px;
+  height: 30px;
+  color: white;
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 500px;
+  transition: all 200ms;
+}
+
+.contactPage form button:hover {
+  color: var(--primary-color);
+  background-color: var(--tertiary-color);
+}

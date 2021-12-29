@@ -3,7 +3,6 @@ import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -56,12 +55,12 @@ const NavSideBar = () => {
     <div>
       {["left"].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button
+          <button
             className={styles.menuIcon}
             onClick={toggleDrawer(anchor, true)}
           >
             <GiHamburgerMenu />
-          </Button>
+          </button>
 
           <Drawer
             anchor={anchor}

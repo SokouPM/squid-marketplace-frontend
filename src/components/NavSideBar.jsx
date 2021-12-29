@@ -11,14 +11,7 @@ const NavSideBar = () => {
     left: false,
   });
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
+  const toggleDrawer = (anchor, open) => () => {
     setState({ ...state, [anchor]: open });
   };
 

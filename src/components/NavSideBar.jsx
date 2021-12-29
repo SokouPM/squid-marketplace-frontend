@@ -3,9 +3,6 @@ import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
 import datas from "../datas/categories.json";
 import styles from "../../styles/components/Header.module.css";
 
@@ -32,22 +29,18 @@ const NavSideBar = () => {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        <p>Categories de meubles</p>
-        {datas.map((item) => (
-          <ListItem button key={item.id}>
-            <Link
-              href={`/${item.name
-                .toLowerCase()
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "")}`}
-              passHref
-            >
-              <ListItemText primary={item.name} />
-            </Link>
-          </ListItem>
-        ))}
-      </List>
+      <p>Categories de meubles</p>
+      {datas.map((item) => (
+        <Link
+          key={item.id}
+          href={`/${item.name
+            .normalize("NFD")
+            .replace(/\s+/g, "-")
+            .replace(/[\u0300-\u036f]/g, "")}`}
+        >
+          <a>{item.name}</a>
+        </Link>
+      ))}
     </Box>
   );
 

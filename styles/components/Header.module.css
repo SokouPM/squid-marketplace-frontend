@@ -56,6 +56,8 @@
   background-color: var(--primary-color);
   overflow-y: auto;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .sideBar p {
@@ -64,15 +66,21 @@
   margin: 15px 0;
 }
 
-.sideBar div {
+.sideBar a {
+  color: white;
   padding-left: 10px;
   transition: all 0.1s;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
 
-.sideBar div:hover {
+.sideBar a:hover {
   color: var(--secondary-color);
   padding-left: 20px;
   font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 /************* Logo *************/

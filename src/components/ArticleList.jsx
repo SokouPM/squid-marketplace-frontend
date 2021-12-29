@@ -1,10 +1,10 @@
 // import UseApi from "./hooks/UseApi";
-import Image from "next/image";
+// import Image from "next/image";
 import datas from "../datas/products.json";
 import Rating from "@mui/material/Rating";
-import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
 import { IoMdStar } from "react-icons/io";
+import { GiSquid } from "react-icons/gi";
 import styles from "../../styles/components/ArticleList.module.css";
 
 const ArticleList = (url) => {
@@ -12,15 +12,25 @@ const ArticleList = (url) => {
 
   const stockRender = (stockNumber) => {
     if (stockNumber > 5) {
-      return <p className={styles.inStock}>En stock</p>;
+      return (
+        <p className={styles.inStock}>
+          <GiSquid /> En stock
+        </p>
+      );
     }
     if (stockNumber <= 5 && stockNumber > 0) {
       return (
-        <p className={styles.lessThanSix}>Plus que {stockNumber} en stock</p>
+        <p className={styles.lessThanSix}>
+          <GiSquid /> Plus que {stockNumber} en stock
+        </p>
       );
     }
     if (stockNumber >= 0) {
-      return <p className={styles.outOfStock}>Rupture de stock</p>;
+      return (
+        <p className={styles.outOfStock}>
+          <GiSquid /> Rupture de stock
+        </p>
+      );
     }
   };
 

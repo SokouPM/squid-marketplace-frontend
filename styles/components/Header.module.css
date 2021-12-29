@@ -38,6 +38,9 @@
   width: 40px;
   border-radius: 100px;
   transition: all 200ms;
+  background: none;
+  border: none;
+  color: white;
 }
 
 .menuIcon:hover {
@@ -46,6 +49,30 @@
 
 .menuIcon svg {
   font-size: 25px;
+}
+
+.sideBar {
+  color: white;
+  background-color: var(--primary-color);
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.sideBar p {
+  text-align: center;
+  font-size: 18px;
+  margin: 15px 0;
+}
+
+.sideBar div {
+  padding-left: 10px;
+  transition: all 0.1s;
+}
+
+.sideBar div:hover {
+  color: var(--secondary-color);
+  padding-left: 20px;
+  font-weight: bold;
 }
 
 /************* Logo *************/

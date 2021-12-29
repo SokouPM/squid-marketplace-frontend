@@ -1,19 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-import { GiHamburgerMenu } from "react-icons/gi";
-// import { ImCross } from "react-icons/im";
+import NavSideBar from "./NavSideBar";
 import { AiFillCaretDown } from "react-icons/ai";
 import { FaSearch } from "react-icons/fa";
-import { IoPersonCircleSharp } from "react-icons/io5";
+import { GiSquidHead } from "react-icons/gi";
 import styles from "../../styles/components/Header.module.css";
 
 const Header = () => {
+  let isVisible = false;
+
   return (
     <header>
       <div className={styles.headerContent}>
-        <div className={styles.menuIcon}>
-          <GiHamburgerMenu />
-        </div>
+        <NavSideBar />
 
         <Link href="/">
           <a className={styles.logo}>
@@ -32,12 +31,11 @@ const Header = () => {
 
       <div className={styles.headerContent}>
         <a className={styles.connectButton}>
-          <IoPersonCircleSharp /> Se connecter
+          <GiSquidHead /> Se connecter
         </a>
 
         <div className={styles.chart}>
           <p>Panier</p> <div className={styles.chartCount}>0</div>
-          {/* <i className="fas fa-caret-down"></i> */}
           <AiFillCaretDown />
         </div>
       </div>

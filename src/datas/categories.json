@@ -1,0 +1,34 @@
+[
+  {
+    "id": 0,
+    "name": "Lits"
+  },
+  {
+    "id": 1,
+    "name": "Armoires"
+  },
+  {
+    "id": 2,
+    "name": "Commodes"
+  },
+  {
+    "id": 3,
+    "name": "Étagères"
+  },
+  {
+    "id": 4,
+    "name": "Bureaux"
+  },
+  {
+    "id": 5,
+    "name": "Buffets"
+  },
+  {
+    "id": 6,
+    "name": "Chaises"
+  },
+  {
+    "id": 7,
+    "name": "Tables"
+  }
+]

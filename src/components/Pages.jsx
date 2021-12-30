@@ -1,7 +1,7 @@
-import Header from "./Header";
-import BreadCrumbs from "./BreadCrumbs";
-import Footer from "./Footer";
 import { useRouter } from "next/router";
+import Header from "./Header";
+import BreadCrumbs from "./body/BreadCrumbs";
+import Footer from "./Footer";
 
 const Page = (props) => {
   const { children, ...otherProps } = props;

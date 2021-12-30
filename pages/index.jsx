@@ -1,5 +1,5 @@
-import Page from "../src/components/Pages";
-import ArticleList from "../src/components/ArticleList";
+import Page from "/src/components/Pages";
+import ArticleList from "/src/components/body/ArticleList";
 
 const Home = () => {
   return (

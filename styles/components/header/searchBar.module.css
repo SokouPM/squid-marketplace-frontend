@@ -1,0 +1,42 @@
+.searchBarContent,
+.searchBar {
+  display: flex;
+  align-items: center;
+}
+
+.searchBar input,
+.searchBar button {
+  height: 30px;
+  border: none;
+  padding: 0 10px;
+}
+
+.searchBar input {
+  border-radius: 500px 0 0 500px;
+  width: 300px;
+}
+
+.searchBar input:focus {
+  border: solid 2px var(--secondary-color);
+}
+
+.searchBar button {
+  color: white;
+  display: flex;
+  align-items: center;
+  background-color: var(--secondary-color);
+  border-radius: 0 500px 500px 0;
+  font-size: 18px;
+  width: 45px;
+  transition: all 200ms;
+}
+
+.searchBar button svg {
+  font-size: 20px;
+  margin-left: 2px;
+}
+
+.searchBar button:hover {
+  color: var(--primary-color);
+  background-color: var(--tertiary-color);
+}

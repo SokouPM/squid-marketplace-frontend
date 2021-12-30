@@ -3,8 +3,8 @@ import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import datas from "../datas/categories.json";
-import styles from "../../styles/components/Header.module.css";
+import datas from "/src/datas/categories.json";
+import styles from "/styles/components/header/navSideBar.module.css";
 
 const NavSideBar = () => {
   const [state, setState] = React.useState({

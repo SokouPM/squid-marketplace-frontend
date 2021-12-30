@@ -16,7 +16,7 @@
 }
 
 .breadcrumbs li:not(li:first-of-type):before {
-  content: "<";
+  content: ">";
   margin: 0 10px;
 }
 

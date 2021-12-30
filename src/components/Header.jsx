@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import NavSideBar from "./NavSideBar";
+import NavSideBar from "./header/NavSideBar";
 import { AiFillCaretDown } from "react-icons/ai";
-import { FaSearch } from "react-icons/fa";
 import { GiSquidHead } from "react-icons/gi";
-import styles from "../../styles/components/Header.module.css";
+import styles from "/styles/components/header.module.css";
+import SearchBar from "./header/SearchBar";
 
 const Header = () => {
   let isVisible = false;
@@ -22,12 +22,7 @@ const Header = () => {
         </Link>
       </div>
 
-      <form className={styles.searchBar}>
-        <input type="text"></input>
-        <button>
-          <FaSearch />
-        </button>
-      </form>
+      <SearchBar />
 
       <div className={styles.headerContent}>
         <a className={styles.connectButton}>

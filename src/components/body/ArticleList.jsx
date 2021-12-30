@@ -1,11 +1,11 @@
 // import UseApi from "./hooks/UseApi";
 // import Image from "next/image";
-import datas from "../datas/products.json";
 import Rating from "@mui/material/Rating";
 import CircularProgress from "@mui/material/CircularProgress";
 import { IoMdStar } from "react-icons/io";
 import { GiSquid } from "react-icons/gi";
-import styles from "../../styles/components/ArticleList.module.css";
+import datas from "/src/datas/products.json";
+import styles from "/styles/components/body/ArticleList.module.css";
 
 const ArticleList = (url) => {
   // const datas = UseApi(url);
@@ -28,7 +28,7 @@ const ArticleList = (url) => {
     if (stockNumber >= 0) {
       return (
         <p className={styles.outOfStock}>
-          <GiSquid /> Rupture de stock
+          <GiSquid /> L’article n’est plus disponible
         </p>
       );
     }

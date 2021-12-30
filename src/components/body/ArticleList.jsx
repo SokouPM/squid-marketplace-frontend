@@ -4,8 +4,8 @@ import Rating from "@mui/material/Rating";
 import CircularProgress from "@mui/material/CircularProgress";
 import { IoMdStar } from "react-icons/io";
 import { GiSquid } from "react-icons/gi";
-import datas from "/src/datas/products.json";
-import styles from "/styles/components/body/ArticleList.module.css";
+import datas from "../../../src/datas/products.json";
+import styles from "../../../styles/components/body/ArticleList.module.css";
 
 const ArticleList = (url) => {
   // const datas = UseApi(url);

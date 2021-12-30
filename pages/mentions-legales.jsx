@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
-import Page from "/src/components/Pages";
+import Page from "../src/components/Pages";
 import { GiSquid } from "react-icons/gi";
-import styles from "/styles/LegalNotices.module.css";
+import styles from "../styles/LegalNotices.module.css";
 
 const LegalNotice = () => {
   return (

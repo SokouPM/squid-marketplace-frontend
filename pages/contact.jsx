@@ -1,5 +1,5 @@
-import Page from "../src/components/Pages";
-import styles from "../styles/Contact.module.css";
+import Page from "/src/components/Pages";
+import styles from "/styles/Contact.module.css";
 
 const Contact = () => {
   return (

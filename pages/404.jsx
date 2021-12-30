@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
-import Page from "../src/components/Pages";
+import Page from "/src/components/Pages";
 import Image from "next/image";
-import styles from "../styles/404.module.css";
+import styles from "/styles/404.module.css";
 
 const NotFound = () => {
   return (

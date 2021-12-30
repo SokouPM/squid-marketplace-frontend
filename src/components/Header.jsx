@@ -3,7 +3,7 @@ import Link from "next/link";
 import NavSideBar from "./header/NavSideBar";
 import { AiFillCaretDown } from "react-icons/ai";
 import { GiSquidHead } from "react-icons/gi";
-import styles from "../../styles/components/header.module.css";
+import styles from "/styles/components/header.module.css";
 import SearchBar from "./header/SearchBar";
 
 const Header = () => {

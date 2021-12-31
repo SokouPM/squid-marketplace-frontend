@@ -11,16 +11,18 @@ const ArticleList = (url) => {
   // const datas = UseApi(url);
 
   const stockRender = (stockNumber) => {
-    if (stockNumber > 5) {
+    const alertLimitNb = 10;
+
+    if (stockNumber > alertLimitNb) {
       return (
         <p className={styles.inStock}>
           <GiSquid /> En stock
         </p>
       );
     }
-    if (stockNumber <= 5 && stockNumber > 0) {
+    if (stockNumber <= alertLimitNb && stockNumber > 0) {
       return (
-        <p className={styles.lessThanSix}>
+        <p className={styles.lessThan}>
           <GiSquid /> Plus que {stockNumber} en stock
         </p>
       );
@@ -66,6 +68,7 @@ const ArticleList = (url) => {
               value={item.rating}
               precision={0.5}
               readOnly
+              icon={<IoMdStar color="#cc0023" fontSize="inherit" />}
               emptyIcon={<IoMdStar color="#272727" fontSize="inherit" />}
               sx={{
                 width: 300,

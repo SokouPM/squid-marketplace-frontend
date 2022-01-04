@@ -1,6 +1,7 @@
 import Page from "/src/components/Pages";
-import { Field, Form, Formik, useFormik } from "formik";
+import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
+import FiAlertTriangle from "react-icons/fi";
 import styles from "/styles/Contact.module.css";
 
 const Contact = () => {
@@ -8,7 +9,10 @@ const Contact = () => {
     name: Yup.string()
       .min(2, "Le champ doit contenir minimum 2 caractères !")
       .max(150, "Le champ doit contenir maximum 150 caractères !")
-      .matches(/^[a-zA-Z\s]*$/, "Le champ ne doit pas contenir de nombre")
+      .matches(
+        /^[a-zA-Z\s]*$/,
+        "Le champ ne doit pas contenir de nombre ou de caractères spéciaux !"
+      )
       .required("Le champ est requis !"),
     email: Yup.string()
       .email("Le mail est invalide !")
@@ -35,7 +39,7 @@ const Contact = () => {
           }}
           validationSchema={DisplayingErrorMessagesSchema}
           onSubmit={(values) => {
-            alert(values);
+            alert(JSON.stringify(values, null, 2));
           }}
         >
           {({ errors, touched }) => (

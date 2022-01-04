@@ -23,7 +23,7 @@ const Contact = () => {
       .required("Le champ est requis !"),
     message: Yup.string()
       .min(2, "Le champ doit contenir minimum 2 caractères !")
-      .max(150, "Le champ doit contenir maximum 150 caractères !")
+      .max(500, "Le champ doit contenir maximum 500 caractères !")
       .required("Le champ est requis !"),
   });
 

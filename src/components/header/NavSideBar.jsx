@@ -24,7 +24,7 @@ const NavSideBar = () => {
     >
       <p>Categories de meubles</p>
       {datas.map((item) => (
-        <Link key={item.id} href={`cetegorie-${item.id}`}>
+        <Link key={item.id} href={`categorie-${item.id}`}>
           <a>{item.name}</a>
         </Link>
       ))}

@@ -24,13 +24,7 @@ const NavSideBar = () => {
     >
       <p>Categories de meubles</p>
       {datas.map((item) => (
-        <Link
-          key={item.id}
-          href={`/${item.name
-            .normalize("NFD")
-            .replace(/\s+/g, "-")
-            .replace(/[\u0300-\u036f]/g, "")}`}
-        >
+        <Link key={item.id} href={`cetegorie-${item.id}`}>
           <a>{item.name}</a>
         </Link>
       ))}

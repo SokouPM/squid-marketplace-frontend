@@ -3,11 +3,23 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 30px;
+  height: 98vh;
 }
 
-.notFoundPage h2 {
+.notFoundPage p {
   text-align: center;
   font-size: 40px;
+  font-weight: bold;
+}
+
+.notFoundPage p:first-of-type {
   margin-top: 30px;
+}
+
+.notFoundPage a {
+  color: var(--secondary-color);
+}
+
+.notFoundPage a:hover {
+  text-decoration: underline;
 }

@@ -1,6 +1,6 @@
-/* eslint-disable react/no-unescaped-entities */
 import Page from "/src/components/Pages";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "/styles/404.module.css";
 
 const NotFound = () => {
@@ -13,7 +13,13 @@ const NotFound = () => {
           width={450}
           height={530}
         />
-        <h2>Oups, la page demandée n'existe pas.</h2>
+        <p>Oups, la page demandée n&apos;existe pas.</p>
+        <p>
+          <Link href="/">
+            <a>Cliquez ici</a>
+          </Link>{" "}
+          pour revenir sur la page d&apos;accueil
+        </p>
       </div>
     </Page>
   );

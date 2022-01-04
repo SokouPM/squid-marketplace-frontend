@@ -6,7 +6,8 @@
     "price": 53,
     "stock": 17,
     "rating": 2.5,
-    "voteNumber": 54
+    "voteNumber": 54,
+    "category": "Lits"
   },
   {
     "id": 2,
@@ -15,7 +16,8 @@
     "price": 78,
     "stock": 3,
     "rating": 3,
-    "voteNumber": 12
+    "voteNumber": 12,
+    "category": "Armoires"
   },
   {
     "id": 3,
@@ -24,7 +26,8 @@
     "price": 123,
     "stock": 0,
     "rating": 4.5,
-    "voteNumber": 54
+    "voteNumber": 54,
+    "category": "Étagères"
   },
   {
     "id": 4,
@@ -33,6 +36,7 @@
     "price": 32,
     "stock": 13,
     "rating": 1.5,
-    "voteNumber": 45
+    "voteNumber": 45,
+    "category": "Chaises"
   }
 ]

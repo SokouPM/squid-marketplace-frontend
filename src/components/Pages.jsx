@@ -8,6 +8,18 @@ const Page = (props) => {
   const { children, ...otherProps } = props;
   const router = useRouter();
 
+  const componentRender = (component) => {
+    {
+      if (
+        router.pathname !== "/404" &&
+        router.pathname !== "/connexion" &&
+        router.pathname !== "/inscription"
+      ) {
+        return component;
+      }
+    }
+  };
+
   return (
     <div {...otherProps}>
       <Head>
@@ -20,12 +32,12 @@ const Page = (props) => {
         </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Header />
+      {componentRender(<Header />)}
       <main>
-        {router.pathname !== "/404" && <BreadCrumbs />}
+        {componentRender(<BreadCrumbs />)}
         {children}
       </main>
-      <Footer />
+      {componentRender(<Footer />)}
     </div>
   );
 };

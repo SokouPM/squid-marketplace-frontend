@@ -1,5 +1,6 @@
 // import UseApi from "./hooks/UseApi";
 import Image from "next/image";
+import Link from "next/link";
 import Rating from "@mui/material/Rating";
 import CircularProgress from "@mui/material/CircularProgress";
 import { IoMdStar } from "react-icons/io";
@@ -52,35 +53,50 @@ const ArticleList = (url) => {
   return (
     <ul className={styles.articleList}>
       {datas.map((item) => (
-        <li className={styles.articleItem} key={item.id}>
-          <Image
-            src={item.imgUrl}
-            alt="image de l'article"
-            width={500}
-            height={300}
-          />
-          <p className={styles.articleName}>{item.name}</p>
-          <div className={styles.priceAndStockLine}>
-            <p>{item.price} €</p>
-            {stockRender(item.stock)}
-          </div>
-
-          <div className={styles.ratingLine}>
-            <p className={styles.voteNumber}>( {item.voteNumber} )</p>
-            <Rating
-              name="read-only"
-              value={item.rating}
-              precision={0.5}
-              readOnly
-              icon={<IoMdStar color="#cc0023" fontSize="inherit" />}
-              emptyIcon={<IoMdStar color="#272727" fontSize="inherit" />}
-              sx={{
-                width: 300,
-                color: "#cc0023",
-              }}
+        <Link
+          href={{
+            pathname: "/[category]/[id]",
+            query: {
+              category: item.category
+                .normalize("NFD")
+                .replace(/\s+/g, "-")
+                .replace(/[\u0300-\u036f]/g, ""),
+              id: `article-${item.id}`,
+            },
+          }}
+          key={item.id}
+          passHref
+        >
+          <li className={styles.articleItem}>
+            <Image
+              src={item.imgUrl}
+              alt="image de l'article"
+              width={500}
+              height={300}
             />
-          </div>
-        </li>
+            <p className={styles.articleName}>{item.name}</p>
+            <div className={styles.priceAndStockLine}>
+              <p>{item.price} €</p>
+              {stockRender(item.stock)}
+            </div>
+
+            <div className={styles.ratingLine}>
+              <p className={styles.voteNumber}>( {item.voteNumber} )</p>
+              <Rating
+                name="read-only"
+                value={item.rating}
+                precision={0.5}
+                readOnly
+                icon={<IoMdStar color="#cc0023" fontSize="inherit" />}
+                emptyIcon={<IoMdStar color="#272727" fontSize="inherit" />}
+                sx={{
+                  width: 300,
+                  color: "#cc0023",
+                }}
+              />
+            </div>
+          </li>
+        </Link>
       ))}
     </ul>
   );

@@ -7,8 +7,6 @@ import styles from "/styles/components/header.module.css";
 import SearchBar from "./header/SearchBar";
 
 const Header = () => {
-  let isVisible = false;
-
   return (
     <header>
       <div className={styles.headerContent}>

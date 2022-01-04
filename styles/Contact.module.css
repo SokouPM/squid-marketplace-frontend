@@ -23,6 +23,51 @@
   margin-bottom: 2px;
 }
 
+.formLine {
+  display: flex;
+  align-items: center;
+}
+
+.errorField,
+.errorFieldII {
+  color: red;
+  background-color: pink;
+  padding: 5px 10px;
+  width: max-content;
+}
+
+.errorField {
+  animation: errorEntrance 0.2s ease 0s 1 normal forwards;
+}
+
+.errorFieldII {
+  animation: errorEntranceII 0.2s ease 0s 1 normal forwards;
+}
+
+@keyframes errorEntrance {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes errorEntranceII {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .contactPage form button {
   width: 100px;
   height: 30px;

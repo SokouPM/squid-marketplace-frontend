@@ -7,7 +7,6 @@ const UseApi = (url) => {
   useEffect(() => {
     (async () => {
       const { data: result } = await axios(url);
-
       setData(result);
     })();
   }, [url]);

@@ -1,5 +1,5 @@
 // import UseApi from "./hooks/UseApi";
-// import Image from "next/image";
+import Image from "next/image";
 import Rating from "@mui/material/Rating";
 import CircularProgress from "@mui/material/CircularProgress";
 import { IoMdStar } from "react-icons/io";
@@ -53,8 +53,12 @@ const ArticleList = (url) => {
     <ul className={styles.articleList}>
       {datas.map((item) => (
         <li className={styles.articleItem} key={item.id}>
-          {/* <Image src={item.imgUrl} alt="image de l'article" /> */}
-          <img src={item.imgUrl} alt="image de l'article" />
+          <Image
+            src={item.imgUrl}
+            alt="image de l'article"
+            width={500}
+            height={300}
+          />
           <p className={styles.articleName}>{item.name}</p>
           <div className={styles.priceAndStockLine}>
             <p>{item.price} €</p>

@@ -1,7 +1,6 @@
 import Page from "/src/components/Pages";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import FiAlertTriangle from "react-icons/fi";
 import styles from "/styles/Contact.module.css";
 
 const Contact = () => {

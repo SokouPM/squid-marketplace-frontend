@@ -1,0 +1,33 @@
+.formGroup input,
+.formGroup textarea {
+  border: solid 1px gray;
+  border-radius: 5px;
+}
+
+.formGroup label {
+  margin-bottom: 2px;
+}
+
+.errorField {
+  color: red;
+  background-color: pink;
+  padding: 5px 10px;
+  width: max-content;
+  animation: errorEntrance 0.2s ease 0s 1 normal forwards;
+}
+
+@keyframes errorEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0%);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(120%);
+  }
+
+  100% {
+    transform: scale(100%);
+  }
+}

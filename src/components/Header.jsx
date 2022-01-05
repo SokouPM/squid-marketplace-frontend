@@ -22,9 +22,11 @@ const Header = () => {
       <SearchBar />
 
       <div className={styles.headerContent}>
-        <a className={styles.connectButton}>
-          <GiSquidHead /> Se connecter
-        </a>
+        <Link href="/connexion">
+          <a className={styles.connectButton}>
+            <GiSquidHead /> Se connecter
+          </a>
+        </Link>
 
         <div className={styles.chart}>
           <p>Panier</p> <div className={styles.chartCount}>0</div>

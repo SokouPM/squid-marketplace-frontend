@@ -1,0 +1,60 @@
+.normalField {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.checkboxField {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.checkboxField label {
+  margin-left: 10px;
+}
+
+.connectPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 98vh;
+  border: red solid 1px;
+}
+
+.connectPage form {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  border: blue solid 1px;
+}
+
+.connectPage form input {
+  width: 100%;
+}
+
+.formRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  border: solid green 1px;
+}
+
+.formRow button {
+  width: 100px;
+  height: 30px;
+  color: white;
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 500px;
+  transition: all 200ms;
+}
+
+.formRow button:hover {
+  color: var(--primary-color);
+  background-color: var(--tertiary-color);
+}
+

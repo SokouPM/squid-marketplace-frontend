@@ -1,10 +1,11 @@
 import Page from "/src/components/Pages";
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
+import FormField from "../src/components/body/FormField";
 import styles from "/styles/Contact.module.css";
 
 const Contact = () => {
-  const DisplayingErrorMessagesSchema = Yup.object().shape({
+  const displayingErrorMessagesSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, "Le champ doit contenir minimum 2 caractères !")
       .max(150, "Le champ doit contenir maximum 150 caractères !")
@@ -36,47 +37,50 @@ const Contact = () => {
             subject: "",
             message: "",
           }}
-          validationSchema={DisplayingErrorMessagesSchema}
+          validationSchema={displayingErrorMessagesSchema}
           onSubmit={(values) => {
-            alert(JSON.stringify(values, null, 2));
+            alert(JSON.stringify(values, null, 2)); // TODO
+            router.push({ pathname: "/" });
           }}
         >
           {({ errors, touched }) => (
             <Form>
-              <div className={styles.formGroup}>
-                <label htmlFor="name">Nom</label>
-                <div className={styles.formLine}>
-                  <Field id="name" name="name" />
-                  {touched.name && errors.name && (
-                    <div className={styles.errorField}>{errors.name}</div>
-                  )}
-                </div>
-              </div>
-              <div className={styles.formGroup}>
-                <label htmlFor="email">Email</label>
-                <div className={styles.formLine}>
-                  <Field id="email" name="email" />
-                  {touched.email && errors.email && (
-                    <div className={styles.errorField}>{errors.email}</div>
-                  )}
-                </div>
-              </div>
-              <div className={styles.formGroup}>
-                <label htmlFor="subject">Sujet</label>
-                <div className={styles.formLine}>
-                  <Field id="subject" name="subject" />
-                  {touched.subject && errors.subject && (
-                    <div className={styles.errorField}>{errors.subject}</div>
-                  )}
-                </div>
-              </div>
-              <div className={styles.formGroup}>
-                <label htmlFor="message">Message</label>
-                <Field as="textarea" id="message" name="message" />
-                {touched.message && errors.message && (
-                  <div className={styles.errorFieldII}>{errors.message}</div>
-                )}
-              </div>
+              <FormField
+                style={styles.normalField}
+                label="Nom"
+                id="name"
+                name="name"
+                errorPosition={styles.formLine}
+                errorType={errors.name}
+                touchedType={touched.name}
+              />
+              <FormField
+                style={styles.normalField}
+                label="Email"
+                id="email"
+                name="email"
+                errorPosition={styles.formLine}
+                errorType={errors.email}
+                touchedType={touched.email}
+              />
+              <FormField
+                style={styles.normalField}
+                label="Sujet"
+                id="subject"
+                name="subject"
+                errorPosition={styles.formLine}
+                errorType={errors.subject}
+                touchedType={touched.subject}
+              />
+              <FormField
+                style={styles.normalField}
+                label="Message"
+                type="textarea"
+                id="message"
+                name="message"
+                errorType={errors.message}
+                touchedType={touched.message}
+              />
               <button type="submit">Submit</button>
             </Form>
           )}

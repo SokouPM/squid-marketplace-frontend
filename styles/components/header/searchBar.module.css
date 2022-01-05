@@ -13,7 +13,7 @@
 
 .searchBar input {
   border-radius: 500px 0 0 500px;
-  width: 300px;
+  width: 300px !important;
 }
 
 .searchBar input:focus {

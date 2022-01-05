@@ -4,9 +4,9 @@ import * as Yup from "yup";
 import FormField from "../src/components/body/FormField";
 import PasswordField from "../src/components/body/customFields/PasswordField";
 import CheckboxField from "../src/components/body/customFields/CheckboxField";
-import styles from "/styles/Connect.module.css";
 import GoogleButton from "../src/components/body/GoogleButton";
 import FacebookButton from "../src/components/body/FacebookButton";
+import styles from "/styles/Connect.module.css";
 
 const connexion = () => {
   const displayingErrorMessagesSchema = Yup.object().shape({
@@ -14,7 +14,7 @@ const connexion = () => {
       .email("Le mail est invalide !")
       .required("Le champ est requis !"),
     password: Yup.string()
-      .min(8, "Le mot de passe doit contenir minimum 8 caractères !")
+      .min(6, "Le mot de passe doit contenir minimum 6 caractères !")
       .max(50, "Le mot de passe doit contenir maximum 50 caractères !")
       .matches(
         /^.*(?=.*[a-z]).*$/g,
@@ -27,10 +27,6 @@ const connexion = () => {
       .matches(
         /^.*(?=.*[0-9]).*$/g,
         "Le mot de passe doit contenir au moins 1 chiffre !"
-      )
-      .matches(
-        /^.*(?=.*[^0-9a-zA-Z]).*$/g,
-        "Le mot de passe doit contenir au moins 1 caractère spécial !"
       )
       .required("Le champ est requis !"),
   });
@@ -56,6 +52,7 @@ const connexion = () => {
                 label="Email"
                 id="email"
                 name="email"
+                placeholder="exemple@mail.com"
                 errorType={errors.email}
                 touchedType={touched.email}
               />
@@ -65,6 +62,7 @@ const connexion = () => {
                 type={PasswordField}
                 id="password"
                 name="password"
+                placeholder="1 majuscule, 1 minuscule, 1 nombre et entre 6 et 50 caractères"
                 errorType={errors.password}
                 touchedType={touched.password}
               />

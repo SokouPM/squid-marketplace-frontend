@@ -50,6 +50,7 @@ const Contact = () => {
                 label="Nom"
                 id="name"
                 name="name"
+                placeholder="Prénom Nom"
                 errorPosition={styles.formLine}
                 errorType={errors.name}
                 touchedType={touched.name}
@@ -59,6 +60,7 @@ const Contact = () => {
                 label="Email"
                 id="email"
                 name="email"
+                placeholder="exemple@mail.com"
                 errorPosition={styles.formLine}
                 errorType={errors.email}
                 touchedType={touched.email}
@@ -68,6 +70,7 @@ const Contact = () => {
                 label="Sujet"
                 id="subject"
                 name="subject"
+                placeholder="Le sujet de votre message"
                 errorPosition={styles.formLine}
                 errorType={errors.subject}
                 touchedType={touched.subject}
@@ -78,6 +81,7 @@ const Contact = () => {
                 type="textarea"
                 id="message"
                 name="message"
+                placeholder="Votre message"
                 errorType={errors.message}
                 touchedType={touched.message}
               />

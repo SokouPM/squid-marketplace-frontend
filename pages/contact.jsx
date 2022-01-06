@@ -1,7 +1,7 @@
 import Page from "/src/components/Pages";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import FormField from "../src/components/body/FormField";
+import FormField from "/src/components/body/FormField";
 import styles from "/styles/Contact.module.css";
 
 const Contact = () => {
@@ -30,65 +30,71 @@ const Contact = () => {
   return (
     <Page>
       <div className={styles.contactPage}>
-        <Formik
-          initialValues={{
-            name: "",
-            email: "",
-            subject: "",
-            message: "",
-          }}
-          validationSchema={displayingErrorMessagesSchema}
-          onSubmit={(values) => {
-            alert(JSON.stringify(values, null, 2)); // TODO
-            router.push({ pathname: "/" });
-          }}
-        >
-          {({ errors, touched }) => (
-            <Form>
-              <FormField
-                style={styles.normalField}
-                label="Nom"
-                id="name"
-                name="name"
-                placeholder="Prénom Nom"
-                errorPosition={styles.formLine}
-                errorType={errors.name}
-                touchedType={touched.name}
-              />
-              <FormField
-                style={styles.normalField}
-                label="Email"
-                id="email"
-                name="email"
-                placeholder="exemple@mail.com"
-                errorPosition={styles.formLine}
-                errorType={errors.email}
-                touchedType={touched.email}
-              />
-              <FormField
-                style={styles.normalField}
-                label="Sujet"
-                id="subject"
-                name="subject"
-                placeholder="Le sujet de votre message"
-                errorPosition={styles.formLine}
-                errorType={errors.subject}
-                touchedType={touched.subject}
-              />
-              <FormField
-                style={styles.normalField}
-                label="Message"
-                type="textarea"
-                id="message"
-                name="message"
-                placeholder="Votre message"
-                errorType={errors.message}
-                touchedType={touched.message}
-              />
-              <button type="submit">Submit</button>
-            </Form>
-          )}
-        </Formik>
+        <fieldset>
+          <legend>
+            Contactez-nous
+          </legend>
+
+          <Formik
+            initialValues={{
+              name: "",
+              email: "",
+              subject: "",
+              message: "",
+            }}
+            validationSchema={displayingErrorMessagesSchema}
+            onSubmit={(values) => {
+              alert(JSON.stringify(values, null, 2)); // TODO
+              router.push({ pathname: "/" });
+            }}
+          >
+            {({ errors, touched }) => (
+              <Form>
+                <FormField
+                  style={styles.normalField}
+                  label="Nom"
+                  id="name"
+                  name="name"
+                  placeholder="Prénom Nom"
+                  errorPosition={styles.formLine}
+                  errorType={errors.name}
+                  touchedType={touched.name}
+                />
+                <FormField
+                  style={styles.normalField}
+                  label="Email"
+                  id="email"
+                  name="email"
+                  placeholder="exemple@mail.com"
+                  errorPosition={styles.formLine}
+                  errorType={errors.email}
+                  touchedType={touched.email}
+                />
+                <FormField
+                  style={styles.normalField}
+                  label="Sujet"
+                  id="subject"
+                  name="subject"
+                  placeholder="Le sujet de votre message"
+                  errorPosition={styles.formLine}
+                  errorType={errors.subject}
+                  touchedType={touched.subject}
+                />
+                <FormField
+                  style={styles.normalField}
+                  label="Message"
+                  type="textarea"
+                  id="message"
+                  name="message"
+                  placeholder="Votre message"
+                  errorType={errors.message}
+                  touchedType={touched.message}
+                />
+                <button type="submit">Submit</button>
+              </Form>
+            )}
+          </Formik>
+        </fieldset>
       </div>
     </Page>
   );

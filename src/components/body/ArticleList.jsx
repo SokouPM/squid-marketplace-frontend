@@ -8,7 +8,7 @@ import { GiSquid } from "react-icons/gi";
 import datas from "/src/datas/products.json";
 import styles from "/styles/components/body/ArticleList.module.css";
 
-const ArticleList = (url) => {
+const ArticleList = () => {
   // const datas = UseApi(url);
 
   const stockRender = (stockNumber) => {
@@ -68,12 +68,15 @@ const ArticleList = (url) => {
           passHref
         >
           <li className={styles.articleItem}>
-            <Image
-              src={item.imgUrl}
-              alt="image de l'article"
-              width={500}
-              height={300}
-            />
+            <div className={styles.articleImageBorder}>
+              <Image
+                src={item.imgUrl}
+                alt="image de l'article"
+                objectFit="contain"
+                objectPosition="top"
+                layout="fill"
+              />
+            </div>
             <p className={styles.articleName}>{item.name}</p>
             <div className={styles.priceAndStockLine}>
               <p>{item.price} €</p>

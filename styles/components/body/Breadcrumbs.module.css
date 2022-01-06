@@ -19,15 +19,3 @@
   content: ">";
   margin: 0 10px;
 }
-
-@media screen and (max-width: 1500px) {
-  .breadcrumbs {
-    width: 90%;
-  }
-}
-
-@media screen and (max-width: 1300px) {
-  .breadcrumbs {
-    width: 100%;
-  }
-}

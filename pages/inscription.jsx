@@ -1,12 +1,14 @@
-import Link from "next/link";
-import Image from "next/image";
 import Page from "/src/components/Pages";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import FormField from "../src/components/body/FormField";
-import PasswordField from "../src/components/body/customFields/PasswordField";
-import GoogleButton from "../src/components/body/GoogleButton";
-import FacebookButton from "../src/components/body/FacebookButton";
+// Custom components
+import GoHomeLink from "/src/components/body/GoHomeLink";
+import AccountRegisterConnectAside from "/src/components/body/AccountRegisterConnectAside";
+import FormField from "/src/components/body/FormField";
+import PasswordField from "/src/components/body/customFields/PasswordField";
+import GoogleButton from "/src/components/body/GoogleButton";
+import FacebookButton from "/src/components/body/FacebookButton";
+// Style
 import styles from "/styles/Register.module.css";
 
 const connexion = () => {
@@ -41,6 +43,7 @@ const connexion = () => {
   return (
     <Page>
       <div className={styles.registerPage}>
+        <GoHomeLink />
         <div className={styles.connectRegisterWindow}>
           <Formik
             initialValues={{
@@ -92,16 +95,11 @@ const connexion = () => {
               </Form>
             )}
           </Formik>
-          <div className={styles.connectSide}>
-            <Image src="/logo.png" alt="logo" width={200} height={160} />
-            <p className="registerText">
-              Vous avez compte ? <br />
-              <Link href="/connexion">
-                <a>Cliquez ici</a>
-              </Link>{" "}
-              pour vous connecter
-            </p>
-          </div>
+          <AccountRegisterConnectAside
+            text1="Vous avez déjà un compte ?"
+            link="/connexion"
+            text2="pour vous connecter."
+          />
         </div>
       </div>
     </Page>

@@ -23,3 +23,15 @@
 .notFoundPage a:hover {
   text-decoration: underline;
 }
+
+@media screen and (max-width: 1300px) {
+  .notFoundPage {
+    height: 94.8vh;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .notFoundPage p {
+    font-size: 6vw;
+  }
+}

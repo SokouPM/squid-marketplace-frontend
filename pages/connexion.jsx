@@ -1,13 +1,15 @@
-import Link from "next/link";
-import Image from "next/image";
 import Page from "/src/components/Pages";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import FormField from "../src/components/body/FormField";
-import PasswordField from "../src/components/body/customFields/PasswordField";
-import CheckboxField from "../src/components/body/customFields/CheckboxField";
-import GoogleButton from "../src/components/body/GoogleButton";
-import FacebookButton from "../src/components/body/FacebookButton";
+// Custom components
+import GoHomeLink from "/src/components/body/GoHomeLink";
+import AccountRegisterConnectAside from "/src/components/body/AccountRegisterConnectAside";
+import FormField from "/src/components/body/FormField";
+import PasswordField from "/src/components/body/customFields/PasswordField";
+import CheckboxField from "/src/components/body/customFields/CheckboxField";
+import GoogleButton from "/src/components/body/GoogleButton";
+import FacebookButton from "/src/components/body/FacebookButton";
+// Style
 import styles from "/styles/Connect.module.css";
 
 const connexion = () => {
@@ -15,38 +17,19 @@ const connexion = () => {
     email: Yup.string()
       .email("Le mail est invalide !")
       .required("Le champ est requis !"),
-    password: Yup.string()
-      .min(6, "Le mot de passe doit contenir minimum 6 caractères !")
-      .max(50, "Le mot de passe doit contenir maximum 50 caractères !")
-      .matches(
-        /^.*(?=.*[a-z]).*$/g,
-        "Le mot de passe doit contenir au moins 1 minuscule !"
-      )
-      .matches(
-        /^.*(?=.*[A-Z]).*$/g,
-        "Le mot de passe doit contenir au moins 1 majuscule !"
-      )
-      .matches(
-        /^.*(?=.*[0-9]).*$/g,
-        "Le mot de passe doit contenir au moins 1 chiffre !"
-      )
-      .required("Le champ est requis !"),
+    password: Yup.string().required("Le champ est requis !"),
   });
 
   return (
     <Page>
       <div className={styles.connectPage}>
+        <GoHomeLink />
         <div className={styles.connectRegisterWindow}>
-          <div className={styles.registerSide}>
-            <Image src="/logo.png" alt="logo" width={200} height={150} />
-            <p className="registerText">
-              Pas de compte ? <br />
-              <Link href="/inscription">
-                <a>Cliquez ici</a>
-              </Link>{" "}
-              pour en créer un
-            </p>
-          </div>
+          <AccountRegisterConnectAside
+            text1="Pas encore inscrit ?"
+            link="/inscription"
+            text2="pour créer un compte."
+          />
           <Formik
             initialValues={{
               email: "",

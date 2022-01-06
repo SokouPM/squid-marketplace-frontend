@@ -1,6 +1,12 @@
-.normalField {
-  margin-bottom: 10px;
-  width: 100%;
+.contactPage legend {
+  color: var(--secondary-color);
+  font-size: 20px;
+  margin-left: -3%;
+}
+
+.contactPage fieldset {
+  border: 1px solid var(--secondary-color);
+  padding: 30px 5%;
 }
 
 .contactPage form,
@@ -9,15 +15,25 @@
   flex-direction: column;
 }
 
-.contactPage form {
-  width: 85%;
-  margin: auto;
+.normalField {
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 .formLine {
   display: flex;
   align-items: center;
 }
+
+.formLine input {
+  width: 50%;
+}
+
+.contactPage form textarea {
+  height: 150px;
+  width: 100%;
+}
+
 .contactPage form button {
   width: 100px;
   height: 30px;
@@ -31,4 +47,23 @@
 .contactPage form button:hover {
   color: var(--primary-color);
   background-color: var(--tertiary-color);
+}
+
+@media screen and (max-width: 900px) {
+  .formLine {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .formLine input {
+    width: 100%;
+  }
+
+  .contactPage form textarea {
+    height: 250px;
+  }
+
+  .contactPage form button {
+    margin: auto;
+  }
 }

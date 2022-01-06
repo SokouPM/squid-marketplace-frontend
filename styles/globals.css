@@ -73,8 +73,7 @@ main {
 
 input:not(input[type="checkbox"], input[type="radio"]) {
   height: 30px;
-  width: 50%;
-  padding: 0 10px;
+  padding: 0 6px;
 }
 
 input:not(input[type="checkbox"], input[type="radio"]):focus,
@@ -85,9 +84,8 @@ textarea:focus {
 }
 
 textarea {
-  width: 100%;
-  height: 150px;
-  padding: 10px;
+  font-size: 12px;
+  padding: 6px;
   resize: none;
 }
 
@@ -95,15 +93,10 @@ footer {
   height: var(--footer-height);
 }
 
-@media screen and (max-width: 1500px) {
-  main {
-    padding: 20px 0;
-  }
-}
-
 @media screen and (max-width: 1300px) {
   main {
-    padding: 20px 10%;
+    padding: 20px 5%;
     width: 100%;
   }
 }
+

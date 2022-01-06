@@ -34,17 +34,15 @@
 }
 
 .articleImageBorder {
-  width: 500px;
+  width: 30vw;
+  height: 18vw;
+  max-width: 500px;
+  max-height: 300px;
+  position: relative;
 }
 
 .articleItem img {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-}
-
-.articleItem img {
-  max-width: 500px;
-  max-height: 300px;
-  width: 100%;
 }
 
 .articleName {
@@ -84,6 +82,7 @@
 }
 
 .ratingLine span {
+  font-size: 24px;
   width: max-content;
 }
 
@@ -92,4 +91,84 @@
   font-size: 12px;
   margin-right: 10px;
   color: gray;
+}
+
+@media screen and (max-width: 1300px) {
+  .articleImageBorder {
+    width: 40vw;
+    height: 24vw;
+  }
+
+  .articleName {
+    font-size: 1.8vw;
+  }
+
+  .priceAndStockLine {
+    font-size: 1.5vw;
+  }
+
+  .voteNumber {
+    font-size: 1vw;
+  }
+  .ratingLine span {
+    font-size: 1.8vw;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .articleImageBorder {
+    width: 100vw;
+    height: 60vw;
+  }
+
+  .articleName {
+    font-size: 20px;
+  }
+
+  .priceAndStockLine {
+    font-size: 18px;
+  }
+
+  .voteNumber {
+    font-size: 12px;
+  }
+
+  .ratingLine span {
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .articleImageBorder {
+    width: 100vw;
+    height: 60vw;
+  }
+
+  .articleName {
+    font-size: 5vw;
+  }
+
+  .priceAndStockLine {
+    font-size: 4.5vw;
+  }
+
+  .voteNumber {
+    font-size: 3vw;
+  }
+
+  .ratingLine span {
+    font-size: 6vw;
+  }
+}
+
+@media screen and (max-width: 305px) {
+  .priceAndStockLine {
+    font-size: 4.3vw;
+  }
+}
+
+@media screen and (max-width: 215px) {
+  .priceAndStockLine {
+    font-size: 4vw;
+  }
 }

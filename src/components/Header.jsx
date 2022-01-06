@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import NavSideBar from "./header/NavSideBar";
 import { AiFillCaretDown } from "react-icons/ai";
 import { GiSquidHead } from "react-icons/gi";

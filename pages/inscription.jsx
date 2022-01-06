@@ -5,10 +5,9 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import FormField from "../src/components/body/FormField";
 import PasswordField from "../src/components/body/customFields/PasswordField";
-import CheckboxField from "../src/components/body/customFields/CheckboxField";
 import GoogleButton from "../src/components/body/GoogleButton";
 import FacebookButton from "../src/components/body/FacebookButton";
-import styles from "/styles/Connect.module.css";
+import styles from "/styles/Register.module.css";
 
 const connexion = () => {
   const displayingErrorMessagesSchema = Yup.object().shape({
@@ -31,26 +30,23 @@ const connexion = () => {
         "Le mot de passe doit contenir au moins 1 chiffre !"
       )
       .required("Le champ est requis !"),
+    passwordConfirm: Yup.string()
+      .oneOf(
+        [Yup.ref("password"), null],
+        "Les mots de passe doivent correspondre"
+      )
+      .required("Le champ est requis !"),
   });
 
   return (
     <Page>
-      <div className={styles.connectPage}>
+      <div className={styles.registerPage}>
         <div className={styles.connectRegisterWindow}>
-          <div className={styles.registerSide}>
-            <Image src="/logo.png" alt="logo" width={200} height={150} />
-            <p className="registerText">
-              Pas de compte ? <br />
-              <Link href="/inscription">
-                <a>Cliquez ici</a>
-              </Link>{" "}
-              pour en créer un
-            </p>
-          </div>
           <Formik
             initialValues={{
               email: "",
               password: "",
+              passwordConfirm: "",
             }}
             validationSchema={displayingErrorMessagesSchema}
             onSubmit={(values) => {
@@ -58,8 +54,8 @@ const connexion = () => {
             }}
           >
             {({ errors, touched }) => (
-              <Form className={styles.connectSide}>
-                <h2>Connectez-vous</h2>
+              <Form className={styles.registerSide}>
+                <h2>Créez un compte</h2>
                 <FormField
                   style={styles.normalField}
                   label="Email"
@@ -79,22 +75,33 @@ const connexion = () => {
                   errorType={errors.password}
                   touchedType={touched.password}
                 />
-                <div className={styles.formRow}>
-                  <FormField
-                    style={styles.checkboxField}
-                    label="Se souvenir de moi"
-                    type={CheckboxField}
-                    id="rememberMe"
-                    name="rememberMe"
-                  />
-                  <button type="submit">Connexion</button>
-                </div>
+                <FormField
+                  style={styles.normalField}
+                  label="Confirmer le mot de passe"
+                  type={PasswordField}
+                  id="passwordConfirm"
+                  name="passwordConfirm"
+                  placeholder="Identique au mot de passe"
+                  errorType={errors.passwordConfirm}
+                  touchedType={touched.passwordConfirm}
+                />
+                <button type="submit">Inscription</button>
                 <span className={styles.or}>---- ou ----</span>
                 <GoogleButton />
                 <FacebookButton />
               </Form>
             )}
           </Formik>
+          <div className={styles.connectSide}>
+            <Image src="/logo.png" alt="logo" width={200} height={160} />
+            <p className="registerText">
+              Vous avez compte ? <br />
+              <Link href="/connexion">
+                <a>Cliquez ici</a>
+              </Link>{" "}
+              pour vous connecter
+            </p>
+          </div>
         </div>
       </div>
     </Page>

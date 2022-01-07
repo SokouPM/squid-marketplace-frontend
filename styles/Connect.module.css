@@ -85,3 +85,54 @@
   margin-top: 20px;
   color: gray;
 }
+
+@media screen and (max-width: 1300px) {
+  .connectPage {
+    height: 94.8vh;
+  }
+
+  .connectRegisterWindow {
+    width: 90%;
+    margin-top: 20px;
+  }
+
+  .connectSide {
+    padding: 5vw;
+  }
+
+  .or {
+    margin-top: 5vw;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .connectRegisterWindow {
+    width: 70%;
+    flex-direction: column;
+  }
+  
+  .connectSide h2 {
+    margin-bottom: 5vw;
+    font-size: 5vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .connectRegisterWindow {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .connectSide h2 {
+    font-size: 20px;
+  }
+
+  .formRow {
+    flex-direction: column;
+  }
+
+  .formRow button {
+    margin-top: 5vw;
+  }
+}

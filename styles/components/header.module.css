@@ -12,12 +12,11 @@
   cursor: pointer;
 }
 
-.headerContent {
-  width: 500px;
-}
-
-.headerContent:first-child {
-  justify-content: start;
+.header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  padding: 0 20px;
 }
 
 .headerContent:last-child {
@@ -68,7 +67,7 @@
 
 /************ Chart ************/
 
-.chart .chartCount {
+.chartCount {
   width: 30px;
   height: 30px;
   font-size: 20px;
@@ -77,4 +76,89 @@
   background-color: white;
   justify-content: center;
   margin: 0 5px;
+}
+
+@media screen and (max-width: 1140px) {
+  .logo h1 {
+    font-size: 2vw;
+    margin-left: 5px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .header {
+    padding: 0 2vw;
+  }
+
+  .headerContent {
+    width: max-content;
+  }
+
+  .connectButton {
+    font-size: 1.5vw;
+    margin-right: 1vw;
+  }
+
+  .connectButton svg {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .logo h1 {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 730px) {
+  .header {
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+  }
+
+  .header > :nth-child(2) {
+    margin: 0 auto;
+    order: 4;
+  }
+
+  .headerContent {
+    margin-bottom: 10px;
+  }
+
+  .headerContent:first-child {
+    width: 30%;
+  }
+
+  .headerContent:last-child {
+    width: 70%;
+  }
+
+  .connectButton {
+    font-size: 10px;
+    margin-right: 2vw;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .headerContent:first-child {
+    width: 55%;
+  }
+
+  .headerContent:last-child {
+    width: 45%;
+  }
+
+  .connectButton {
+    padding: 3px;
+  }
+
+  .connectButton svg {
+    margin: 0;
+  }
+
+  .connectButton p,
+  .chart p {
+    display: none;
+  }
 }

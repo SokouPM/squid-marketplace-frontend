@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Box from "@mui/material/Box";
@@ -7,7 +7,7 @@ import datas from "/src/datas/categories.json";
 import styles from "/styles/components/header/navSideBar.module.css";
 
 const NavSideBar = () => {
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     left: false,
   });
 
@@ -23,8 +23,11 @@ const NavSideBar = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <p>Categories de meubles</p>
+      <Link href={`/categorie-tout`}>
+        <a>Toutes les catégories</a>
+      </Link>
       {datas.map((item) => (
-        <Link key={item.id} href={`categorie-${item.id}`}>
+        <Link key={item.id} href={`/categorie-${item.id}`}>
           <a>{item.name}</a>
         </Link>
       ))}

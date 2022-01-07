@@ -15,3 +15,10 @@
 .footer a:hover {
   text-decoration: underline;
 }
+
+@media screen and (max-width: 200px) {
+  .footer {
+    font-size: 7vw;
+    line-height: 13vw;
+  }
+}

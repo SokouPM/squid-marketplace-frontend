@@ -30,13 +30,12 @@ body {
 header,
 footer {
   background-color: var(--primary-color);
+  max-width: 100vw !important;
   color: white;
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 20px;
+  min-height: var(--header-height);
 }
 
 button,
@@ -57,10 +56,6 @@ p {
 a {
   text-decoration: none;
   color: black;
-}
-
-header {
-  height: var(--header-height);
 }
 
 main {
@@ -99,4 +94,3 @@ footer {
     width: 100%;
   }
 }
-

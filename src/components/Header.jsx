@@ -1,14 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import NavSideBar from "./header/NavSideBar";
-import { AiFillCaretDown } from "react-icons/ai";
-import { GiSquidHead } from "react-icons/gi";
+import { MdAccountCircle } from "react-icons/md";
 import SearchBar from "./header/SearchBar";
 import styles from "/styles/components/header.module.css";
 
 const Header = () => {
   return (
-    <header>
+    <header className={styles.header}>
       <div className={styles.headerContent}>
         <NavSideBar />
         <Link href="/">
@@ -24,13 +23,12 @@ const Header = () => {
       <div className={styles.headerContent}>
         <Link href="/connexion">
           <a className={styles.connectButton}>
-            <GiSquidHead /> Se connecter
+            <MdAccountCircle /> <p>Se connecter</p>
           </a>
         </Link>
 
         <div className={styles.chart}>
           <p>Panier</p> <div className={styles.chartCount}>0</div>
-          <AiFillCaretDown />
         </div>
       </div>
     </header>

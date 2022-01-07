@@ -116,6 +116,9 @@
 }
 
 @media screen and (max-width: 850px) {
+  .articleItem {
+    margin: 2vw auto;
+  }
   .articleImageBorder {
     width: 100vw;
     height: 60vw;
@@ -139,6 +142,10 @@
 }
 
 @media screen and (max-width: 400px) {
+  .articleItem:hover {
+    transform: scale(105%);
+  }
+
   .articleImageBorder {
     width: 100vw;
     height: 60vw;

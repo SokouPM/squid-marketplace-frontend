@@ -5,7 +5,10 @@ import styles from "/styles/components/body/AccountRegConAside.module.css";
 const AccountRegisterConnectAside = (props) => {
   return (
     <aside className={styles.mainBlock}>
-      <Image src="/logo.png" alt="logo" width={180} height={150} />
+      <span className={styles.logo}>
+        <Image src="/logo.png" alt="logo" width={180} height={150} />
+      </span>
+
       <p className="registerText">
         {props.text1} <br />
         <Link href={props.link}>

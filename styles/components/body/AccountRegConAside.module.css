@@ -20,3 +20,21 @@
   color: white;
   text-decoration: underline;
 }
+
+@media screen and (max-width: 1500px) {
+  .mainBlock p {
+    font-size: 1.3vw;
+    line-height: 2vw;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .logo {
+    display: none;
+  }
+  .mainBlock p {
+    margin: 10px;
+    font-size: 12px;
+    line-height: 20px;
+  }
+}

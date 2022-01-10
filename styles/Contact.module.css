@@ -22,11 +22,11 @@
 
 .formLine {
   display: flex;
-  align-items: center;
+  justify-content: space-between;
 }
 
-.formLine input {
-  width: 50%;
+.formLine > * {
+  width: 49%;
 }
 
 .contactPage form textarea {
@@ -52,10 +52,9 @@
 @media screen and (max-width: 900px) {
   .formLine {
     flex-direction: column;
-    align-items: flex-start;
   }
 
-  .formLine input {
+  .formLine > * {
     width: 100%;
   }
 

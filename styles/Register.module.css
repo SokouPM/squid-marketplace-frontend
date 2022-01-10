@@ -3,7 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 98vh;
+  min-height: 98vh;
+  height: max-content !important;
 }
 
 .registerPage form {
@@ -66,10 +67,6 @@
 }
 
 @media screen and (max-width: 1300px) {
-  .registerPage {
-    height: 94.8vh;
-  }
-
   .connectRegisterWindow {
     width: 100%;
     margin-top: 20px;

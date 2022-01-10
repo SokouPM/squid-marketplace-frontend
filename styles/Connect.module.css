@@ -3,7 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 98vh;
+  min-height: 98vh;
+  height: max-content !important;
 }
 
 .connectPage form {
@@ -15,7 +16,7 @@
   margin: auto;
 }
 
-.connectPage form input {
+.connectPage form input:not([type="checkbox"]) {
   width: 100%;
 }
 
@@ -49,6 +50,7 @@
   cursor: pointer;
   display: flex;
   flex-direction: row-reverse;
+  align-items: baseline;
 }
 
 .checkboxField * {
@@ -87,10 +89,6 @@
 }
 
 @media screen and (max-width: 1300px) {
-  .connectPage {
-    height: 94.8vh;
-  }
-
   .connectRegisterWindow {
     width: 90%;
     margin-top: 20px;
@@ -110,7 +108,7 @@
     width: 70%;
     flex-direction: column;
   }
-  
+
   .connectSide h2 {
     margin-bottom: 5vw;
     font-size: 5vw;

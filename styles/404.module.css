@@ -3,7 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 98vh;
+  min-height: 98vh;
+  height: max-content !important;
 }
 
 .notFoundPage p {
@@ -22,12 +23,6 @@
 
 .notFoundPage a:hover {
   text-decoration: underline;
-}
-
-@media screen and (max-width: 1300px) {
-  .notFoundPage {
-    height: 94.8vh;
-  }
 }
 
 @media screen and (max-width: 950px) {

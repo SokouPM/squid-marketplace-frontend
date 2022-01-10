@@ -58,7 +58,7 @@ const connexion = () => {
                   type={PasswordField}
                   id="password"
                   name="password"
-                  placeholder="1 majuscule, 1 minuscule, 1 nombre et entre 6 et 50 caractères"
+                  placeholder="Votre mot de passe"
                   errorType={errors.password}
                   touchedType={touched.password}
                 />

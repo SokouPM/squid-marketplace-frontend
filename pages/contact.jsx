@@ -31,9 +31,7 @@ const Contact = () => {
     <Page>
       <div className={styles.contactPage}>
         <fieldset>
-          <legend>
-            Contactez-nous
-          </legend>
+          <legend>Contactez-nous</legend>
 
           <Formik
             initialValues={{
@@ -50,36 +48,46 @@ const Contact = () => {
           >
             {({ errors, touched }) => (
               <Form>
-                <FormField
-                  style={styles.normalField}
-                  label="Nom"
-                  id="name"
-                  name="name"
-                  placeholder="Prénom Nom"
-                  errorPosition={styles.formLine}
-                  errorType={errors.name}
-                  touchedType={touched.name}
-                />
-                <FormField
-                  style={styles.normalField}
-                  label="Email"
-                  id="email"
-                  name="email"
-                  placeholder="exemple@mail.com"
-                  errorPosition={styles.formLine}
-                  errorType={errors.email}
-                  touchedType={touched.email}
-                />
-                <FormField
-                  style={styles.normalField}
-                  label="Sujet"
-                  id="subject"
-                  name="subject"
-                  placeholder="Le sujet de votre message"
-                  errorPosition={styles.formLine}
-                  errorType={errors.subject}
-                  touchedType={touched.subject}
-                />
+                <div className={styles.formLine}>
+                  <FormField
+                    style={styles.normalField}
+                    label="Prénom"
+                    id="name"
+                    name="name"
+                    placeholder="Votre prénom"
+                    errorType={errors.name}
+                    touchedType={touched.name}
+                  />
+                  <FormField
+                    style={styles.normalField}
+                    label="Nom"
+                    id="name"
+                    name="name"
+                    placeholder="Votre nom"
+                    errorType={errors.name}
+                    touchedType={touched.name}
+                  />
+                </div>
+                <div className={styles.formLine}>
+                  <FormField
+                    style={styles.normalField}
+                    label="Email"
+                    id="email"
+                    name="email"
+                    placeholder="exemple@mail.com"
+                    errorType={errors.email}
+                    touchedType={touched.email}
+                  />
+                  <FormField
+                    style={styles.normalField}
+                    label="Sujet"
+                    id="subject"
+                    name="subject"
+                    placeholder="Le sujet de votre message"
+                    errorType={errors.subject}
+                    touchedType={touched.subject}
+                  />
+                </div>
                 <FormField
                   style={styles.normalField}
                   label="Message"

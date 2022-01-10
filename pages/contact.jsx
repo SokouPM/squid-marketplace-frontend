@@ -6,12 +6,20 @@ import styles from "/styles/Contact.module.css";
 
 const Contact = () => {
   const displayingErrorMessagesSchema = Yup.object().shape({
-    name: Yup.string()
+    firstname: Yup.string()
       .min(2, "Le champ doit contenir minimum 2 caractères !")
       .max(150, "Le champ doit contenir maximum 150 caractères !")
       .matches(
-        /^[a-zA-Z\s]*$/,
-        "Le champ ne doit pas contenir de nombre ou de caractères spéciaux !"
+        /^[a-zA-Z\-\s]*$/,
+        'Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf "-" !'
+      )
+      .required("Le champ est requis !"),
+    lastname: Yup.string()
+      .min(2, "Le champ doit contenir minimum 2 caractères !")
+      .max(150, "Le champ doit contenir maximum 150 caractères !")
+      .matches(
+        /^[a-zA-Z\-\s]*$/,
+        'Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf "-" !'
       )
       .required("Le champ est requis !"),
     email: Yup.string()
@@ -35,7 +43,8 @@ const Contact = () => {
 
           <Formik
             initialValues={{
-              name: "",
+              firstname: "",
+              lastname: "",
               email: "",
               subject: "",
               message: "",
@@ -52,20 +61,20 @@ const Contact = () => {
                   <FormField
                     style={styles.normalField}
                     label="Prénom"
-                    id="name"
-                    name="name"
+                    id="firstname"
+                    name="firstname"
                     placeholder="Votre prénom"
-                    errorType={errors.name}
-                    touchedType={touched.name}
+                    errorType={errors.firstname}
+                    touchedType={touched.firstname}
                   />
                   <FormField
                     style={styles.normalField}
                     label="Nom"
-                    id="name"
-                    name="name"
+                    id="lastname"
+                    name="lastname"
                     placeholder="Votre nom"
-                    errorType={errors.name}
-                    touchedType={touched.name}
+                    errorType={errors.lastname}
+                    touchedType={touched.lastname}
                   />
                 </div>
                 <div className={styles.formLine}>

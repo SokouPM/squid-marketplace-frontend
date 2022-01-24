@@ -1,13 +1,11 @@
-import React from "react";
-import { GoogleLogin } from "react-google-login";
-import styles from "/styles/components/body/SocialNetworkButton.module.css";
+import React from "react"
+import { GoogleLogin } from "react-google-login"
+import styles from "/styles/components/body/SocialNetworkButton.module.css"
 
 const GoogleButton = () => {
-  const CLIENT_ID = "TODO";
+  const CLIENT_ID = "TODO"
 
-  const responseGoogle = (response) => {
-    console.log(response);
-  };
+  const responseGoogle = () => {}
 
   return (
     <GoogleLogin
@@ -19,7 +17,7 @@ const GoogleButton = () => {
       isSignedIn={true}
       cookiePolicy={"single_host_origin"}
     />
-  );
-};
+  )
+}
 
-export default GoogleButton;
+export default GoogleButton

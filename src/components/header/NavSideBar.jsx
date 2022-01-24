@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import Link from "next/link";
-import { GiHamburgerMenu } from "react-icons/gi";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import datas from "/src/datas/categories.json";
-import styles from "/styles/components/header/navSideBar.module.css";
+import React, { useState } from "react"
+import Link from "next/link"
+import { GiHamburgerMenu } from "react-icons/gi"
+import Box from "@mui/material/Box"
+import Drawer from "@mui/material/Drawer"
+import datas from "/src/datas/categories.json"
+import styles from "/styles/components/header/navSideBar.module.css"
 
 const NavSideBar = () => {
   const [state, setState] = useState({
     left: false,
-  });
+  })
 
   const toggleDrawer = (anchor, open) => () => {
-    setState({ ...state, [anchor]: open });
-  };
+    setState({ ...state, [anchor]: open })
+  }
 
   const list = (anchor) => (
     <Box
@@ -32,7 +32,7 @@ const NavSideBar = () => {
         </Link>
       ))}
     </Box>
-  );
+  )
 
   return (
     <div>
@@ -55,7 +55,7 @@ const NavSideBar = () => {
         </React.Fragment>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default NavSideBar;
+export default NavSideBar

@@ -1,8 +1,9 @@
-import Page from "/src/components/Pages";
-import { Form, Formik } from "formik";
-import * as Yup from "yup";
-import FormField from "/src/components/body/FormField";
-import styles from "/styles/Contact.module.css";
+import Layout from "/src/components/Layout"
+import Router from "next/router"
+import { Form, Formik } from "formik"
+import * as Yup from "yup"
+import FormField from "/src/components/body/FormField"
+import styles from "/styles/Contact.module.css"
 
 const Contact = () => {
   const displayingErrorMessagesSchema = Yup.object().shape({
@@ -33,10 +34,15 @@ const Contact = () => {
       .min(2, "Le champ doit contenir minimum 2 caractères !")
       .max(500, "Le champ doit contenir maximum 500 caractères !")
       .required("Le champ est requis !"),
-  });
+  })
 
   return (
-    <Page>
+    <Layout
+      page="Nous contacter"
+      diplayheader="true"
+      diplaybreadcrumbs="true"
+      diplayfooter="true"
+    >
       <div className={styles.contactPage}>
         <fieldset>
           <legend>Contactez-nous</legend>
@@ -51,8 +57,8 @@ const Contact = () => {
             }}
             validationSchema={displayingErrorMessagesSchema}
             onSubmit={(values) => {
-              alert(JSON.stringify(values, null, 2)); // TODO
-              router.push({ pathname: "/" });
+              alert(JSON.stringify(values, null, 2))
+              Router.push({ pathname: "/" }) // TODO
             }}
           >
             {({ errors, touched }) => (
@@ -113,8 +119,8 @@ const Contact = () => {
           </Formik>
         </fieldset>
       </div>
-    </Page>
-  );
-};
+    </Layout>
+  )
+}
 
-export default Contact;
+export default Contact

@@ -1,5 +1,5 @@
-import Link from "next/link";
-import styles from "/styles/components/footer.module.css";
+import Link from "next/link"
+import styles from "/styles/components/footer.module.css"
 
 const Footer = () => {
   return (
@@ -15,7 +15,7 @@ const Footer = () => {
         </Link>
       </p>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

@@ -1,11 +1,15 @@
-/* eslint-disable react/no-unescaped-entities */
-import Page from "/src/components/Pages";
-import { GiSquid } from "react-icons/gi";
-import styles from "/styles/LegalNotices.module.css";
+import Layout from "/src/components/Layout"
+import { GiSquid } from "react-icons/gi"
+import styles from "/styles/LegalNotices.module.css"
 
 const LegalNotice = () => {
   return (
-    <Page>
+    <Layout
+      page="Mentions légales"
+      diplayheader="true"
+      diplaybreadcrumbs="true"
+      diplayfooter="true"
+    >
       <div className={styles.legalNoticePage}>
         <div className={styles.legalNoticeText}>
           <h2>Politique de confidentialité de Squid marketPlace </h2>
@@ -278,8 +282,8 @@ const LegalNotice = () => {
           <p> 12 Av. Léonard de Vinci, Courbevoie, 92400, France</p>
         </div>
       </div>
-    </Page>
-  );
-};
+    </Layout>
+  )
+}
 
-export default LegalNotice;
+export default LegalNotice

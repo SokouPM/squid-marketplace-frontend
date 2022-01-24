@@ -1,13 +1,11 @@
-import FacebookLogin from "react-facebook-login";
-import { FaFacebookSquare } from "react-icons/fa";
-import styles from "/styles/components/body/SocialNetworkButton.module.css";
+import FacebookLogin from "react-facebook-login"
+import { FaFacebookSquare } from "react-icons/fa"
+import styles from "/styles/components/body/SocialNetworkButton.module.css"
 
 const FacebookButton = () => {
-  const CLIENT_ID = "TODO";
+  const CLIENT_ID = "TODO"
 
-  const responseFacebook = (response) => {
-    console.log(response);
-  };
+  const responseFacebook = () => {}
 
   return (
     <FacebookLogin
@@ -20,7 +18,7 @@ const FacebookButton = () => {
       cssClass={styles.facebookButton}
       callback={responseFacebook}
     />
-  );
-};
+  )
+}
 
-export default FacebookButton;
+export default FacebookButton

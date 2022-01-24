@@ -1,16 +1,16 @@
-import Page from "/src/components/Pages";
-import { Form, Formik } from "formik";
-import * as Yup from "yup";
+import Layout from "/src/components/Layout"
+import { Form, Formik } from "formik"
+import * as Yup from "yup"
 // Custom components
-import GoHomeLink from "/src/components/body/GoHomeLink";
-import AccountRegisterConnectAside from "/src/components/body/AccountRegisterConnectAside";
-import FormField from "/src/components/body/FormField";
-import PasswordField from "/src/components/body/customFields/PasswordField";
-import CheckboxField from "/src/components/body/customFields/CheckboxField";
-import GoogleButton from "/src/components/body/GoogleButton";
-import FacebookButton from "/src/components/body/FacebookButton";
+import GoHomeLink from "/src/components/body/GoHomeLink"
+import AccountRegisterConnectAside from "/src/components/body/AccountRegisterConnectAside"
+import FormField from "/src/components/body/FormField"
+import PasswordField from "/src/components/body/customFields/PasswordField"
+import CheckboxField from "/src/components/body/customFields/CheckboxField"
+import GoogleButton from "/src/components/body/GoogleButton"
+import FacebookButton from "/src/components/body/FacebookButton"
 // Style
-import styles from "/styles/Connect.module.css";
+import styles from "/styles/Connect.module.css"
 
 const connexion = () => {
   const displayingErrorMessagesSchema = Yup.object().shape({
@@ -18,10 +18,15 @@ const connexion = () => {
       .email("Le mail est invalide !")
       .required("Le champ est requis !"),
     password: Yup.string().required("Le champ est requis !"),
-  });
+  })
 
   return (
-    <Page>
+    <Layout
+      page="Connexion"
+      diplayheader="false"
+      diplaybreadcrumbs="false"
+      diplayfooter="false"
+    >
       <div className={styles.connectPage}>
         <GoHomeLink />
         <div className={styles.connectRegisterWindow}>
@@ -37,7 +42,7 @@ const connexion = () => {
             }}
             validationSchema={displayingErrorMessagesSchema}
             onSubmit={(values) => {
-              alert(JSON.stringify(values, null, 2)); // TODO
+              alert(JSON.stringify(values, null, 2)) // TODO
             }}
           >
             {({ errors, touched }) => (
@@ -80,8 +85,8 @@ const connexion = () => {
           </Formik>
         </div>
       </div>
-    </Page>
-  );
-};
+    </Layout>
+  )
+}
 
-export default connexion;
+export default connexion

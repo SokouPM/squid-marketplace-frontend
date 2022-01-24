@@ -1,6 +1,6 @@
-import Image from "next/image";
-import Link from "next/link";
-import styles from "/styles/components/body/AccountRegConAside.module.css";
+import Image from "next/image"
+import Link from "next/link"
+import styles from "/styles/components/body/AccountRegConAside.module.css"
 
 const AccountRegisterConnectAside = (props) => {
   return (
@@ -17,7 +17,7 @@ const AccountRegisterConnectAside = (props) => {
         {props.text2}
       </p>
     </aside>
-  );
-};
+  )
+}
 
-export default AccountRegisterConnectAside;
+export default AccountRegisterConnectAside

@@ -1,12 +1,17 @@
-import Page from "/src/components/Pages";
-import ArticleList from "/src/components/body/ArticleList";
+import Layout from "/src/components/Layout"
+import ArticleList from "/src/components/body/ArticleList"
 
 const Home = () => {
   return (
-    <Page>
+    <Layout
+      page="Accueil"
+      diplayheader="true"
+      diplaybreadcrumbs="true"
+      diplayfooter="true"
+    >
       <ArticleList />
-    </Page>
-  );
-};
+    </Layout>
+  )
+}
 
-export default Home;
+export default Home

@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 const UseApi = (url) => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(null)
 
   useEffect(() => {
     (async () => {
-      const { data: result } = await axios(url);
-      setData(result);
-    })();
-  }, [url]);
+      const { data: result } = await axios(url)
+      setData(result)
+    })()
+  }, [url])
 
-  return data;
-};
+  return data
+}
 
-export default UseApi;
+export default UseApi

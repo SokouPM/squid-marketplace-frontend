@@ -1,5 +1,5 @@
-import Breadcrumbs from "nextjs-breadcrumbs";
-import styles from "/styles/components/body/Breadcrumbs.module.css";
+import Breadcrumbs from "nextjs-breadcrumbs"
+import styles from "/styles/components/body/Breadcrumbs.module.css"
 
 const BreadCrumbs = () => {
   return (
@@ -8,7 +8,7 @@ const BreadCrumbs = () => {
       useDefaultStyle={true}
       rootLabel="Accueil"
     />
-  );
-};
+  )
+}
 
-export default BreadCrumbs;
+export default BreadCrumbs

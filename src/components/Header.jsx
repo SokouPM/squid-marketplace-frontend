@@ -1,9 +1,10 @@
-import Link from "next/link";
-import Image from "next/image";
-import NavSideBar from "./header/NavSideBar";
-import { MdAccountCircle } from "react-icons/md";
-import SearchBar from "./header/SearchBar";
-import styles from "/styles/components/header.module.css";
+import Link from "next/link"
+import Image from "next/image"
+import NavSideBar from "./header/NavSideBar"
+import { MdAccountCircle } from "react-icons/md"
+import { RiShoppingCartLine } from "react-icons/ri"
+import SearchBar from "./header/SearchBar"
+import styles from "/styles/components/header.module.css"
 
 const Header = () => {
   return (
@@ -28,11 +29,12 @@ const Header = () => {
         </Link>
 
         <div className={styles.chart}>
-          <p>Panier</p> <div className={styles.chartCount}>0</div>
+          <RiShoppingCartLine />
+          <div className={styles.chartCount}>0</div>
         </div>
       </div>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

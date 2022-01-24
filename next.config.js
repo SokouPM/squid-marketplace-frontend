@@ -3,4 +3,4 @@ module.exports = {
   images: {
     domains: ["place-hold.it"],
   },
-};
+}

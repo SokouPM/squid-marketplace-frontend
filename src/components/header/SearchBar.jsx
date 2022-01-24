@@ -1,12 +1,12 @@
-import Autocomplete from "@mui/material/Autocomplete";
-import options from "/src/datas/productsName";
-import { FaSearch } from "react-icons/fa";
-import styles from "/styles/components/header/searchBar.module.css";
+import Autocomplete from "@mui/material/Autocomplete"
+import options from "/src/datas/productsName"
+import { FaSearch } from "react-icons/fa"
+import styles from "/styles/components/header/searchBar.module.css"
 
 const SearchBar = () => {
   const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+    e.preventDefault()
+  }
 
   return (
     <Autocomplete
@@ -25,7 +25,7 @@ const SearchBar = () => {
         </form>
       )}
     />
-  );
-};
+  )
+}
 
-export default SearchBar;
+export default SearchBar

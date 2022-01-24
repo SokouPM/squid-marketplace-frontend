@@ -1,6 +1,6 @@
-import { Field } from "formik";
-import React from "react";
-import styles from "/styles/components/body/FormField.module.css";
+import { Field } from "formik"
+import React from "react"
+import styles from "/styles/components/body/FormField.module.css"
 
 const FormField = (props) => {
   return (
@@ -16,7 +16,7 @@ const FormField = (props) => {
         <div className={styles.errorField}>{props.errorType}</div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default FormField;
+export default FormField

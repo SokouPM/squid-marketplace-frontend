@@ -6,7 +6,7 @@ const AccountRegisterConnectAside = (props) => {
   return (
     <aside className={styles.mainBlock}>
       <span className={styles.logo}>
-        <Image src="/logo.png" alt="logo" width={180} height={150} />
+        <Image src="/logoBig.png" alt="logo" width={180} height={150} />
       </span>
 
       <p className="registerText">

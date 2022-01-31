@@ -1,5 +1,6 @@
 import Head from "next/head"
 import Header from "./Header"
+import Slider from "./body/Slider"
 import BreadCrumbs from "./body/BreadCrumbs"
 import Footer from "./Footer"
 
@@ -15,6 +16,7 @@ const Page = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {props.diplayheader === "true" ? <Header /> : null}
+      {props.diplayslider === "true" ? <Slider /> : null}
       <main>
         {props.diplaybreadcrumbs === "true" ? <BreadCrumbs /> : null}
         {children}

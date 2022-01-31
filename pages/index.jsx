@@ -6,6 +6,7 @@ const Home = () => {
     <Layout
       page="Accueil"
       diplayheader="true"
+      diplayslider="true"
       diplaybreadcrumbs="true"
       diplayfooter="true"
     >

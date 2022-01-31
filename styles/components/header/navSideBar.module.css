@@ -1,4 +1,5 @@
-.menuIcon {
+.menuIcon,
+.closeMenuIcon {
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -15,12 +16,28 @@
   color: white;
 }
 
-.menuIcon:hover {
+.menuIcon:hover,
+.closeMenuIcon:hover {
   background-color: var(--secondary-color);
 }
 
-.menuIcon svg {
+.menuIcon svg,
+.closeMenuIcon svg {
   font-size: 25px;
+}
+
+.navHeader {
+  display: flex;
+  align-items: center;
+}
+
+.navHeader p {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.closeMenuIcon {
+  margin: 10px 20px;
 }
 
 .sideBar {

@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import { GiHamburgerMenu } from "react-icons/gi"
+import { CgClose } from "react-icons/cg"
 import Box from "@mui/material/Box"
 import Drawer from "@mui/material/Drawer"
 import datas from "/src/datas/categories.json"
@@ -22,7 +23,15 @@ const NavSideBar = () => {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <p>Categories de meubles</p>
+      <div className={styles.navHeader}>
+        <button
+          className={styles.closeMenuIcon}
+          onClick={toggleDrawer(anchor, false)}
+        >
+          <CgClose />
+        </button>
+        <p>Catégories :</p>
+      </div>
       <Link href={`/categorie-tout`}>
         <a>Toutes les catégories</a>
       </Link>

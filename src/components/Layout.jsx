@@ -4,7 +4,7 @@ import Slider from "./body/Slider"
 import BreadCrumbs from "./body/BreadCrumbs"
 import Footer from "./Footer"
 
-const Page = (props) => {
+const Layout = (props) => {
   const { children, ...otherProps } = props
 
   return (
@@ -26,4 +26,4 @@ const Page = (props) => {
   )
 }
 
-export default Page
+export default Layout

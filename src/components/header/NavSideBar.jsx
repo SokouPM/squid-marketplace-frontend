@@ -32,11 +32,8 @@ const NavSideBar = () => {
         </button>
         <p>Catégories :</p>
       </div>
-      <Link href={`/categorie-tout`}>
-        <a>Toutes les catégories</a>
-      </Link>
       {datas.map((item) => (
-        <Link key={item.id} href={`/categorie-${item.id}`}>
+        <Link key={item.id} href={`/categories/${item.id}`}>
           <a>{item.name}</a>
         </Link>
       ))}

@@ -10,7 +10,7 @@ const Home = () => {
       diplaybreadcrumbs="true"
       diplayfooter="true"
     >
-      <ArticleList />
+      <ArticleList limit={4} />
     </Layout>
   )
 }

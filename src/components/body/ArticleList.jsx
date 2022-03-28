@@ -1,15 +1,27 @@
-// import UseApi from "./hooks/UseApi";
 import Image from "next/image"
 import Link from "next/link"
+import { useEffect, useState } from "react"
 import Rating from "@mui/material/Rating"
 import CircularProgress from "@mui/material/CircularProgress"
 import { IoMdStar } from "react-icons/io"
 import { GiSquid } from "react-icons/gi"
-import datas from "/src/datas/products.json"
+import api from "../services/api"
+// import datas from "/src/datas/products.json"
 import styles from "/styles/components/body/ArticleList.module.css"
 
-const ArticleList = () => {
+const ArticleList = ({ limit }) => {
   // const datas = UseApi(url);
+  const [articles, setArticles] = useState(null)
+  const [apiError, setApiError] = useState(null)
+
+  useEffect(() => {
+    api
+      .get("/articles/get")
+      .then((response) => setArticles(response.data))
+      .catch((error) =>
+        setApiError(error.response ? error.response.data.error : error.message)
+      )
+  }, [])
 
   const stockRender = (stockNumber) => {
     const alertLimitNb = 10
@@ -39,7 +51,15 @@ const ArticleList = () => {
     }
   }
 
-  if (!datas) {
+  if (apiError) {
+    return (
+      <div>
+        <p>{apiError}</p>
+      </div>
+    )
+  }
+
+  if (!articles) {
     return (
       <div className={styles.loading}>
         <CircularProgress
@@ -54,55 +74,50 @@ const ArticleList = () => {
 
   return (
     <ul className={styles.articleList}>
-      {datas.map((item) => (
-        <Link
-          href={{
-            pathname: "/[category]/[id]",
-            query: {
-              category: item.category
-                .normalize("NFD")
-                .replace(/\s+/g, "-")
-                .replace(/[\u0300-\u036f]/g, ""),
-              id: `article-${item.id}`,
-            },
-          }}
-          key={item.id}
-          passHref
-        >
-          <li className={styles.articleItem}>
-            <div className={styles.articleImageBorder}>
-              <Image
-                src={item.imgUrl}
-                alt="image de l'article"
-                objectFit="contain"
-                objectPosition="top"
-                layout="fill"
-              />
-            </div>
-            <p className={styles.articleName}>{item.name}</p>
-            <div className={styles.priceAndStockLine}>
-              <p>{item.price} €</p>
-              {stockRender(item.stock)}
-            </div>
+      {articles.map((item, index) =>
+        index < limit ? (
+          <Link
+            href={{
+              pathname: `/articles/${item.id}`,
+            }}
+            key={item.id}
+            passHref
+          >
+            <li className={styles.articleItem}>
+              <div className={styles.articleImageBorder}>
+                <Image
+                  src="https://place-hold.it/500x300"
+                  alt="image de l'article"
+                  objectFit="contain"
+                  objectPosition="top"
+                  layout="fill"
+                />
+              </div>
+              <p className={styles.articleName}>{item.name}</p>
+              <div className={styles.priceAndStockLine}>
+                <p>{item.price} €</p>
+                {stockRender(item.stock)}
+              </div>
 
-            <div className={styles.ratingLine}>
-              <p className={styles.voteNumber}>( {item.voteNumber} )</p>
-              <Rating
-                name="read-only"
-                value={item.rating}
-                precision={0.5}
-                readOnly
-                icon={<IoMdStar color="#cc0023" fontSize="inherit" />}
-                emptyIcon={<IoMdStar color="#272727" fontSize="inherit" />}
-                sx={{
-                  width: 300,
-                  color: "#cc0023",
-                }}
-              />
-            </div>
-          </li>
-        </Link>
-      ))}
+              <div className={styles.ratingLine}>
+                <p className={styles.voteNumber}>( {item.ratings.length} )</p>
+                <Rating
+                  name="read-only"
+                  value={item.rating}
+                  precision={0.5}
+                  readOnly
+                  icon={<IoMdStar color="#cc0023" fontSize="inherit" />}
+                  emptyIcon={<IoMdStar color="#272727" fontSize="inherit" />}
+                  sx={{
+                    width: 300,
+                    color: "#cc0023",
+                  }}
+                />
+              </div>
+            </li>
+          </Link>
+        ) : null
+      )}
     </ul>
   )
 }

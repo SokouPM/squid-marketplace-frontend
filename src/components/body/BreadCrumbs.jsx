@@ -6,7 +6,7 @@ const BreadCrumbs = () => {
     <Breadcrumbs
       containerClassName={styles.breadcrumbs}
       useDefaultStyle={true}
-      rootLabel="Accueil"
+      rootLabel="Home"
     />
   )
 }

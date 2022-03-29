@@ -6,11 +6,9 @@ import CircularProgress from "@mui/material/CircularProgress"
 import { IoMdStar } from "react-icons/io"
 import { GiSquid } from "react-icons/gi"
 import api from "../services/api"
-// import datas from "/src/datas/products.json"
 import styles from "/styles/components/body/ArticleList.module.css"
 
 const ArticleList = ({ limit }) => {
-  // const datas = UseApi(url);
   const [articles, setArticles] = useState(null)
   const [apiError, setApiError] = useState(null)
 

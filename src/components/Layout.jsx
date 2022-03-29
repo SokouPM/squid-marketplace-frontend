@@ -1,6 +1,6 @@
 import Head from "next/head"
+import Image from "next/image"
 import Header from "./Header"
-import Slider from "./body/Slider"
 import BreadCrumbs from "./body/BreadCrumbs"
 import Footer from "./Footer"
 
@@ -16,7 +16,14 @@ const Layout = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {props.diplayheader === "true" ? <Header /> : null}
-      {props.diplayslider === "true" ? <Slider /> : null}
+      {props.diplaybanner === "true" ? (
+        <Image
+          src="/banner.png"
+          alt="squid market place banner"
+          width={1900}
+          height={434}
+        />
+      ) : null}
       <main>
         {props.diplaybreadcrumbs === "true" ? <BreadCrumbs /> : null}
         {children}

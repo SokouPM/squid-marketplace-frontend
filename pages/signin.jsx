@@ -12,7 +12,7 @@ import FacebookButton from "/src/components/body/FacebookButton"
 // Style
 import styles from "/styles/Connect.module.css"
 
-const connexion = () => {
+const SignInPage = () => {
   const displayingErrorMessagesSchema = Yup.object().shape({
     email: Yup.string()
       .email("Le mail est invalide !")
@@ -32,7 +32,7 @@ const connexion = () => {
         <div className={styles.connectRegisterWindow}>
           <AccountRegisterConnectAside
             text1="Pas encore inscrit ?"
-            link="/inscription"
+            link="/signup"
             text2="pour créer un compte."
           />
           <Formik
@@ -89,4 +89,4 @@ const connexion = () => {
   )
 }
 
-export default connexion
+export default SignInPage

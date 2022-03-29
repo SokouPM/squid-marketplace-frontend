@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import styles from "/styles/404.module.css"
 
-const NotFound = () => {
+const NotFoundPage = () => {
   return (
     <Layout
       page="404"
@@ -30,4 +30,4 @@ const NotFound = () => {
   )
 }
 
-export default NotFound
+export default NotFoundPage

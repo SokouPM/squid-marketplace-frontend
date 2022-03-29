@@ -1,12 +1,12 @@
 import Layout from "/src/components/Layout"
 import ArticleList from "/src/components/body/ArticleList"
 
-const Home = () => {
+const HomePage = () => {
   return (
     <Layout
       page="Accueil"
       diplayheader="true"
-      diplayslider="true"
+      diplaybanner="true"
       diplaybreadcrumbs="true"
       diplayfooter="true"
     >
@@ -15,4 +15,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default HomePage

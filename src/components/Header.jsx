@@ -22,7 +22,7 @@ const Header = () => {
       <SearchBar />
 
       <div className={styles.headerContent}>
-        <Link href="/connexion">
+        <Link href="/signin">
           <a className={styles.connectButton}>
             <MdAccountCircle /> <p>Se connecter</p>
           </a>

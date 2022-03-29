@@ -9,7 +9,7 @@ import GoogleButton from "/src/components/body/GoogleButton"
 import FacebookButton from "/src/components/body/FacebookButton"
 import styles from "/styles/Register.module.css"
 
-const connexion = () => {
+const SignUpPage = () => {
   const displayingErrorMessagesSchema = Yup.object().shape({
     email: Yup.string()
       .email("Le mail est invalide !")
@@ -100,7 +100,7 @@ const connexion = () => {
           </Formik>
           <AccountRegisterConnectAside
             text1="Vous avez déjà un compte ?"
-            link="/connexion"
+            link="/signin"
             text2="pour vous connecter."
           />
         </div>
@@ -109,4 +109,4 @@ const connexion = () => {
   )
 }
 
-export default connexion
+export default SignUpPage

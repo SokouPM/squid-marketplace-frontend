@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       <p>
         Copyright 2021 - 2022 <br />
-        <Link href="/mentions-legales">
+        <Link href="/legal-notice">
           <a>Mentions légales</a>
         </Link>{" "}
         |{" "}

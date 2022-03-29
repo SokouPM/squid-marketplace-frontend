@@ -2,7 +2,7 @@ import Layout from "/src/components/Layout"
 import { GiSquid } from "react-icons/gi"
 import styles from "/styles/LegalNotices.module.css"
 
-const LegalNotice = () => {
+const LegalNoticePage = () => {
   return (
     <Layout
       page="Mentions légales"
@@ -286,4 +286,4 @@ const LegalNotice = () => {
   )
 }
 
-export default LegalNotice
+export default LegalNoticePage

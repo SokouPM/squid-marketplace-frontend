@@ -5,7 +5,7 @@ import * as Yup from "yup"
 import FormField from "/src/components/body/FormField"
 import styles from "/styles/Contact.module.css"
 
-const Contact = () => {
+const ContactPage = () => {
   const displayingErrorMessagesSchema = Yup.object().shape({
     firstname: Yup.string()
       .min(2, "Le champ doit contenir minimum 2 caractères !")
@@ -58,7 +58,7 @@ const Contact = () => {
             validationSchema={displayingErrorMessagesSchema}
             onSubmit={(values) => {
               alert(JSON.stringify(values, null, 2))
-              Router.push({ pathname: "/" }) // TODO
+              Router.push("/") // TODO
             }}
           >
             {({ errors, touched }) => (
@@ -123,4 +123,4 @@ const Contact = () => {
   )
 }
 
-export default Contact
+export default ContactPage

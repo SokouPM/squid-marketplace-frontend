@@ -5,7 +5,7 @@ import { IoMdStar } from "react-icons/io"
 import data from "/src/datas/product.json"
 import styles from "/styles/components/body/ArticleList.module.css"
 
-const ArticleInfo = ({ articleId }) => {
+const ArticleInfo = () => {
   const stockRender = (stockNumber) => {
     const alertLimitNb = 10
 

@@ -1,17 +1,16 @@
 import Link from "next/link"
-import styles from "/styles/components/footer.module.css"
 
 const Footer = () => {
   return (
-    <footer className={styles.footer}>
+    <footer className="flex items-center justify-center text-white text-center">
       <p>
         Copyright 2021 - 2022 <br />
         <Link href="/legal-notice">
-          <a>Mentions légales</a>
+          <a className="hover:underline">Mentions légales</a>
         </Link>{" "}
         |{" "}
         <Link href="/contact">
-          <a>Contact</a>
+          <a className="hover:underline">Contact</a>
         </Link>
       </p>
     </footer>

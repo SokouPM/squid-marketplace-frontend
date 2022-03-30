@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import Rating from "@mui/material/Rating"
 import CircularProgress from "@mui/material/CircularProgress"
 import { IoMdStar } from "react-icons/io"
-import { GiSquid } from "react-icons/gi"
+import { GiSquid, GiGiantSquid } from "react-icons/gi"
 import api from "../services/api"
 import styles from "/styles/components/body/ArticleList.module.css"
 
@@ -14,7 +14,7 @@ const ArticleList = ({ limit }) => {
 
   useEffect(() => {
     api
-      .get("/articles/get")
+      .get("/articles/")
       .then((response) => setArticles(response.data))
       .catch((error) =>
         setApiError(error.response ? error.response.data.error : error.message)
@@ -66,6 +66,14 @@ const ArticleList = ({ limit }) => {
           }}
         />
         <p>Chargement des produits...</p>
+      </div>
+    )
+  }
+
+  if (!articles.length) {
+    return (
+      <div className={styles.loading}>
+        <GiGiantSquid className="text-5xl" /> <p>Pas encore d'article</p>
       </div>
     )
   }

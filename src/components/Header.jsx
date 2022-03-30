@@ -4,15 +4,14 @@ import NavSideBar from "./header/NavSideBar"
 import { MdAccountCircle } from "react-icons/md"
 import { RiShoppingCartLine } from "react-icons/ri"
 import SearchBar from "./header/SearchBar"
-import styles from "/styles/components/header.module.css"
 
 const Header = () => {
   return (
-    <header className={styles.header}>
-      <div className={styles.headerContent}>
+    <header className="flex items-center justify-between px-4">
+      <div className="flex items-center text-white">
         <NavSideBar />
         <Link href="/">
-          <a className={styles.logo}>
+          <a className="flex items-center justify-center">
             <Image src="/logo.png" alt="logo" width={60} height={50} />
             <h1>Squid MarketPlace</h1>
           </a>
@@ -21,16 +20,18 @@ const Header = () => {
 
       <SearchBar />
 
-      <div className={styles.headerContent}>
+      <div className="flex items-center justify-center">
         <Link href="/signin">
-          <a className={styles.connectButton}>
-            <MdAccountCircle /> <p>Se connecter</p>
+          <a className="connectButton py-1 pr-2 pl-1 flex items-center justify-center bg-white rounded-full transition-all hover:text-white">
+            <MdAccountCircle className="mr-1 text-2xl" /> <p>Se connecter</p>
           </a>
         </Link>
 
-        <div className={styles.chart}>
-          <RiShoppingCartLine />
-          <div className={styles.chartCount}>0</div>
+        <div className="chart p-2 ml-5 rounded-full text-black bg-white relative transition-all hover:text-white">
+          <RiShoppingCartLine className="text-2xl" />
+          <div className="chartCount h-5 w-5 text-white flex items-center justify-center rounded-full absolute -top-2 -right-1">
+            0
+          </div>
         </div>
       </div>
     </header>

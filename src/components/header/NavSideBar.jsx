@@ -5,7 +5,6 @@ import { CgClose } from "react-icons/cg"
 import Box from "@mui/material/Box"
 import Drawer from "@mui/material/Drawer"
 import datas from "/src/datas/categories.json"
-import styles from "/styles/components/header/navSideBar.module.css"
 
 const NavSideBar = () => {
   const [state, setState] = useState({
@@ -18,26 +17,26 @@ const NavSideBar = () => {
 
   const list = (anchor) => (
     <Box
-      className={styles.sideBar}
+      className="sideBar h-screen flex flex-col text-white"
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <div className={styles.navHeader}>
+      <div className="flex items-center pt-2 mb-2">
         <button
-          className={styles.closeMenuIcon}
+          className="closeMenuIcon transition-all p-2 text-2xl rounded-full ml-4 mr-2"
           onClick={toggleDrawer(anchor, false)}
         >
           <CgClose />
         </button>
-        <p>Catégories :</p>
+        <p className="font-bold underline">Catégories :</p>
       </div>
       <Link href={"/articles"}>
-        <a>Tous les articles</a>
+        <a className="transition-all pl-4 py-1 hover:pl-6">Tous les articles</a>
       </Link>
       {datas.map((item) => (
         <Link key={item.id} href={`/categories/${item.id}`}>
-          <a>{item.name}</a>
+          <a className="transition-all pl-4 py-1 hover:pl-6">{item.name}</a>
         </Link>
       ))}
     </Box>
@@ -48,7 +47,7 @@ const NavSideBar = () => {
       {["left"].map((anchor) => (
         <React.Fragment key={anchor}>
           <button
-            className={styles.menuIcon}
+            className="menuIcon p-2 text-2xl rounded-full mr-4 transition-all"
             onClick={toggleDrawer(anchor, true)}
           >
             <GiHamburgerMenu />

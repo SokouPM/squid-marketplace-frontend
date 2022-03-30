@@ -24,7 +24,7 @@ const Layout = (props) => {
           height={434}
         />
       ) : null}
-      <main>
+      <main className="w-4/5 px-10 py-2 mx-auto bg-white">
         {props.diplaybreadcrumbs === "true" ? <BreadCrumbs /> : null}
         {children}
       </main>

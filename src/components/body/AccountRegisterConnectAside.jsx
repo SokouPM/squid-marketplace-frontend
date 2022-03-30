@@ -1,18 +1,17 @@
 import Image from "next/image"
 import Link from "next/link"
-import styles from "/styles/components/body/AccountRegConAside.module.css"
 
 const AccountRegisterConnectAside = (props) => {
   return (
-    <aside className={styles.mainBlock}>
-      <span className={styles.logo}>
+    <aside className="accountFormAside flex flex-col items-center justify-center w-2/6">
+      <span>
         <Image src="/logoBig.png" alt="logo" width={180} height={150} />
       </span>
 
-      <p className="registerText">
+      <p className="text-white font-bold text-center text-lg">
         {props.text1} <br />
         <Link href={props.link}>
-          <a>Cliquez ici</a>
+          <a className="underline">Cliquez ici</a>
         </Link>{" "}
         {props.text2}
       </p>

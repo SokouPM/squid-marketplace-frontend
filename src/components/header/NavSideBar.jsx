@@ -17,14 +17,14 @@ const NavSideBar = () => {
 
   const list = (anchor) => (
     <Box
-      className="sideBar h-screen flex flex-col text-white"
+      className="bg-primary h-screen flex flex-col text-white"
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <div className="flex items-center pt-2 mb-2">
         <button
-          className="closeMenuIcon transition-all p-2 text-2xl rounded-full ml-4 mr-2"
+          className="hover-bg-secondary transition-all p-2 text-2xl rounded-full ml-4 mr-2"
           onClick={toggleDrawer(anchor, false)}
         >
           <CgClose />
@@ -32,11 +32,15 @@ const NavSideBar = () => {
         <p className="font-bold underline">Catégories :</p>
       </div>
       <Link href={"/articles"}>
-        <a className="transition-all pl-4 py-1 hover:pl-6">Tous les articles</a>
+        <a className="hover-text-secondary transition-all pl-4 py-1 hover:pl-6 hover:bg-black/30">
+          Tous les articles
+        </a>
       </Link>
       {datas.map((item) => (
         <Link key={item.id} href={`/categories/${item.id}`}>
-          <a className="transition-all pl-4 py-1 hover:pl-6">{item.name}</a>
+          <a className="hover-text-secondary transition-all pl-4 py-1 hover:pl-6 hover:bg-black/30">
+            {item.name}
+          </a>
         </Link>
       ))}
     </Box>
@@ -47,7 +51,7 @@ const NavSideBar = () => {
       {["left"].map((anchor) => (
         <React.Fragment key={anchor}>
           <button
-            className="menuIcon p-2 text-2xl rounded-full mr-4 transition-all"
+            className="hover-bg-secondary p-2 text-2xl rounded-full mr-4 transition-all"
             onClick={toggleDrawer(anchor, true)}
           >
             <GiHamburgerMenu />

@@ -1,6 +1,6 @@
 import React from "react"
 import { GoogleLogin } from "react-google-login"
-import styles from "/styles/components/body/SocialNetworkButton.module.css"
+import styles from "/styles/SocialNetworkButton.module.css"
 
 const GoogleButton = () => {
   const CLIENT_ID = "TODO"

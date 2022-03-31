@@ -3,7 +3,6 @@ import Router from "next/router"
 import { Form, Formik } from "formik"
 import * as Yup from "yup"
 import FormField from "/src/components/body/FormField"
-import styles from "/styles/Contact.module.css"
 
 const ContactPage = () => {
   const displayingErrorMessagesSchema = Yup.object().shape({
@@ -43,9 +42,11 @@ const ContactPage = () => {
       diplaybreadcrumbs="true"
       diplayfooter="true"
     >
-      <div className={styles.contactPage}>
-        <fieldset>
-          <legend>Contactez-nous</legend>
+      <div>
+        <fieldset className="border border-secondary rounded px-16 py-6">
+          <legend className="text-secondary -ml-10 text-xl">
+            Contactez-nous
+          </legend>
 
           <Formik
             initialValues={{
@@ -63,9 +64,9 @@ const ContactPage = () => {
           >
             {({ errors, touched }) => (
               <Form>
-                <div className={styles.formLine}>
+                <div className="flex justify-between w-full">
                   <FormField
-                    style={styles.normalField}
+                    style="mb-2 w-full mr-2"
                     label="Prénom"
                     id="firstname"
                     name="firstname"
@@ -74,7 +75,7 @@ const ContactPage = () => {
                     touchedType={touched.firstname}
                   />
                   <FormField
-                    style={styles.normalField}
+                    style="mb-2 w-full ml-2"
                     label="Nom"
                     id="lastname"
                     name="lastname"
@@ -83,9 +84,9 @@ const ContactPage = () => {
                     touchedType={touched.lastname}
                   />
                 </div>
-                <div className={styles.formLine}>
+                <div className="flex justify-between w-full">
                   <FormField
-                    style={styles.normalField}
+                    style="mb-2 w-full mr-2"
                     label="Email"
                     id="email"
                     name="email"
@@ -94,7 +95,7 @@ const ContactPage = () => {
                     touchedType={touched.email}
                   />
                   <FormField
-                    style={styles.normalField}
+                    style="mb-2 w-full ml-2"
                     label="Sujet"
                     id="subject"
                     name="subject"
@@ -104,16 +105,22 @@ const ContactPage = () => {
                   />
                 </div>
                 <FormField
-                  style={styles.normalField}
+                  style="mb-2 "
                   label="Message"
                   type="textarea"
+                  rows={5}
                   id="message"
                   name="message"
                   placeholder="Votre message"
                   errorType={errors.message}
                   touchedType={touched.message}
                 />
-                <button type="submit">Submit</button>
+                <button
+                  className="bg-secondary hover-bg-tertiary hover-text-primary px-10 py-1 rounded-full text-white transition-all"
+                  type="submit"
+                >
+                  Submit
+                </button>
               </Form>
             )}
           </Formik>

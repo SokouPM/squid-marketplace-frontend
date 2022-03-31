@@ -1,7 +1,7 @@
 .breadcrumbs {
   border-bottom: solid var(--secondary-color) 3px;
   margin: 10px auto 20px;
-  height: 30px;
+  padding-bottom: 10px;
   font-size: 18px;
   font-weight: bold;
 }
@@ -18,18 +18,4 @@
 .breadcrumbs li:not(li:first-of-type):before {
   content: ">";
   margin: 0 10px;
-}
-
-@media screen and (max-width: 1300px) {
-  .breadcrumbs {
-    margin: 0 auto 1.5vw;
-  }
-}
-
-@media screen and (max-width: 850px) {
-  .breadcrumbs {
-    font-size: 14px;
-    height: 25px;
-    border-bottom: solid var(--secondary-color) 2px;
-  }
 }

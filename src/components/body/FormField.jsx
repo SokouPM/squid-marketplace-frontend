@@ -1,19 +1,23 @@
 import { Field } from "formik"
-import React from "react"
-import styles from "/styles/components/body/FormField.module.css"
 
 const FormField = (props) => {
   return (
     <div className={props.style}>
-      <label htmlFor={props.name}>{props.label}</label>
+      <label htmlFor={props.name} className="w-full">
+        {props.label}
+      </label>
       <Field
-        as={props.type}
+        className={`border-2 rounded py-1 px-2 w-full ${
+          props.touchedType && props.errorType && "border-red-600"
+        }`}
+        rows={props.rows}
         id={props.id}
         name={props.name}
+        as={props.type}
         placeholder={props.placeholder}
       ></Field>
       {props.touchedType && props.errorType && (
-        <div className={styles.errorField}>{props.errorType}</div>
+        <div className="errorField mt-1 text-red-600">{props.errorType}</div>
       )}
     </div>
   )

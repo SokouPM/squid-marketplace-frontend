@@ -14,54 +14,71 @@
 *,
 ::before,
 ::after {
-  margin: 0;
-  padding: 0;
   font-family: "Roboto", sans-serif;
-  box-sizing: border-box;
-}
-
-html,
-body,
-#root {
-  height: 100%;
-  width: 100%;
-}
-
-header,
-.sideBar,
-footer {
-  background-color: var(--primary-color);
-}
-
-header {
-  height: var(--header-height);
 }
 
 body {
   background-color: var(--tertiary-color);
 }
 
-.menuIcon:hover,
-.closeMenuIcon:hover,
-.searchButton,
-.chart:hover,
-.chartCount,
-.connectButton:hover,
-.accountFormAside {
-  background-color: var(--secondary-color);
+header {
+  height: var(--header-height);
 }
 
-.sideBar a:hover {
-  color: var(--secondary-color);
-  background-color: rgba(0, 0, 0, 0.2);
+main {
+  min-height: calc(100vh - (var(--header-height) + var(--footer-height)));
 }
 
-.notFoundPage {
+.notFoundPage,
+.signInPage,
+.signUpPage {
   min-height: 98vh;
 }
 
-.notFoundPageLink {
+footer {
+  height: var(--footer-height);
+}
+
+.bg-primary,
+.hover-bg-primary:hover {
+  background-color: var(--primary-color);
+}
+
+.bg-secondary,
+.hover-bg-secondary:hover {
+  background-color: var(--secondary-color);
+}
+
+.bg-tertiary,
+.hover-bg-tertiary:hover {
+  background-color: var(--tertiary-color);
+}
+
+.text-primary,
+.hover-text-primary:hover {
+  color: var(--primary-color);
+}
+
+.text-secondary,
+.hover-text-secondary:hover {
   color: var(--secondary-color);
+}
+
+.text-tertiary,
+.hover-text-tertiary:hover {
+  color: var(--tertiary-color);
+}
+
+.border-primary {
+  border-color: var(--primary-color);
+}
+
+.border-secondary {
+  border-color: var(--secondary-color);
+}
+
+.border-tertiary {
+  border-color: var(--tertiary-color);
 }
 
 h1 {
@@ -72,10 +89,24 @@ h1 {
   margin-left: 5px;
 }
 
-main {
-  min-height: calc(100vh - (var(--header-height) + var(--footer-height)));
+.errorField {
+  animation: errorEntrance 0.2s ease 0s 1 normal forwards;
 }
 
-footer {
-  height: var(--footer-height);
+@keyframes errorEntrance {
+  0% {
+    transform: translateX(100px);
+  }
+
+  33% {
+    transform: translateX(-80px);
+  }
+
+  66% {
+    transform: translateX(40px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }

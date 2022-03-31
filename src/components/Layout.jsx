@@ -17,12 +17,14 @@ const Layout = (props) => {
       </Head>
       {props.diplayheader === "true" ? <Header /> : null}
       {props.diplaybanner === "true" ? (
-        <Image
-          src="/banner.png"
-          alt="squid market place banner"
-          width={1900}
-          height={434}
-        />
+        <div className="w-full bg-blue-900 flex items-center justify-center">
+          <Image
+            src="/banner.png"
+            alt="squid market place banner"
+            width={1900}
+            height={434}
+          />
+        </div>
       ) : null}
       <main className="w-4/5 px-10 py-2 mx-auto bg-white">
         {props.diplaybreadcrumbs === "true" ? <BreadCrumbs /> : null}

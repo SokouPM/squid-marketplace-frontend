@@ -20,7 +20,7 @@ const NotFoundPage = () => {
         <p className="mt-5">Oups, la page demandée n'existe pas.</p>
         <p>
           <Link href="/">
-            <a className="notFoundPageLink hover:underline">Cliquez ici</a>
+            <a className="text-secondary hover:underline">Cliquez ici</a>
           </Link>{" "}
           pour revenir sur la page d'accueil
         </p>

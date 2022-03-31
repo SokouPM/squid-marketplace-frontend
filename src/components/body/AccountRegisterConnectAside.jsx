@@ -3,7 +3,7 @@ import Link from "next/link"
 
 const AccountRegisterConnectAside = (props) => {
   return (
-    <aside className="accountFormAside flex flex-col items-center justify-center w-2/6">
+    <aside className="bg-secondary flex flex-col items-center justify-center w-2/6">
       <span>
         <Image src="/logoBig.png" alt="logo" width={180} height={150} />
       </span>

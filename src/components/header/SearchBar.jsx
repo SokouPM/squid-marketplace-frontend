@@ -22,7 +22,7 @@ const SearchBar = () => {
             {...params.inputProps}
             className="h-8 w-80 px-3 rounded-l-full"
           />
-          <button className="searchButton px-3 h-8 text-white rounded-r-full hover:bg-gray-200">
+          <button className="bg-secondary hover-bg-tertiary hover-text-primary px-3 h-8 text-white rounded-r-full transition-all">
             <FaSearch />
           </button>
         </form>

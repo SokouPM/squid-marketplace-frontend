@@ -1,6 +1,6 @@
 import FacebookLogin from "react-facebook-login"
 import { FaFacebookSquare } from "react-icons/fa"
-import styles from "/styles/components/body/SocialNetworkButton.module.css"
+import styles from "/styles/SocialNetworkButton.module.css"
 
 const FacebookButton = () => {
   const CLIENT_ID = "TODO"

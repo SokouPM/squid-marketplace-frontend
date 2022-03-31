@@ -7,7 +7,6 @@ import FormField from "/src/components/body/FormField"
 import PasswordField from "/src/components/body/customFields/PasswordField"
 import GoogleButton from "/src/components/body/GoogleButton"
 import FacebookButton from "/src/components/body/FacebookButton"
-import styles from "/styles/Register.module.css"
 
 const SignUpPage = () => {
   const displayingErrorMessagesSchema = Yup.object().shape({
@@ -45,9 +44,9 @@ const SignUpPage = () => {
       diplaybreadcrumbs="false"
       diplayfooter="false"
     >
-      <div className={styles.registerPage}>
+      <div className="signUpPage flex flex-col justify-center items-center">
         <GoHomeLink />
-        <div className={styles.connectRegisterWindow}>
+        <div className="flex border rounded mb-auto w-4/5 overflow-hidden shadow-md">
           <Formik
             initialValues={{
               email: "",
@@ -60,10 +59,12 @@ const SignUpPage = () => {
             }}
           >
             {({ errors, touched }) => (
-              <Form className={styles.registerSide}>
-                <h2>Créez un compte</h2>
+              <Form className="w-4/6 p-10">
+                <h2 className="text-secondary text-2xl text-center mb-10">
+                  Créez un compte
+                </h2>
                 <FormField
-                  style={styles.normalField}
+                  style="mb-5"
                   label="Email"
                   id="email"
                   name="email"
@@ -72,7 +73,7 @@ const SignUpPage = () => {
                   touchedType={touched.email}
                 />
                 <FormField
-                  style={styles.normalField}
+                  style="mb-5"
                   label="Mot de passe"
                   type={PasswordField}
                   id="password"
@@ -82,7 +83,7 @@ const SignUpPage = () => {
                   touchedType={touched.password}
                 />
                 <FormField
-                  style={styles.normalField}
+                  style="mb-5"
                   label="Confirmer le mot de passe"
                   type={PasswordField}
                   id="passwordConfirm"
@@ -91,10 +92,19 @@ const SignUpPage = () => {
                   errorType={errors.passwordConfirm}
                   touchedType={touched.passwordConfirm}
                 />
-                <button type="submit">Inscription</button>
-                <span className={styles.or}>---- ou ----</span>
-                <GoogleButton />
-                <FacebookButton />
+                <div className="w-full flex items-center justify-center">
+                  <button
+                    className="bg-secondary hover-text-primary hover-bg-tertiary px-10 py-1 rounded-full text-white transition-all"
+                    type="submit"
+                  >
+                    Inscription
+                  </button>
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                  <span className="mt-5 text-gray-400">---- ou ----</span>
+                  <GoogleButton />
+                  <FacebookButton />
+                </div>
               </Form>
             )}
           </Formik>

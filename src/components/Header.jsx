@@ -7,7 +7,7 @@ import SearchBar from "./header/SearchBar"
 
 const Header = () => {
   return (
-    <header className="flex items-center justify-between px-4">
+    <header className="bg-primary flex items-center justify-between px-4">
       <div className="flex items-center text-white">
         <NavSideBar />
         <Link href="/">
@@ -22,14 +22,14 @@ const Header = () => {
 
       <div className="flex items-center justify-center">
         <Link href="/signin">
-          <a className="connectButton py-1 pr-2 pl-1 flex items-center justify-center bg-white rounded-full transition-all hover:text-white">
+          <a className="hover-bg-secondary text-primary py-1 pr-2 pl-1 flex items-center justify-center bg-white rounded-full transition-all hover:text-white">
             <MdAccountCircle className="mr-1 text-2xl" /> <p>Se connecter</p>
           </a>
         </Link>
 
-        <div className="chart p-2 ml-5 rounded-full text-black bg-white relative transition-all hover:text-white">
+        <div className="hover-bg-secondary text-primary p-2 ml-5 rounded-full bg-white relative transition-all hover:text-white">
           <RiShoppingCartLine className="text-2xl" />
-          <div className="chartCount h-5 w-5 text-white flex items-center justify-center rounded-full absolute -top-2 -right-1">
+          <div className="bg-secondary h-5 w-5 text-white flex items-center justify-center rounded-full absolute -top-2 -right-1">
             0
           </div>
         </div>

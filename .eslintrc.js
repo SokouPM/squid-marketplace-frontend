@@ -23,7 +23,7 @@ module.exports = {
       { avoidEscape: true, allowTemplateLiterals: true },
     ],
     semi: ["error", "never"],
-    "no-console": "warn",
+    "no-console": "error",
     "no-implicit-globals": "error",
     "no-warning-comments": ["warn", { terms: ["fixme", "todo"] }],
     "newline-before-return": "error",

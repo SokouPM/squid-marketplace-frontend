@@ -9,8 +9,6 @@ import PasswordField from "/src/components/body/customFields/PasswordField"
 import CheckboxField from "/src/components/body/customFields/CheckboxField"
 import GoogleButton from "/src/components/body/GoogleButton"
 import FacebookButton from "/src/components/body/FacebookButton"
-// Style
-import styles from "/styles/Connect.module.css"
 
 const SignInPage = () => {
   const displayingErrorMessagesSchema = Yup.object().shape({
@@ -27,9 +25,9 @@ const SignInPage = () => {
       diplaybreadcrumbs="false"
       diplayfooter="false"
     >
-      <div className={styles.connectPage}>
+      <div className="signInPage flex flex-col justify-center items-center">
         <GoHomeLink />
-        <div className={styles.connectRegisterWindow}>
+        <div className="flex border rounded mb-auto w-4/5 overflow-hidden shadow-md">
           <AccountRegisterConnectAside
             text1="Pas encore inscrit ?"
             link="/signup"
@@ -46,10 +44,12 @@ const SignInPage = () => {
             }}
           >
             {({ errors, touched }) => (
-              <Form className={styles.connectSide}>
-                <h2>Connectez-vous</h2>
+              <Form className="w-4/6 p-12">
+                <h2 className="text-secondary text-2xl text-center mb-10">
+                  Connectez-vous
+                </h2>
                 <FormField
-                  style={styles.normalField}
+                  style="mb-5"
                   label="Email"
                   id="email"
                   name="email"
@@ -58,7 +58,7 @@ const SignInPage = () => {
                   touchedType={touched.email}
                 />
                 <FormField
-                  style={styles.normalField}
+                  style="mb-5"
                   label="Mot de passe"
                   type={PasswordField}
                   id="password"
@@ -67,19 +67,26 @@ const SignInPage = () => {
                   errorType={errors.password}
                   touchedType={touched.password}
                 />
-                <div className={styles.formRow}>
+                <div className="flex items-center justify-evenly w-full">
                   <FormField
-                    style={styles.checkboxField}
+                    style="flex flex-row-reverse justify-center items-center"
                     label="Se souvenir de moi"
                     type={CheckboxField}
                     id="rememberMe"
                     name="rememberMe"
                   />
-                  <button type="submit">Connexion</button>
+                  <button
+                    className="bg-secondary hover-text-primary hover-bg-tertiary px-10 py-1 rounded-full text-white transition-all"
+                    type="submit"
+                  >
+                    Connexion
+                  </button>
                 </div>
-                <span className={styles.or}>---- ou ----</span>
-                <GoogleButton />
-                <FacebookButton />
+                <div className="flex flex-col items-center justify-center">
+                  <span className="mt-5 text-gray-400">---- ou ----</span>
+                  <GoogleButton />
+                  <FacebookButton />
+                </div>
               </Form>
             )}
           </Formik>

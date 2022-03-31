@@ -23,12 +23,3 @@
   font-size: 20px;
   margin-right: 20px;
 }
-
-@media screen and (max-width: 315px) {
-  .googleButton,
-  .facebookButton {
-    width: 80vw;
-    font-size: 3.8vw !important;
-  }
-
-}

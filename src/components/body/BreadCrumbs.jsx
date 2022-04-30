@@ -9,7 +9,7 @@ const BreadCrumbs = ({ pagelink }) => {
   let link = ""
 
   return (
-    <ul className="flex items-center font-bold text-lg text-secondary border-b-2 border-secondary py-1 mb-3">
+    <ul className="flex items-center font-bold text-xl text-secondary border-b-2 border-secondary py-2 mb-3">
       {breadcrumbsTab.map((item, index) => (
         <li key={index} className="flex items-center">
           {index !== 0 && item !== "" && <span className="mx-2">/</span>}

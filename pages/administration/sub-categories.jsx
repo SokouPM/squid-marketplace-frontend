@@ -1,5 +1,4 @@
 import Layout from "/src/components/Layout"
-import Link from "next/link"
 
 const SubCategoriesAdminPage = () => {
   return (

@@ -1,5 +1,4 @@
-import Layout from "/src/components/Layout"
-import Link from "next/link"
+// import Link from "next/link"
 
 const SubCategoriesList = () => {
   return <div>TODO</div>

@@ -7,6 +7,7 @@ const SubCategoriesAdminPage = () => {
       page="Administration / Utilisateurs"
       fullwidth={1}
       diplayadminheader={1}
+      diplaybreadcrumbs={1}
       diplayfooter={1}
     >
       <h2 className="my-5 text-3xl text-center font-bold">

@@ -1,16 +1,11 @@
-import Layout from "/src/components/Layout"
-import Image from "next/image"
 import Link from "next/link"
+import Image from "next/image"
+import Layout from "../src/components/Layout"
 
 const NotFoundPage = () => {
   return (
-    <Layout
-      page="404"
-      diplayheader="false"
-      diplaybreadcrumbs="false"
-      diplayfooter="false"
-    >
-      <div className="notFoundPage flex flex-col items-center justify-center text-4xl font-bold">
+    <Layout page="404" fullheight={1}>
+      <div className="pt-6 flex flex-col items-center justify-center text-4xl font-bold">
         <Image
           src="/not_found.png"
           alt="logo page non trouvé squid"

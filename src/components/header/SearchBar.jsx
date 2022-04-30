@@ -1,6 +1,6 @@
 import Autocomplete from "@mui/material/Autocomplete"
-import options from "/src/datas/productsName"
 import { FaSearch } from "react-icons/fa"
+import options from "/src/datas/productsName"
 
 const SearchBar = () => {
   const handleSubmit = (e) => {

@@ -4,7 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi"
 import { CgClose } from "react-icons/cg"
 import Box from "@mui/material/Box"
 import Drawer from "@mui/material/Drawer"
-import datas from "/src/datas/categories.json"
+import datas from "../../datas/categories.json"
 
 const NavSideBar = () => {
   const [state, setState] = useState({

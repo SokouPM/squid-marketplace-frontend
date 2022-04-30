@@ -1,6 +1,6 @@
 [
-  { "label": "Article 1" },
-  { "label": "Article 2" },
-  { "label": "Article 3" },
-  { "label": "Article 4" }
+  { "id": 1, "label": "Article 1" },
+  { "id": 2, "label": "Article 2" },
+  { "id": 3, "label": "Article 3" },
+  { "id": 4, "label": "Article 4" }
 ]

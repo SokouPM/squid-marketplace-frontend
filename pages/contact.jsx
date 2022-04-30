@@ -1,8 +1,8 @@
-import Layout from "/src/components/Layout"
 import Router from "next/router"
 import { Form, Formik } from "formik"
 import * as Yup from "yup"
-import FormField from "/src/components/body/FormField"
+import Layout from "../src/components/Layout"
+import FormField from "../src/components/body/FormField"
 
 const ContactPage = () => {
   const displayingErrorMessagesSchema = Yup.object().shape({
@@ -38,9 +38,9 @@ const ContactPage = () => {
   return (
     <Layout
       page="Nous contacter"
-      diplayheader="true"
-      diplaybreadcrumbs="true"
-      diplayfooter="true"
+      diplayheader={1}
+      diplaybreadcrumbs={1}
+      diplayfooter={1}
     >
       <div>
         <fieldset className="border border-secondary rounded px-16 py-6">

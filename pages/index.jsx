@@ -1,14 +1,14 @@
-import Layout from "/src/components/Layout"
-import ArticleList from "/src/components/body/ArticleList"
+import Layout from "../src/components/Layout"
+import ArticleList from "../src/components/body/ArticleList"
 
 const HomePage = () => {
   return (
     <Layout
       page="Accueil"
-      diplayheader="true"
-      diplaybanner="true"
-      diplaybreadcrumbs="true"
-      diplayfooter="true"
+      diplayheader={1}
+      diplaybanner={1}
+      diplaybreadcrumbs={1}
+      diplayfooter={1}
     >
       <ArticleList limit={4} />
     </Layout>

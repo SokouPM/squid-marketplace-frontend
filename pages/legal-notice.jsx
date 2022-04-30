@@ -1,13 +1,13 @@
-import Layout from "/src/components/Layout"
 import { GiSquid } from "react-icons/gi"
+import Layout from "../src/components/Layout"
 
 const LegalNoticePage = () => {
   return (
     <Layout
       page="Mentions légales"
-      diplayheader="true"
-      diplaybreadcrumbs="true"
-      diplayfooter="true"
+      diplayheader={1}
+      diplaybreadcrumbs={1}
+      diplayfooter={1}
     >
       <div className="pb-10">
         <div>

@@ -6,7 +6,7 @@ import CircularProgress from "@mui/material/CircularProgress"
 import { IoMdStar } from "react-icons/io"
 import { GiSquid, GiGiantSquid } from "react-icons/gi"
 import api from "../services/api"
-import styles from "/styles/components/body/ArticleList.module.css"
+import styles from "../../../styles/components/body/ArticleList.module.css"
 
 const ArticleList = ({ limit }) => {
   const [articles, setArticles] = useState(null)

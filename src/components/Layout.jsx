@@ -1,6 +1,7 @@
 import Head from "next/head"
 import Image from "next/image"
 import Header from "./Header"
+import AdminHeader from "./AdminHeader"
 import BreadCrumbs from "./body/BreadCrumbs"
 import Footer from "./Footer"
 
@@ -15,8 +16,9 @@ const Layout = (props) => {
         <meta name="description" content="Site de vente en ligne de meubles" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {props.diplayheader === "true" ? <Header /> : null}
-      {props.diplaybanner === "true" ? (
+      {props.diplayheader && <Header />}
+      {props.diplayadminheader && <AdminHeader />}
+      {props.diplaybanner && (
         <div className="w-full bg-blue-900 flex items-center justify-center">
           <Image
             src="/banner.png"
@@ -25,12 +27,16 @@ const Layout = (props) => {
             height={434}
           />
         </div>
-      ) : null}
-      <main className="w-4/5 px-10 py-2 mx-auto bg-white">
-        {props.diplaybreadcrumbs === "true" ? <BreadCrumbs /> : null}
+      )}
+      <main
+        className={`px-10 py-2 mx-auto bg-white ${
+          props.fullwidth ? "min-w-screen" : "w-4/5"
+        } ${props.fullheight && "min-h-screen"}`}
+      >
+        {props.diplaybreadcrumbs && <BreadCrumbs />}
         {children}
       </main>
-      {props.diplayfooter === "true" ? <Footer /> : null}
+      {props.diplayfooter && <Footer />}
     </div>
   )
 }

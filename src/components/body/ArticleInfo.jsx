@@ -2,8 +2,8 @@ import Image from "next/image"
 import Rating from "@mui/material/Rating"
 import { GiSquid } from "react-icons/gi"
 import { IoMdStar } from "react-icons/io"
-import data from "/src/datas/product.json"
-import styles from "/styles/components/body/ArticleList.module.css"
+import data from "../../datas/product.json"
+import styles from "../../../styles/components/body/ArticleList.module.css"
 
 const ArticleInfo = () => {
   const stockRender = (stockNumber) => {

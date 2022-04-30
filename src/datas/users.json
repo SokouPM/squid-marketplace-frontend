@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "firstName": "Pierre",
+    "LastName": "Marquet",
+    "mail": "marquet_pierre@yahoo.fr",
+    "adress": "5 rue de la féculerie",
+    "postalCode": "95000",
+    "city": "Cergy",
+    "isAdmin": true
+  },
+  {
+    "id": 2,
+    "firstName": "Kilian",
+    "LastName": "Gassin",
+    "mail": "kiliangassin@gmail.com",
+    "adress": "15 rue du petit bois",
+    "postalCode": "92100",
+    "city": "Boulogne Billancourt",
+    "isAdmin": true
+  },
+  {
+    "id": 3,
+    "firstName": "Alexis",
+    "LastName": "Borges",
+    "mail": "gorgesalexis@gmail.com",
+    "adress": "3 rue de Paris",
+    "postalCode": "94200",
+    "city": "Ivry sur Seine",
+    "isAdmin": false
+  }
+]

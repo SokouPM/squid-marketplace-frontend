@@ -1,12 +1,10 @@
-import Layout from "/src/components/Layout"
 import { Form, Formik } from "formik"
 import * as Yup from "yup"
-import GoHomeLink from "/src/components/body/GoHomeLink"
-import AccountRegisterConnectAside from "/src/components/body/AccountRegisterConnectAside"
-import FormField from "/src/components/body/FormField"
-import PasswordField from "/src/components/body/customFields/PasswordField"
-import GoogleButton from "/src/components/body/GoogleButton"
-import FacebookButton from "/src/components/body/FacebookButton"
+import Layout from "../src/components/Layout"
+import GoHomeLink from "../src/components/body/GoHomeLink"
+import AccountRegisterConnectAside from "../src/components/body/AccountRegisterConnectAside"
+import FormField from "../src/components/body/FormField"
+import PasswordField from "../src/components/body/customFields/PasswordField"
 
 const SignUpPage = () => {
   const displayingErrorMessagesSchema = Yup.object().shape({
@@ -38,12 +36,7 @@ const SignUpPage = () => {
   })
 
   return (
-    <Layout
-      page="Inscription"
-      diplayheader="false"
-      diplaybreadcrumbs="false"
-      diplayfooter="false"
-    >
+    <Layout page="Inscription" fullheight={1}>
       <div className="signUpPage flex flex-col justify-center items-center">
         <GoHomeLink />
         <div className="flex border rounded mb-auto w-4/5 overflow-hidden shadow-md">
@@ -102,8 +95,6 @@ const SignUpPage = () => {
                 </div>
                 <div className="flex flex-col items-center justify-center">
                   <span className="mt-5 text-gray-400">---- ou ----</span>
-                  <GoogleButton />
-                  <FacebookButton />
                 </div>
               </Form>
             )}

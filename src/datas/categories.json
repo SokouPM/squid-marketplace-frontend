@@ -1,9 +1,5 @@
 [
   {
-    "id": 0,
-    "name": "Lits"
-  },
-  {
     "id": 1,
     "name": "Armoires"
   },
@@ -30,5 +26,9 @@
   {
     "id": 7,
     "name": "Tables"
+  },
+  {
+    "id": 8,
+    "name": "Lits"
   }
 ]

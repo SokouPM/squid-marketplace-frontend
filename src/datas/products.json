@@ -12,7 +12,7 @@
       "https://place-hold.it/500x300",
       "https://place-hold.it/500x300"
     ],
-    "subCategories": [],
+    "id_categories": 1,
     "orders": [],
     "favorites": [],
     "ratings": [],
@@ -31,7 +31,7 @@
       "https://place-hold.it/500x300",
       "https://place-hold.it/500x300"
     ],
-    "subCategories": [],
+    "id_categories": 5,
     "orders": [],
     "favorites": [],
     "ratings": [],
@@ -50,7 +50,26 @@
       "https://place-hold.it/500x300",
       "https://place-hold.it/500x300"
     ],
-    "subCategories": [],
+    "id_categories": 3,
+    "orders": [],
+    "favorites": [],
+    "ratings": [],
+    "id": 3
+  },
+  {
+    "name": "MALM",
+    "description": "Il s'agit bien d'une coiffeuse, avec de la place pour ranger votre maquillage et vos bijoux. Mais elle peut aussi servir de bureau, de table d'appoint pour poser les clés ou le courrier dans l'entrée ou pour ranger des magazines derrière le canapé.",
+    "stock": 0,
+    "color": "Blanc",
+    "price": 149,
+    "images": [
+      "https://place-hold.it/500x300",
+      "https://place-hold.it/500x300",
+      "https://place-hold.it/500x300",
+      "https://place-hold.it/500x300",
+      "https://place-hold.it/500x300"
+    ],
+    "id_categories": 6,
     "orders": [],
     "favorites": [],
     "ratings": [],
@@ -69,7 +88,7 @@
       "https://place-hold.it/500x300",
       "https://place-hold.it/500x300"
     ],
-    "subCategories": [],
+    "id_categories": 2,
     "orders": [],
     "favorites": [],
     "ratings": [],
@@ -88,10 +107,10 @@
       "https://place-hold.it/500x300",
       "https://place-hold.it/500x300"
     ],
-    "subCategories": [],
+    "id_categories": 1,
     "orders": [],
     "favorites": [],
     "ratings": [],
-    "id": 5
+    "id": 6
   }
 ]

@@ -61,7 +61,7 @@ const CategoriesList = () => {
         </tfoot>
       </table>
       <Link href="/administration/categories/add" passHref>
-        <button className="p-3 w-1/6 rounded bg-green-600 text-white transition-all hover:bg-green-300">
+        <button className="p-3 w-1/6 mb-5 rounded bg-green-600 text-white transition-all hover:bg-green-300">
           Ajouter une catégorie
         </button>
       </Link>

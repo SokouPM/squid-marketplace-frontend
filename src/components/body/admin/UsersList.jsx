@@ -52,7 +52,7 @@ const UsersList = () => {
                 {item.isAdmin && usersId !== item.id ? (
                   <button
                     className="p-1 w-1/2 rounded bg-red-300 text-white cursor-not-allowed"
-                    title="Pour supprimer cet administrateur vous attendre qu'il soit simple utilisateur"
+                    title="Vous ne pouvez pas supprimer un autre administrateur"
                   >
                     Supprimer
                   </button>
@@ -97,7 +97,7 @@ const UsersList = () => {
         </tfoot>
       </table>
       <Link href="/administration/users/add" passHref>
-        <button className="p-3 w-1/6 rounded bg-green-600 text-white transition-all hover:bg-green-300">
+        <button className="p-3 w-1/6 mb-5 rounded bg-green-600 text-white transition-all hover:bg-green-300">
           Ajouter une catégorie
         </button>
       </Link>

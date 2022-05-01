@@ -1,7 +1,7 @@
 import Layout from "../../src/components/Layout"
 import ArticlesList from "../../src/components/body/admin/ArticlesList"
 
-const SubCategoriesAdminPage = () => {
+const ArticlesAdminPage = () => {
   return (
     <Layout
       page="Administration / Articles"
@@ -17,4 +17,4 @@ const SubCategoriesAdminPage = () => {
   )
 }
 
-export default SubCategoriesAdminPage
+export default ArticlesAdminPage

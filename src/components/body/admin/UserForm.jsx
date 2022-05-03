@@ -1,6 +1,5 @@
 import { Form, Formik, Field } from "formik"
 import * as Yup from "yup"
-import CheckboxField from "../customFields/CheckboxField"
 import PasswordField from "../customFields/PasswordField"
 import FormField from "../FormField"
 

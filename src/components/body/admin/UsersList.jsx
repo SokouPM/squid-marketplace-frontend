@@ -35,7 +35,10 @@ const UsersList = () => {
               </td>
               <td className="flex items-center justify-center border-x p-1">
                 {!item.isAdmin || usersId === item.id ? (
-                  <Link href={`/administration/${item.id}/modify`} passHref>
+                  <Link
+                    href={`/administration/users/${item.id}/modify`}
+                    passHref
+                  >
                     <button className="p-1 mr-1 w-1/2 rounded bg-blue-600 text-white transition-all hover:bg-blue-300">
                       Modifier
                     </button>
@@ -98,7 +101,7 @@ const UsersList = () => {
       </table>
       <Link href="/administration/users/add" passHref>
         <button className="p-3 w-1/6 mb-5 rounded bg-green-600 text-white transition-all hover:bg-green-300">
-          Ajouter une catégorie
+          Ajouter un utilisateur
         </button>
       </Link>
     </div>

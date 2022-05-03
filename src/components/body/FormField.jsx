@@ -15,6 +15,7 @@ const FormField = (props) => {
         name={props.name}
         as={props.type}
         placeholder={props.placeholder}
+        checked={props.checked}
       ></Field>
       {props.touchedType && props.errorType && (
         <div className="errorField mt-1 text-red-600">{props.errorType}</div>

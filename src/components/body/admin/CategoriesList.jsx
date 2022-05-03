@@ -20,7 +20,10 @@ const CategoriesList = () => {
             >
               <td className="w-5/6 pl-3 border-x">{item.name}</td>
               <td className="flex items-center justify-center border-x p-1">
-                <Link href={`/administration/${item.id}/modify`} passHref>
+                <Link
+                  href={`/administration/categories/${item.id}/modify`}
+                  passHref
+                >
                   <button className="p-1 mr-1 w-1/2 rounded bg-blue-600 text-white transition-all hover:bg-blue-300">
                     Modifier
                   </button>

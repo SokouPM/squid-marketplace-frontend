@@ -1,12 +1,10 @@
-import { Form, Formik } from "formik"
+import { Form, Formik, Field } from "formik"
 import * as Yup from "yup"
 import Layout from "../src/components/Layout"
-// Custom components
 import GoHomeLink from "../src/components/body/GoHomeLink"
 import AccountRegisterConnectAside from "../src/components/body/AccountRegisterConnectAside"
 import FormField from "../src/components/body/FormField"
 import PasswordField from "../src/components/body/customFields/PasswordField"
-import CheckboxField from "../src/components/body/customFields/CheckboxField"
 
 const SignInPage = () => {
   const displayingErrorMessagesSchema = Yup.object().shape({
@@ -30,6 +28,7 @@ const SignInPage = () => {
             initialValues={{
               email: "",
               password: "",
+              rememberMe: false,
             }}
             validationSchema={displayingErrorMessagesSchema}
             onSubmit={(values) => {
@@ -61,13 +60,10 @@ const SignInPage = () => {
                   touchedType={touched.password}
                 />
                 <div className="flex items-center justify-evenly w-full">
-                  <FormField
-                    style="flex flex-row-reverse justify-center items-center"
-                    label="Se souvenir de moi"
-                    type={CheckboxField}
-                    id="rememberMe"
-                    name="rememberMe"
-                  />
+                  <label className="cursor-pointer">
+                    <Field className="mr-2" type="checkbox" name="rememberMe" />
+                    Se souvenir de moi
+                  </label>
                   <button
                     className="bg-secondary hover-text-primary hover-bg-tertiary px-10 py-1 rounded-full text-white transition-all"
                     type="submit"

@@ -32,12 +32,10 @@ const AdministrationPage = () => {
               Gestion des catégories
             </a>
           </Link>
-          <Link href="/administration/sub-categories">
+          <Link href="/administration/invoices">
             <a
               onMouseEnter={() => {
-                setInfo(
-                  "Ajouter, modifier, supprimer ou afficher la liste des sous-catégories"
-                )
+                setInfo("Afficher la liste des factures")
               }}
               onMouseLeave={() => {
                 setInfo(null)
@@ -45,7 +43,7 @@ const AdministrationPage = () => {
               className="flex items-center justify-center border-2 rounded-lg w-1/2 py-4 m-3 text-lg bg-blue-500 text-white transition-all hover:scale-110 hover:drop-shadow-xl"
             >
               <MdOutlineCategory className="text-3xl mr-2" />
-              Gestion des sous-catégories
+              Gestion des factures
             </a>
           </Link>
         </div>

@@ -1,5 +1,5 @@
 import Layout from "../../../src/components/Layout"
-// import CategoryForm from "../../../src/components/body/admin/CategoryForm"
+import ArticleForm from "../../../src/components/body/admin/ArticleForm"
 
 const AddCategoryPage = () => {
   return (
@@ -12,7 +12,7 @@ const AddCategoryPage = () => {
       <h2 className="my-5 text-3xl text-center font-bold">
         Ajouter un article
       </h2>
-      TODO
+      <ArticleForm />
     </Layout>
   )
 }

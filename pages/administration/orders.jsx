@@ -1,20 +1,19 @@
 import Layout from "../../src/components/Layout"
-import UsersList from "../../src/components/body/admin/UsersList"
-
-const UsersAdminPage = () => {
+import OrdersList from "../../src/components/body/admin/OrdersList"
+const OrdersAdminPage = () => {
   return (
     <Layout
-      page="Administration / Utilisateurs"
+      page="Administration / Sous-catégories"
       fullwidth={1}
       diplayadminheader={1}
       diplayfooter={1}
     >
       <h2 className="my-5 text-3xl text-center font-bold">
-        Liste des utilisateurs
+        Liste des factures
       </h2>
-      <UsersList />
+      <OrdersList />
     </Layout>
   )
 }
 
-export default UsersAdminPage
+export default OrdersAdminPage

@@ -2,6 +2,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { MdOutlineCategory, MdOutlineArticle } from "react-icons/md"
 import { FiUsers } from "react-icons/fi"
+import { FaFileInvoiceDollar } from "react-icons/fa"
 import Layout from "../src/components/Layout"
 
 const AdministrationPage = () => {
@@ -20,7 +21,7 @@ const AdministrationPage = () => {
             <a
               onMouseEnter={() => {
                 setInfo(
-                  "Ajouter, modifier, supprimer ou afficher la liste des catégories"
+                  "Ajouter, modifier, supprimer ou afficher les catégories"
                 )
               }}
               onMouseLeave={() => {
@@ -32,18 +33,20 @@ const AdministrationPage = () => {
               Gestion des catégories
             </a>
           </Link>
-          <Link href="/administration/invoices">
+          <Link href="/administration/orders">
             <a
               onMouseEnter={() => {
-                setInfo("Afficher la liste des factures")
+                setInfo(
+                  "Afficher ou supprimer les commande ou télécharger les factures"
+                )
               }}
               onMouseLeave={() => {
                 setInfo(null)
               }}
               className="flex items-center justify-center border-2 rounded-lg w-1/2 py-4 m-3 text-lg bg-blue-500 text-white transition-all hover:scale-110 hover:drop-shadow-xl"
             >
-              <MdOutlineCategory className="text-3xl mr-2" />
-              Gestion des factures
+              <FaFileInvoiceDollar className="text-3xl mr-2" />
+              Gestion des commandes
             </a>
           </Link>
         </div>
@@ -51,9 +54,7 @@ const AdministrationPage = () => {
           <Link href="/administration/articles">
             <a
               onMouseEnter={() => {
-                setInfo(
-                  "Ajouter, modifier, supprimer ou afficher la liste des articles"
-                )
+                setInfo("Ajouter, modifier, supprimer ou afficher les articles")
               }}
               onMouseLeave={() => {
                 setInfo(null)
@@ -68,7 +69,7 @@ const AdministrationPage = () => {
             <a
               onMouseEnter={() => {
                 setInfo(
-                  "Ajouter, modifier, supprimer ou afficher la liste des utilisateurs"
+                  "Ajouter, modifier, supprimer ou afficher les utilisateurs"
                 )
               }}
               onMouseLeave={() => {

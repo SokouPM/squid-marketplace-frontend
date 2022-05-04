@@ -19,7 +19,7 @@ const ModifyUserPage = () => {
       {userId ? (
         <>
           <h2 className="my-5 text-3xl text-center font-bold">
-            Modifier la categorie "{userId}"
+            Modifier l'utilisateur "{userId}"
           </h2>
           <UserForm user={user} />
         </>

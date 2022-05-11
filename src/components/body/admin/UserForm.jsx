@@ -3,7 +3,7 @@ import * as Yup from "yup"
 import PasswordField from "../customFields/PasswordField"
 import FormField from "../FormField"
 
-const CategoriesList = ({ user }) => {
+const UserForm = ({ user }) => {
   let displayingErrorMessagesSchema
 
   user
@@ -110,4 +110,4 @@ const CategoriesList = ({ user }) => {
   )
 }
 
-export default CategoriesList
+export default UserForm

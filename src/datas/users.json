@@ -4,7 +4,8 @@
     "firstName": "Pierre",
     "LastName": "Marquet",
     "email": "marquet_pierre@yahoo.fr",
-    "adress": "5 rue de la féculerie",
+    "civility": "M.",
+    "address": "5 rue de la féculerie",
     "postalCode": "95000",
     "city": "Cergy",
     "isAdmin": true
@@ -14,7 +15,8 @@
     "firstName": "Kilian",
     "LastName": "Gassin",
     "email": "kiliangassin@gmail.com",
-    "adress": "15 rue du petit bois",
+    "civility": "M.",
+    "address": "15 rue du petit bois",
     "postalCode": "92100",
     "city": "Boulogne Billancourt",
     "isAdmin": true
@@ -24,7 +26,8 @@
     "firstName": "Alexis",
     "LastName": "Borges",
     "email": "borgesalexis@gmail.com",
-    "adress": "3 rue de Paris",
+    "civility": "M.",
+    "address": "3 rue de Paris",
     "postalCode": "94200",
     "city": "Ivry sur Seine",
     "isAdmin": false

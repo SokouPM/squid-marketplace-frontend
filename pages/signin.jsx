@@ -60,7 +60,7 @@ const SignInPage = () => {
                   touchedType={touched.password}
                 />
                 <div className="flex items-center justify-evenly w-full">
-                  <label className="cursor-pointer">
+                  <label className="cursor-pointer select-none">
                     <Field className="mr-2" type="checkbox" name="rememberMe" />
                     Se souvenir de moi
                   </label>

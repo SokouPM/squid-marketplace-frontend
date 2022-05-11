@@ -9,7 +9,7 @@ const displayingErrorMessagesSchema = Yup.object().shape({
     .max(40, "Maximum 40 caractères"),
 })
 
-const CategoriesList = ({ category }) => {
+const CategoriesForm = ({ category }) => {
   return (
     <Formik
       initialValues={{
@@ -52,4 +52,4 @@ const CategoriesList = ({ category }) => {
   )
 }
 
-export default CategoriesList
+export default CategoriesForm

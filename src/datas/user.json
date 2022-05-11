@@ -1,9 +1,10 @@
 {
   "id": 1,
   "firstName": "Pierre",
-  "LastName": "Marquet",
+  "lastName": "Marquet",
   "email": "marquet_pierre@yahoo.fr",
-  "adress": "5 rue de la féculerie",
+  "civility": "M.",
+  "address": "5 rue de la féculerie",
   "postalCode": "95000",
   "city": "Cergy",
   "isAdmin": true

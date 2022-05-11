@@ -29,7 +29,7 @@ const displayingErrorMessagesSchema = Yup.object().shape({
     .required("Le champ est requis !"),
 })
 
-const CategoriesList = ({ article }) => {
+const ArticleForm = ({ article }) => {
   const [pictureError, setPictureError] = useState(null)
   const [pictureList, setPicturesList] = useState([])
 
@@ -248,4 +248,4 @@ const CategoriesList = ({ article }) => {
   )
 }
 
-export default CategoriesList
+export default ArticleForm

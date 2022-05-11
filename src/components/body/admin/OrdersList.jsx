@@ -2,7 +2,7 @@ import Link from "next/link"
 import swal from "sweetalert"
 import orders from "../../../datas/orders.json"
 
-const ArticlesList = () => {
+const OrdersList = () => {
   return (
     <div className="flex flex-col items-center justify-center">
       <table className="mb-5">
@@ -74,4 +74,4 @@ const ArticlesList = () => {
   )
 }
 
-export default ArticlesList
+export default OrdersList

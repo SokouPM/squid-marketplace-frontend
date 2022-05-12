@@ -18,7 +18,7 @@ const AccountNav = ({ userId }) => {
           Mes commandes
         </a>
       </Link>
-      <Link href={`/users/${userId}/password`}>
+      <Link href={`/users/${userId}/change-password`}>
         <a className="border-l border-primary w-full text-center py-5 my-5 transition-all hover:bg-gray-200">
           Modifier mon mot de passe
         </a>

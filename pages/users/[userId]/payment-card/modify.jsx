@@ -1,10 +1,10 @@
 import { useRouter } from "next/router"
 import React from "react"
 import CircularProgress from "@mui/material/CircularProgress"
-import Layout from "../../../src/components/Layout"
-import user from "../../../src/datas/user.json"
-import AccountNav from "../../../src/components/body/AccountNav"
-import AccountForm from "../../../src/components/body/AccountForm"
+import Layout from "../../../../src/components/Layout"
+import user from "../../../../src/datas/user.json"
+import AccountNav from "../../../../src/components/body/AccountNav"
+import CreditCardForm from "../../../../src/components/body/CreditCardForm"
 
 const UserInformationsPage = () => {
   const {
@@ -13,17 +13,17 @@ const UserInformationsPage = () => {
 
   return (
     <Layout
-      page="Modifier mes informations"
+      page="Modifier ma carte de paiement"
       diplayheader={1}
       diplaybreadcrumbs={1}
       diplayfooter={1}
     >
       <AccountNav userId={userId} />
       <h2 className="text-center text-3xl mb-5 font-bold">
-        Modifier mes informations
+        Modifier ma carte de paiement
       </h2>
       {user && userId ? (
-        <AccountForm user={user} />
+        <CreditCardForm user={user} />
       ) : (
         <div className="flex items-center justify-center">
           <CircularProgress

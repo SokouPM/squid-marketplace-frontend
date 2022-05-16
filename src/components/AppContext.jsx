@@ -44,12 +44,10 @@ export const AppContextProvider = (props) => {
   const signIn = useCallback(
     async (mail, password) => {
       try {
-        const {
-          data: { jwt },
-        } = await api.post("auth/connection", { mail, password })
+        const { data } = await api.post("auth/connection", { mail, password })
         setSignInError(null)
-        localStorage.setItem("jwt", jwt)
-        initSession(jwt)
+        localStorage.setItem("jwt", data)
+        initSession(data)
 
         const {
           query: { redirect },
@@ -59,7 +57,7 @@ export const AppContextProvider = (props) => {
           router.push(decodeURIComponent(redirect))
         }
       } catch (err) {
-        setSignInError(err.response.data.error)
+        setSignInError(err.response.data)
       }
     },
     [initSession, router]

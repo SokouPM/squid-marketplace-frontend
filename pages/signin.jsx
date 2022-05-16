@@ -28,13 +28,8 @@ const SignInPage = () => {
   return (
     <Layout page="Connexion" fullheight={1}>
       <div className="signInPage flex flex-col justify-center items-center">
-        {signInError ? (
-          <div className="w-full mb-7 py-2 bg-red-200 flex items-center justify-center text-red-600 text-center font-bold text-2xl rounded">
-            <FiAlertTriangle className="text-5xl mr-3" />
-            {signInError}
-          </div>
-        ) : null}
         <GoHomeLink />
+
         <div className="flex border rounded mb-auto w-4/5 overflow-hidden shadow-md">
           <AccountRegisterConnectAside
             text1="Pas encore inscrit ?"
@@ -74,6 +69,12 @@ const SignInPage = () => {
                   errorType={errors.password}
                   touchedType={touched.password}
                 />
+                {signInError && (
+                  <div className="w-full mb-7 py-2 bg-red-200 flex items-center justify-center text-red-600 text-center font-bold text-2xl rounded">
+                    <FiAlertTriangle className="text-5xl mr-3" />
+                    {signInError}
+                  </div>
+                )}
                 <div className="flex items-center justify-evenly w-full">
                   <label className="cursor-pointer select-none">
                     <Field className="mr-2" type="checkbox" name="rememberMe" />

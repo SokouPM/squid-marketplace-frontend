@@ -1,4 +1,7 @@
+import { useCallback, useContext } from "react"
 import { Form, Formik, Field } from "formik"
+import { FiAlertTriangle } from "react-icons/fi"
+import AppContext from "../src/components/AppContext"
 import * as Yup from "yup"
 import Layout from "../src/components/Layout"
 import GoHomeLink from "../src/components/body/GoHomeLink"
@@ -6,17 +9,31 @@ import AccountRegisterConnectAside from "../src/components/body/AccountRegisterC
 import FormField from "../src/components/body/FormField"
 import PasswordField from "../src/components/body/customFields/PasswordField"
 
+const displayingErrorMessagesSchema = Yup.object().shape({
+  mail: Yup.string()
+    .email("Le mail est invalide !")
+    .required("Le champ est requis !"),
+  password: Yup.string().required("Le champ est requis !"),
+})
+
 const SignInPage = () => {
-  const displayingErrorMessagesSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Le mail est invalide !")
-      .required("Le champ est requis !"),
-    password: Yup.string().required("Le champ est requis !"),
-  })
+  const { signIn, signInError } = useContext(AppContext)
+  const handleFormSubmit = useCallback(
+    async ({ mail, password }) => {
+      return signIn(mail, password)
+    },
+    [signIn]
+  )
 
   return (
     <Layout page="Connexion" fullheight={1}>
       <div className="signInPage flex flex-col justify-center items-center">
+        {signInError ? (
+          <div className="w-full mb-7 py-2 bg-red-200 flex items-center justify-center text-red-600 text-center font-bold text-2xl rounded">
+            <FiAlertTriangle className="text-5xl mr-3" />
+            {signInError}
+          </div>
+        ) : null}
         <GoHomeLink />
         <div className="flex border rounded mb-auto w-4/5 overflow-hidden shadow-md">
           <AccountRegisterConnectAside
@@ -26,14 +43,12 @@ const SignInPage = () => {
           />
           <Formik
             initialValues={{
-              email: "",
+              mail: "",
               password: "",
               rememberMe: false,
             }}
             validationSchema={displayingErrorMessagesSchema}
-            onSubmit={(values) => {
-              alert(JSON.stringify(values, null, 2)) // TODO
-            }}
+            onSubmit={handleFormSubmit}
           >
             {({ errors, touched }) => (
               <Form className="w-4/6 p-12">
@@ -43,11 +58,11 @@ const SignInPage = () => {
                 <FormField
                   style="mb-5"
                   label="Email"
-                  id="email"
-                  name="email"
+                  id="mail"
+                  name="mail"
                   placeholder="exemple@mail.com"
-                  errorType={errors.email}
-                  touchedType={touched.email}
+                  errorType={errors.mail}
+                  touchedType={touched.mail}
                 />
                 <FormField
                   style="mb-5"

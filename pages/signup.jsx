@@ -1,55 +1,71 @@
+import { useCallback, useContext } from "react"
 import { Form, Formik } from "formik"
+import { FiAlertTriangle } from "react-icons/fi"
 import * as Yup from "yup"
+import AppContext from "../src/components/AppContext"
 import Layout from "../src/components/Layout"
 import GoHomeLink from "../src/components/body/GoHomeLink"
 import AccountRegisterConnectAside from "../src/components/body/AccountRegisterConnectAside"
 import FormField from "../src/components/body/FormField"
 import PasswordField from "../src/components/body/customFields/PasswordField"
 
+const displayingErrorMessagesSchema = Yup.object().shape({
+  mail: Yup.string()
+    .email("Le mail est invalide !")
+    .required("Le champ est requis !"),
+  password: Yup.string()
+    .min(6, "Le mot de passe doit contenir minimum 6 caractères !")
+    .max(50, "Le mot de passe doit contenir maximum 50 caractères !")
+    .matches(
+      /^.*(?=.*[a-z]).*$/g,
+      "Le mot de passe doit contenir au moins 1 minuscule !"
+    )
+    .matches(
+      /^.*(?=.*[A-Z]).*$/g,
+      "Le mot de passe doit contenir au moins 1 majuscule !"
+    )
+    .matches(
+      /^.*(?=.*[0-9]).*$/g,
+      "Le mot de passe doit contenir au moins 1 chiffre !"
+    )
+    .required("Le champ est requis !"),
+  passwordConfirm: Yup.string()
+    .oneOf(
+      [Yup.ref("password"), null],
+      "Les mots de passe doivent correspondre"
+    )
+    .required("Le champ est requis !"),
+})
+
 const SignUpPage = () => {
-  const displayingErrorMessagesSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Le mail est invalide !")
-      .required("Le champ est requis !"),
-    password: Yup.string()
-      .min(6, "Le mot de passe doit contenir minimum 6 caractères !")
-      .max(50, "Le mot de passe doit contenir maximum 50 caractères !")
-      .matches(
-        /^.*(?=.*[a-z]).*$/g,
-        "Le mot de passe doit contenir au moins 1 minuscule !"
-      )
-      .matches(
-        /^.*(?=.*[A-Z]).*$/g,
-        "Le mot de passe doit contenir au moins 1 majuscule !"
-      )
-      .matches(
-        /^.*(?=.*[0-9]).*$/g,
-        "Le mot de passe doit contenir au moins 1 chiffre !"
-      )
-      .required("Le champ est requis !"),
-    passwordConfirm: Yup.string()
-      .oneOf(
-        [Yup.ref("password"), null],
-        "Les mots de passe doivent correspondre"
-      )
-      .required("Le champ est requis !"),
-  })
+  const { signUp, signUpError } = useContext(AppContext)
+
+  const handleFormSubmit = useCallback(
+    async ({ mail, password }) => {
+      return signUp(mail, password)
+    },
+    [signUp]
+  )
 
   return (
     <Layout page="Inscription" fullheight={1}>
       <div className="signUpPage flex flex-col justify-center items-center">
+        {signUpError ? (
+          <div className="w-full mb-7 py-2 bg-red-200 flex items-center justify-center text-red-600 text-center font-bold text-2xl rounded">
+            <FiAlertTriangle className="text-5xl mr-3" />
+            {signUpError}
+          </div>
+        ) : null}
         <GoHomeLink />
         <div className="flex border rounded mb-auto w-4/5 overflow-hidden shadow-md">
           <Formik
             initialValues={{
-              email: "",
+              mail: "",
               password: "",
               passwordConfirm: "",
             }}
             validationSchema={displayingErrorMessagesSchema}
-            onSubmit={(values) => {
-              alert(JSON.stringify(values, null, 2)) // TODO
-            }}
+            onSubmit={handleFormSubmit}
           >
             {({ errors, touched }) => (
               <Form className="w-4/6 p-10">
@@ -59,11 +75,11 @@ const SignUpPage = () => {
                 <FormField
                   style="mb-5"
                   label="Email"
-                  id="email"
-                  name="email"
+                  id="mail"
+                  name="mail"
                   placeholder="exemple@mail.com"
-                  errorType={errors.email}
-                  touchedType={touched.email}
+                  errorType={errors.mail}
+                  touchedType={touched.mail}
                 />
                 <FormField
                   style="mb-5"

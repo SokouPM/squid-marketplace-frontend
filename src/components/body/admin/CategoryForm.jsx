@@ -1,5 +1,8 @@
+import { useCallback, useContext } from "react"
 import { Form, Formik } from "formik"
 import * as Yup from "yup"
+import AppContext from "../../AppContext"
+import api from "../../services/api"
 import FormField from "../FormField"
 
 const displayingErrorMessagesSchema = Yup.object().shape({
@@ -10,15 +13,25 @@ const displayingErrorMessagesSchema = Yup.object().shape({
 })
 
 const CategoriesForm = ({ category }) => {
+  const { router } = useContext(AppContext)
+
+  const handleFormSubmit = useCallback(
+    async ({ name }) => {
+      category
+        ? await api.put("/category", { name })
+        : await api.post("/category", { name })
+      router.push("/administration/categories")
+    },
+    [category, router]
+  )
+
   return (
     <Formik
       initialValues={{
         name: category ? category.name : "",
       }}
       validationSchema={displayingErrorMessagesSchema}
-      onSubmit={(values) => {
-        alert(JSON.stringify(values, null, 2)) // TODO
-      }}
+      onSubmit={handleFormSubmit}
     >
       {({ errors, touched }) => (
         <Form className="w-4/6 p-12 border mx-auto flex flex-col items-center justify-center rounded">

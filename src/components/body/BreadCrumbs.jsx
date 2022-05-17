@@ -1,20 +1,21 @@
-import { useRouter } from "next/router"
 import Link from "next/link"
+import { useContext } from "react"
+import AppContext from "../AppContext"
 
-const BreadCrumbs = ({ pagelink }) => {
-  const router = useRouter()
-  const breadcrumbsTab = router.pathname.split("/")
-  breadcrumbsTab[0] = pagelink ? pagelink : "Accueil"
+const BreadCrumbs = ({ homelink }) => {
+  const { router } = useContext(AppContext)
+  const pathTab = router.asPath.split("/")
+  pathTab[0] = homelink ? homelink : "Accueil"
 
   let link = ""
 
   return (
     <ul className="flex items-center font-bold text-xl text-secondary border-b-2 border-secondary py-2 mb-3">
-      {breadcrumbsTab.map((item, index) => (
+      {pathTab.map((item, index) => (
         <li key={index} className="flex items-center">
           {index !== 0 && item !== "" && <span className="mx-2">/</span>}
           <Link href={index !== 0 ? (link += `/${item}`) : "/"}>
-            <a>{item}</a>
+            <a className="capitalize">{item}</a>
           </Link>
         </li>
       ))}

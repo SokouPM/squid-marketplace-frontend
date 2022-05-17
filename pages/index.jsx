@@ -8,7 +8,7 @@ const HomePage = () => {
       diplayheader={1}
       diplaybanner={1}
       diplaybreadcrumbs={1}
-      pagelink="Produits populaires"
+      homelink="Produits populaires"
       diplayfooter={1}
     >
       <ArticleList limit={4} />

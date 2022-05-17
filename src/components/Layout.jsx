@@ -33,7 +33,7 @@ const Layout = (props) => {
           props.fullwidth ? "min-w-screen" : "w-4/5"
         } ${props.fullheight && "min-h-screen"}`}
       >
-        {props.diplaybreadcrumbs && <BreadCrumbs pagelink={props.pagelink} />}
+        {props.diplaybreadcrumbs && <BreadCrumbs homelink={props.homelink} />}
         {children}
       </main>
       {props.diplayfooter && <Footer />}

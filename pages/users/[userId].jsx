@@ -18,7 +18,7 @@ const UserInformationsPage = () => {
       diplaybreadcrumbs={1}
       diplayfooter={1}
     >
-      <AccountNav userId={userId} />
+      <AccountNav userId={userId} selected={1} />
       <h2 className="text-center text-3xl mb-5 font-bold">Mes informations</h2>
       {user && userId ? (
         <div className="flex flex-col items-center justify-center">

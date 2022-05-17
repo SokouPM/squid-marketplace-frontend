@@ -1,8 +1,76 @@
 import Link from "next/link"
+import { useState, useEffect } from "react"
 import swal from "sweetalert"
-import categories from "../../../datas/categories.json"
+import CircularProgress from "@mui/material/CircularProgress"
+import { FiAlertTriangle } from "react-icons/fi"
+import api from "../../services/api"
 
 const CategoriesList = () => {
+  const [categories, setCategories] = useState(null)
+  const [apiError, setApiError] = useState(null)
+
+  useEffect(() => {
+    api
+      .get("/category")
+      .then((response) => setCategories(response.data))
+      .catch((error) =>
+        setApiError(error.response ? error.response.data.error : error.message)
+      )
+  }, [])
+
+  if (apiError) {
+    return (
+      <div className="w-full flex items-center justify-center mt-10 p-5 bg-red-200 rounded">
+        <p className="text-3xl font-bold flex items-center justify-center text-red-600">
+          <FiAlertTriangle className="text-5xl mr-3" />
+          {apiError}
+        </p>
+      </div>
+    )
+  }
+
+  if (!categories) {
+    return (
+      <div className="flex items-center justify-center">
+        <CircularProgress
+          sx={{
+            color: "#cc0023",
+          }}
+        />
+        <p className="ml-3">Chargement des categories...</p>
+      </div>
+    )
+  }
+
+  if (!categories.length) {
+    return (
+      <div className="w-full flex flex-col items-center justify-center mt-10 p-5">
+        <table className="w-5/6 mb-5">
+          <thead>
+            <tr className="bg-slate-500 text-left">
+              <th className="border pl-3 p-2 font-bold text-white">Nom</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="w-5/6 pl-3 border-x">Pas encore de categorie</td>
+            </tr>
+          </tbody>
+          <tfoot className="bg-slate-500 text-left">
+            <tr>
+              <td className="border pl-3 p-2 font-bold text-white">Nom</td>
+            </tr>
+          </tfoot>
+        </table>
+        <Link href="/administration/categories/add" passHref>
+          <button className="p-3 w-1/6 mb-5 rounded bg-green-600 text-white transition-all hover:bg-green-300">
+            Ajouter une catégorie
+          </button>
+        </Link>
+      </div>
+    )
+  }
+
   return (
     <div className="flex flex-col items-center justify-center">
       <table className="w-5/6 mb-5">
@@ -15,13 +83,13 @@ const CategoriesList = () => {
         <tbody>
           {categories.map((item, index) => (
             <tr
-              key={item.id}
+              key={item.id_category}
               className={`font-bold ${index % 2 ? "bg-gray-100" : "bg-white"}`}
             >
               <td className="w-5/6 pl-3 border-x">{item.name}</td>
               <td className="flex items-center justify-center border-x p-1">
                 <Link
-                  href={`/administration/categories/${item.id}/modify`}
+                  href={`/administration/categories/${item.id_category}/modify`}
                   passHref
                 >
                   <button className="p-1 mr-1 w-1/2 rounded bg-blue-600 text-white transition-all hover:bg-blue-300">

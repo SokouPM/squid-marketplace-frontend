@@ -1,4 +1,4 @@
-import { Form, Formik } from "formik"
+import { Form, Formik, Field } from "formik"
 import * as Yup from "yup"
 import FormField from "./FormField"
 
@@ -13,6 +13,8 @@ const displayingErrorMessagesSchema = Yup.object().shape({
     .required("Le champ est requis !"),
   number: Yup.number()
     .typeError("Doit être un nombre")
+    .min(1000000000000000n, "Le numéro n'est pas valide !")
+    .max(9999999999999999n, "Le numéro n'est pas valide !")
     .required("Le champ est requis !"),
   cryptogram: Yup.number()
     .typeError("Le cryptogramme doit être un nombre")
@@ -21,13 +23,61 @@ const displayingErrorMessagesSchema = Yup.object().shape({
     .required("Le champ est requis !"),
 })
 
-const AccountForm = ({ card }) => {
+const monthRender = () => {
+  const monthTab = []
+
+  for (let i = 1; i <= 12; i++) {
+    const name = i < 10 ? `0${i}` : i.toString()
+    monthTab.push({ name: name, value: i })
+  }
+
+  return (
+    <Field
+      name="month"
+      as="select"
+      className="px-4 py-3 mr-2 rounded cursor-pointer font-bold "
+    >
+      {monthTab.map((item, index) => (
+        <option key={index} value={item.value} name="role">
+          {item.name}
+        </option>
+      ))}
+    </Field>
+  )
+}
+
+const yearRender = () => {
+  const yearTab = []
+  const actualYear = new Date().getFullYear()
+
+  for (let i = actualYear; i <= actualYear + 10; i++) {
+    yearTab.push(i)
+  }
+
+  return (
+    <Field
+      name="year"
+      as="select"
+      className="px-4 py-3 ml-2 rounded cursor-pointer font-bold "
+    >
+      {yearTab.map((item, index) => (
+        <option key={index} value={item} name="role">
+          {item}
+        </option>
+      ))}
+    </Field>
+  )
+}
+
+const AccountForm = () => {
   return (
     <Formik
       initialValues={{
-        name: card ? card.name : "",
-        number: card ? card.number : "",
-        cryptogram: card ? card.cryptogram : "",
+        name: "",
+        number: "",
+        month: "01",
+        year: new Date().getFullYear(),
+        cryptogram: "",
       }}
       validationSchema={displayingErrorMessagesSchema}
       onSubmit={(values) => {
@@ -56,21 +106,15 @@ const AccountForm = ({ card }) => {
             touchedType={touched.number}
           />
 
-          <div className="flex items-center justify-center w-5/6 mb-5">
-            <div className="w-1/2 flex flex-col items-start mr-5">
-              <label htmlFor="expirationDate">Date de validité</label>
-              <input
-                type="date"
-                name="expirationDate"
-                id="expirationDate"
-                className={`border-2 rounded py-1 px-2 w-full ${
-                  errors.number && touched.number && "border-red-600"
-                }`}
-              />
+          <div className="flex items-start justify-center w-5/6 mb-5">
+            <div className="flex flex-col items-left justify-center w-4/6">
+              <label htmlFor="category">Date d'expiration</label>
+              <div className="w-1/2 flex items-center mr-5">
+                {monthRender()}/{yearRender()}
+              </div>
             </div>
-
             <FormField
-              style="w-1/2 flex-1"
+              style="w-2/6 flex-1"
               label="Cryptogramme"
               id="cryptogram"
               name="cryptogram"

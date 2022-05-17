@@ -4,7 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi"
 import { CgClose } from "react-icons/cg"
 import Box from "@mui/material/Box"
 import Drawer from "@mui/material/Drawer"
-import datas from "../../datas/categories.json"
+import NavCategoriesList from "./NavCategoryList"
 
 const NavSideBar = () => {
   const [state, setState] = useState({
@@ -36,13 +36,7 @@ const NavSideBar = () => {
           Tous les articles
         </a>
       </Link>
-      {datas.map((item) => (
-        <Link key={item.id} href={`/categories/${item.id}`}>
-          <a className="hover-text-secondary transition-all pl-4 py-1 hover:pl-6 hover:bg-black/30">
-            {item.name}
-          </a>
-        </Link>
-      ))}
+      <NavCategoriesList />
     </Box>
   )
 

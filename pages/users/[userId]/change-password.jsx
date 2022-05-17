@@ -45,7 +45,7 @@ const UserInformationsPage = () => {
       diplaybreadcrumbs={1}
       diplayfooter={1}
     >
-      <AccountNav userId={userId} />
+      <AccountNav userId={userId} selected={4} />
       <h2 className="text-center text-3xl mb-5 font-bold">
         Modifier mon mot de passe
       </h2>

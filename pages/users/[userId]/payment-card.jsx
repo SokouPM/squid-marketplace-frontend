@@ -8,10 +8,9 @@ import creditCard from "../../../src/datas/creditCard.json"
 import AccountNav from "../../../src/components/body/AccountNav"
 
 const formatCardNumber = (number) => {
-  const formatNumber = number.toString().replace(/(\d{6})+/g, "")
   let dotString = ""
 
-  for (let i = 1; i <= number.toString().length - 4; i++) {
+  for (let i = 1; i <= 12; i++) {
     dotString += "•"
 
     if (i % 4 == 0) {
@@ -19,7 +18,7 @@ const formatCardNumber = (number) => {
     }
   }
 
-  return `${dotString} ${formatNumber}`
+  return `${dotString} ${number}`
 }
 
 const formatCardExpirationDate = (date) => {
@@ -41,7 +40,7 @@ const UserInformationsPage = () => {
       diplaybreadcrumbs={1}
       diplayfooter={1}
     >
-      <AccountNav userId={userId} />
+      <AccountNav userId={userId} selected={2} />
       <h2 className="text-center text-3xl mb-5 font-bold">
         Ma carte de paiement
       </h2>
@@ -59,7 +58,7 @@ const UserInformationsPage = () => {
             <div>
               <p className="mb-3">
                 <span className="font-bold">Nom sur la carte :</span>{" "}
-                {creditCard.firstName} {creditCard.lastName}
+                {creditCard.name}
               </p>
               <p className="mb-3">
                 <span className="font-bold">N° de la carte :</span>{" "}
@@ -73,7 +72,7 @@ const UserInformationsPage = () => {
           </div>
           <Link href={`/users/${userId}/payment-card/modify`}>
             <a className="bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white transition-all">
-              Modifier ma carte
+              Changer ma carte
             </a>
           </Link>
         </div>

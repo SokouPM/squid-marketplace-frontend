@@ -1,22 +1,62 @@
 [
   {
     "id": 1,
-    "price": 153
+    "price": 153,
+    "deliveryStatus": "En cours de livraison",
+    "deliveryDate": null
   },
   {
     "id": 2,
-    "price": 65
+    "price": 65,
+    "deliveryStatus": "Commandé",
+    "deliveryDate": null
   },
   {
     "id": 3,
-    "price": 228
+    "price": 228,
+    "deliveryStatus": "Expédié",
+    "deliveryDate": null
   },
   {
     "id": 4,
-    "price": 32
+    "price": 32,
+    "deliveryStatus": "Livré",
+    "deliveryDate": "2022-2-1"
   },
   {
     "id": 5,
-    "price": 64
+    "price": 64,
+    "deliveryStatus": "Expédié",
+    "deliveryDate": null
+  },
+  {
+    "id": 6,
+    "price": 32,
+    "deliveryStatus": "Commandé",
+    "deliveryDate": null
+  },
+  {
+    "id": 7,
+    "price": 64,
+    "deliveryStatus": "En cours de livraison",
+    "deliveryDate": null
+  },
+  {
+    "id": 8,
+    "price": 153,
+    "deliveryStatus": "Livré",
+    "deliveryDate": "2021-12-23"
+  },
+  {
+    "id": 9,
+    "price": 65,
+    "deliveryStatus": "En cours de livraison",
+    "deliveryDate": null
+  },
+  {
+    "id": 10,
+    "price": 228,
+    "deliveryStatus": "En cours de livraison",
+    "deliveryDate": null
   }
 ]

@@ -62,8 +62,8 @@ const ArticleForm = ({ article }) => {
       initialValues={{
         name: article ? article.name : "",
         description: article ? article.description : "",
-        category: article ? article.category : categories[0].name,
-        color: article ? article.color : "Rouge",
+        category: article ? article.category : categories[0].id,
+        color: article ? article.color : "red",
         price: article ? article.price : 0,
         stock: article ? article.stock : 0,
       }}
@@ -109,7 +109,7 @@ const ArticleForm = ({ article }) => {
                 as="select"
               >
                 {categories.map((item) => (
-                  <option key={item.id} value={item.id} name="role">
+                  <option key={item.id} value={item.id} name="category">
                     {item.name}
                   </option>
                 ))}
@@ -178,7 +178,7 @@ const ArticleForm = ({ article }) => {
           </div>
           <div className="w-5/6 mb-10">
             <label htmlFor="image">
-              Ajouter une image à l'article (min. 2 / max. 6)
+              Ajouter une image à l'article (min. 2 / max. 4)
             </label>
             <input
               type="file"
@@ -187,7 +187,7 @@ const ArticleForm = ({ article }) => {
                 (pictureError && "border-red-600",
                 pictureList.length >= 6 && "opacity-25 cursor-not-allowed")
               }`}
-              disabled={pictureList.length >= 6 ? true : false}
+              disabled={pictureList.length >= 4 ? true : false}
               onChange={(e) => {
                 const isAnError = checkAndAddImageOnArray(
                   e.target.files[0],
@@ -199,7 +199,7 @@ const ArticleForm = ({ article }) => {
                 }
               }}
             />
-            {pictureError && pictureList.length < 6 && (
+            {pictureError && pictureList.length < 4 && (
               <div className="errorField mt-1 text-red-600">{pictureError}</div>
             )}
           </div>

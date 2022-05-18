@@ -24,13 +24,10 @@ const OrdersList = () => {
               <td className="w-1/6 pl-3 border-x">smp.{item.id}</td>
               <td className="p-3 border-x whitespace-nowrap">{item.price} €</td>
               <td className="flex items-center justify-center border-x p-1">
-                <Link
-                  href={`/administration/orders/${item.id}/download`}
-                  passHref
-                >
-                  <button className="p-1 mr-1 w-1/2 rounded bg-blue-600 text-white transition-all hover:bg-blue-300">
+                <Link href={`/administration/orders/${item.id}/download`}>
+                  <a className="p-1 mr-1 w-1/2 rounded bg-blue-600 text-white transition-all hover:bg-blue-300">
                     Télécharger la facture
-                  </button>
+                  </a>
                 </Link>
                 <button
                   className="p-1 w-1/2 rounded bg-red-600 text-white transition-all hover:bg-red-300"

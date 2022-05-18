@@ -5,11 +5,12 @@ import FormField from "../body/FormField"
 const displayingErrorMessagesSchema = Yup.object().shape({
   email: Yup.string()
     .email("Le mail est invalide !")
+    .max(50, "Le champ doit contenir maximum 50 caractères !")
     .required("Le champ est requis !"),
   civility: Yup.string().required("Le champ est requis !"),
   firstName: Yup.string()
     .min(2, "Le champ doit contenir minimum 2 caractères !")
-    .max(150, "Le champ doit contenir maximum 150 caractères !")
+    .max(50, "Le champ doit contenir maximum 50 caractères !")
     .matches(
       /^[a-zA-Z\-\s]*$/,
       'Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf "-" !'
@@ -17,7 +18,7 @@ const displayingErrorMessagesSchema = Yup.object().shape({
     .required("Le champ est requis !"),
   lastName: Yup.string()
     .min(2, "Le champ doit contenir minimum 2 caractères !")
-    .max(150, "Le champ doit contenir maximum 150 caractères !")
+    .max(50, "Le champ doit contenir maximum 50 caractères !")
     .matches(
       /^[a-zA-Z\-\s]*$/,
       'Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf "-" !'

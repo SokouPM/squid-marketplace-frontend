@@ -185,7 +185,7 @@ const ArticleForm = ({ article }) => {
               name="image"
               className={`border-2 rounded py-1 px-2 w-full cursor-pointer ${
                 (pictureError && "border-red-600",
-                pictureList.length >= 6 && "opacity-25 cursor-not-allowed")
+                pictureList.length >= 4 && "opacity-25 cursor-not-allowed")
               }`}
               disabled={pictureList.length >= 4 ? true : false}
               onChange={(e) => {
@@ -194,7 +194,7 @@ const ArticleForm = ({ article }) => {
                   e.target.value
                 )
 
-                if (!isAnError || pictureList.length >= 6) {
+                if (!isAnError || pictureList.length >= 4) {
                   e.target.value = null
                 }
               }}

@@ -48,7 +48,7 @@ const NavCategoriesList = () => {
   return (
     <div className="w-full flex flex-col items-start justify-center">
       {categories.map((item) => (
-        <Link key={item.id} href={`/categories/${item.id_category}`}>
+        <Link key={item.id_categoy} href={`/categories/${item.id_category}`}>
           <a className="w-full hover-text-secondary transition-all pl-4 py-1 hover:pl-6 hover:bg-black/30">
             {item.name}
           </a>

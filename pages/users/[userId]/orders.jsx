@@ -12,7 +12,7 @@ const UserOrdersPage = () => {
 
   return (
     <Layout
-      page="Modifier mes informations"
+      page="Mes commandes"
       diplayheader={1}
       diplaybreadcrumbs={1}
       diplayfooter={1}

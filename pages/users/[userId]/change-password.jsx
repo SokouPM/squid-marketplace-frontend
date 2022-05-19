@@ -40,7 +40,7 @@ const UserInformationsPage = () => {
 
   return (
     <Layout
-      page="Modifier mes informations"
+      page="Modifier mon mot de passe"
       diplayheader={1}
       diplaybreadcrumbs={1}
       diplayfooter={1}

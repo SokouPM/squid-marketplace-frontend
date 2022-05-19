@@ -18,9 +18,8 @@ const NavSideBar = () => {
   const list = (anchor) => (
     <Box
       className="bg-primary h-screen flex flex-col text-white"
-      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+      sx={{ width: 250 }}
       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
     >
       <div className="flex items-center pt-2 mb-2">
         <button

@@ -2,8 +2,8 @@ import Link from "next/link"
 import Image from "next/image"
 import NavSideBar from "./header/NavSideBar"
 import { MdAccountCircle } from "react-icons/md"
-import { RiShoppingCartLine } from "react-icons/ri"
 import SearchBar from "./header/SearchBar"
+import CartBar from "./header/CartBar"
 
 const Header = () => {
   return (
@@ -27,12 +27,7 @@ const Header = () => {
           </a>
         </Link>
 
-        <div className="hover-bg-secondary text-primary p-2 ml-5 rounded-full bg-white relative transition-all hover:text-white">
-          <RiShoppingCartLine className="text-2xl" />
-          <div className="bg-secondary h-5 w-5 text-white flex items-center justify-center rounded-full absolute -top-2 -right-1">
-            0
-          </div>
-        </div>
+        <CartBar />
       </div>
     </header>
   )

@@ -299,7 +299,6 @@ const LegalNoticePage = () => {
             par courrier à l'adresse suivante :
           </p>
           <p className="my-5 text-justify">
-            {" "}
             12 Av. Léonard de Vinci, Courbevoie, 92400, France
           </p>
         </div>

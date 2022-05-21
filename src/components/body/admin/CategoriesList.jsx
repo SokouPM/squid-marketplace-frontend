@@ -18,6 +18,10 @@ const CategoriesList = () => {
       )
   }, [])
 
+  const deleteCategory = async (categoryId) => {
+    await api.delete(`/category/byId?id=${categoryId}`)
+  }
+
   if (apiError) {
     return (
       <div className="w-full flex items-center justify-center mt-10 p-5 bg-red-200 rounded">
@@ -38,35 +42,6 @@ const CategoriesList = () => {
           }}
         />
         <p className="ml-3">Chargement des categories...</p>
-      </div>
-    )
-  }
-
-  if (!categories.length) {
-    return (
-      <div className="w-full flex flex-col items-center justify-center mt-10 p-5">
-        <table className="w-5/6 mb-5">
-          <thead>
-            <tr className="bg-slate-500 text-left">
-              <th className="border pl-3 p-2 font-bold text-white">Nom</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="w-5/6 pl-3 border-x">Pas encore de categorie</td>
-            </tr>
-          </tbody>
-          <tfoot className="bg-slate-500 text-left">
-            <tr>
-              <td className="border pl-3 p-2 font-bold text-white">Nom</td>
-            </tr>
-          </tfoot>
-        </table>
-        <Link href="/administration/categories/add" passHref>
-          <button className="p-3 w-1/6 mb-5 rounded bg-green-600 text-white transition-all hover:bg-green-300">
-            Ajouter une catégorie
-          </button>
-        </Link>
       </div>
     )
   }
@@ -111,9 +86,7 @@ const CategoriesList = () => {
                           title: `La catégorie "${item.name}" à été supprimée`,
                           icon: "success",
                         })
-                        setTimeout(() => {
-                          alert(`deleted cetegory : ${item.id}`) // TODO
-                        }, 1000)
+                        deleteCategory(item.id_category)
                       }
                     })
                   }}

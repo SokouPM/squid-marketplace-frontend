@@ -1,13 +1,30 @@
 import { useRouter } from "next/router"
+import { useState, useEffect } from "react"
+import api from "../../../../src/components/services/api"
 import Layout from "../../../../src/components/Layout"
 import UserForm from "../../../../src/components/body/admin/UserForm"
-import user from "../../../../src/datas/user"
 import CircularProgress from "@mui/material/CircularProgress"
 
 const ModifyUserPage = () => {
   const {
     query: { userId },
   } = useRouter()
+
+  const [user, setUser] = useState(null)
+  // const [apiError, setApiError] = useState(null)
+
+  useEffect(() => {
+    if (userId && !isNaN(userId)) {
+      api
+        .get(`/customer/byId?id=${userId}`)
+        .then((response) => setUser(response.data))
+      // .catch((error) =>
+      //   setApiError(
+      //     error.response ? error.response.data.error : error.message
+      //   )
+      // )
+    }
+  }, [userId])
 
   return (
     <Layout

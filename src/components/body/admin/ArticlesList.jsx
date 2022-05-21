@@ -1,27 +1,70 @@
 import Link from "next/link"
+import { useState, useEffect } from "react"
 import swal from "sweetalert"
-import products from "../../../datas/products.json"
-import categories from "../../../datas/categories.json"
+import CircularProgress from "@mui/material/CircularProgress"
+import { FiAlertTriangle } from "react-icons/fi"
+import api from "../../services/api"
 
 const ArticlesList = () => {
+  const [articles, setArticles] = useState(null)
+  const [apiError, setApiError] = useState(null)
+
+  useEffect(() => {
+    api
+      .get("/articles")
+      .then((response) => setArticles(response.data))
+      .catch((error) =>
+        setApiError(error.response ? error.response.data.error : error.message)
+      )
+  }, [])
+
+  const deleteArticle = async (articleId) => {
+    await api.delete(`/articles/id=${articleId}`)
+  }
+
+  if (apiError) {
+    return (
+      <div className="w-full flex items-center justify-center mt-10 p-5 bg-red-200 rounded">
+        <p className="text-3xl font-bold flex items-center justify-center text-red-600">
+          <FiAlertTriangle className="text-5xl mr-3" />
+          {apiError}
+        </p>
+      </div>
+    )
+  }
+
+  if (!articles) {
+    return (
+      <div className="w-full flex items-center justify-center mt-10 p-5">
+        <CircularProgress
+          sx={{
+            color: "#cc0023",
+          }}
+          className="mr-5"
+        />
+        <p>Chargement des articles...</p>
+      </div>
+    )
+  }
+
   return (
     <div className="flex flex-col items-center justify-center">
-      <table className="mb-5">
+      <table className="mb-5 w-full">
         <thead>
           <tr className="bg-slate-500 text-left">
-            <th className="border pl-3 p-2 font-bold text-white">Nom</th>
+            <th className="border w-1/6 pl-3 p-2 font-bold text-white">Nom</th>
             <th className="border pl-3 p-2 font-bold text-white">Prix</th>
             <th className="border pl-3 p-2 font-bold text-white">Quantité</th>
             <th className="border pl-3 p-2 font-bold text-white">Catégorie</th>
             <th className="border pl-3 p-2 font-bold text-white">Couleur</th>
-            <th className="border pl-3 p-2 font-bold text-white">
+            <th className="border w-3/6 pl-3 p-2 font-bold text-white">
               Description
             </th>
             <th className="border"></th>
           </tr>
         </thead>
         <tbody>
-          {products.map((item, index) => (
+          {articles.map((item, index) => (
             <tr
               key={item.id}
               className={`font-bold h-28 ${
@@ -33,11 +76,7 @@ const ArticlesList = () => {
                 {item.price} €
               </td>
               <td className="pl-3 h-28 border-x">{item.stock}</td>
-              <td className="pl-3 h-28 border-x">
-                {categories.map(
-                  (cat) => item.id_categories === cat.id && cat.name
-                )}
-              </td>
+              <td className="pl-3 h-28 border-x">TODO</td>
               <td className="pl-3 h-28 border-x">{item.color}</td>
               <td className="w-3/6 pl-3 h-28 border-x">{item.description}</td>
               <td className="flex items-center justify-center h-28 border-x p-1">
@@ -64,9 +103,7 @@ const ArticlesList = () => {
                           title: `L'article "${item.name}" à été supprimée`,
                           icon: "success",
                         })
-                        setTimeout(() => {
-                          alert(`deleted article : ${item.id}`) // TODO
-                        }, 1000)
+                        deleteArticle(item.id)
                       }
                     })
                   }}

@@ -1,13 +1,30 @@
 import { useRouter } from "next/router"
+import { useState, useEffect } from "react"
 import CircularProgress from "@mui/material/CircularProgress"
+import api from "../../../../src/components/services/api"
 import Layout from "../../../../src/components/Layout"
 import ArticleForm from "../../../../src/components/body/admin/ArticleForm"
-import article from "../../../../src/datas/category"
 
 const ModifyArticlePage = () => {
   const {
     query: { articleId },
   } = useRouter()
+
+  const [article, setArticle] = useState(null)
+  // const [apiError, setApiError] = useState(null)
+
+  useEffect(() => {
+    if (articleId && !isNaN(articleId)) {
+      api
+        .get(`/articles/byId?id=${articleId}`)
+        .then((response) => setArticle(response.data))
+      // .catch((error) =>
+      //   setApiError(
+      //     error.response ? error.response.data.error : error.message
+      //   )
+      // )
+    }
+  }, [articleId])
 
   return (
     <Layout
@@ -16,7 +33,7 @@ const ModifyArticlePage = () => {
       diplayadminheader={1}
       diplayfooter={1}
     >
-      {articleId ? (
+      {article ? (
         <>
           <h2 className="my-5 text-3xl text-center font-bold">
             Modifier l'article "{articleId}"

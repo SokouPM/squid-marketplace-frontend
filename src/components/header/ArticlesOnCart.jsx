@@ -52,11 +52,11 @@ const ArticlesOnChart = () => {
               </Link>
               <div className="w-full flex items-center justify-center mt-3">
                 <button className="hover-bg-secondary text-primary p-2 rounded-full bg-white relative transition-all hover:text-white">
-                  <FaPlus />
+                  <FaMinus />
                 </button>
                 <p className="mx-3">{quantity}</p>
                 <button className="hover-bg-secondary text-primary p-2 rounded-full bg-white relative transition-all hover:text-white">
-                  <FaMinus />
+                  <FaPlus />
                 </button>
               </div>
             </div>

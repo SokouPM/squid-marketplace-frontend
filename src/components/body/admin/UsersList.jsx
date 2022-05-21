@@ -1,9 +1,52 @@
 import Link from "next/link"
+import { useState, useEffect } from "react"
 import swal from "sweetalert"
-import users from "../../../datas/users.json"
+import CircularProgress from "@mui/material/CircularProgress"
+import { FiAlertTriangle } from "react-icons/fi"
+import api from "../../services/api"
 
 const UsersList = () => {
+  const [users, setUsers] = useState(null)
+  const [apiError, setApiError] = useState(null)
+
+  useEffect(() => {
+    api
+      .get("/customer")
+      .then((response) => setUsers(response.data))
+      .catch((error) =>
+        setApiError(error.response ? error.response.data.error : error.message)
+      )
+  }, [])
+
+  const deleteUser = async (userId) => {
+    await api.delete(`/customer/id=${userId}`)
+  }
+
   const usersId = 1
+
+  if (apiError) {
+    return (
+      <div className="w-full flex items-center justify-center mt-10 p-5 bg-red-200 rounded">
+        <p className="text-3xl font-bold flex items-center justify-center text-red-600">
+          <FiAlertTriangle className="text-5xl mr-3" />
+          {apiError}
+        </p>
+      </div>
+    )
+  }
+
+  if (!users) {
+    return (
+      <div className="flex items-center justify-center">
+        <CircularProgress
+          sx={{
+            color: "#cc0023",
+          }}
+        />
+        <p className="ml-3">Chargement des categories...</p>
+      </div>
+    )
+  }
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -75,9 +118,7 @@ const UsersList = () => {
                             title: `L'utilisateur "${item.firstName} ${item.LastName}" à été supprimée`,
                             icon: "success",
                           })
-                          setTimeout(() => {
-                            alert(`deleted user : ${item.id}`) // TODO
-                          }, 1000)
+                          deleteUser(item.id)
                         }
                       })
                     }}

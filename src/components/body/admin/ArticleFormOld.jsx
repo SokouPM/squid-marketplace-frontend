@@ -1,16 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
-// import Image from "next/image"
-import Link from "next/link"
-import { useState, useContext, useCallback, useEffect } from "react"
+import Image from "next/image"
+import { useState } from "react"
 import { Form, Formik, Field } from "formik"
 import * as Yup from "yup"
-import CircularProgress from "@mui/material/CircularProgress"
 import { ImCross } from "react-icons/im"
-import { FiAlertTriangle } from "react-icons/fi"
-import AppContext from "../../AppContext"
 import FormField from "../FormField"
-import api from "../../services/api"
-// import categories from "../../../datas/categories.json"
+import categories from "../../../datas/categories.json"
 import colors from "../../../datas/colors.json"
 
 const displayingErrorMessagesSchema = Yup.object().shape({
@@ -37,95 +31,31 @@ const displayingErrorMessagesSchema = Yup.object().shape({
 })
 
 const ArticleForm = ({ article }) => {
-  const { router } = useContext(AppContext)
-
   const [pictureError, setPictureError] = useState(null)
   const [pictureList, setPicturesList] = useState([])
-  const [pictureUrl, setPictureUrl] = useState("")
 
-  const [categories, setCategories] = useState(null)
-  const [apiError, setApiError] = useState(null)
+  const checkAndAddImageOnArray = (file) => {
+    const fileExtention = file.type.split("/").pop()
 
-  useEffect(() => {
-    api
-      .get("/category")
-      .then((response) => setCategories(response.data))
-      .catch((error) =>
-        setApiError(error.response ? error.response.data.error : error.message)
-      )
-  }, [])
+    if (
+      fileExtention !== "jpg" &&
+      fileExtention !== "jpeg" &&
+      fileExtention !== "png"
+    ) {
+      setPictureError("L'image doit être au format jpeg jpg ou png")
 
-  const handleFormSubmit = useCallback(
-    async ({ name, description, category, color, price, stock }) => {
-      article
-        ? await api.put(`/category/byId?id=${category.id_category}`, {
-            name,
-            description,
-            categoryId: category,
-            images: pictureList,
-            color,
-            price,
-            stock,
-          })
-        : await api.post("/category/", {
-            name,
-            description,
-            categoryId: category,
-            images: pictureList,
-            color,
-            price,
-            stock,
-          })
-      router.push("/administration/categories")
-      await alert({
-        name,
-        description,
-        categoryId: category,
-        images: pictureList,
-        color,
-        price,
-        stock,
-      })
-    },
-    [article, pictureList, router]
-  )
+      return true
+    }
 
-  if (apiError) {
-    return (
-      <div className="w-full flex items-center justify-center mt-10 p-5 bg-red-200 rounded">
-        <p className="text-3xl font-bold flex items-center justify-center text-red-600">
-          <FiAlertTriangle className="text-5xl mr-3" />
-          {apiError}
-        </p>
-      </div>
-    )
-  }
+    if (file.size > 1048576) {
+      setPictureError("L'image est supérieure à 1Mo")
 
-  if (!categories) {
-    return (
-      <div className="w-full flex items-center justify-center mt-10 p-5">
-        <CircularProgress
-          sx={{
-            color: "#cc0023",
-          }}
-          className="mr-5"
-        />
-        <p>Chargement des catégories...</p>
-      </div>
-    )
-  }
+      return true
+    }
 
-  if (!categories.length) {
-    return (
-      <div className="w-full flex items-center justify-center mt-10 p-5">
-        <p>
-          Veuillez créer des catégories{" "}
-          <Link href="/administration/categories">
-            <a>ici</a>
-          </Link>{" "}
-        </p>
-      </div>
-    )
+    setPicturesList((arr) => [...arr, file])
+
+    setPictureError(null)
   }
 
   return (
@@ -139,14 +69,14 @@ const ArticleForm = ({ article }) => {
         stock: article ? article.stock : 0,
       }}
       validationSchema={displayingErrorMessagesSchema}
-      onSubmit={() => {
+      onSubmit={(values) => {
         if (pictureList.length < 2) {
           setPictureError("Vous devez mettre au moins 2 images")
 
           return
         }
 
-        handleFormSubmit
+        alert([JSON.stringify(values, null, 2), pictureList]) // TODO
       }}
     >
       {({ errors, touched }) => (
@@ -226,35 +156,25 @@ const ArticleForm = ({ article }) => {
             <label htmlFor="image">
               Ajouter une image à l'article (min. 2 / max. 4)
             </label>
-            <div className="flex w-full">
-              <Field
-                name="image"
-                id="image"
-                placeholder="Url de l'image"
-                className={`w-10/12 border-2 rounded py-1 px-2 ${
-                  pictureError && "border-red-600"
-                } ${
-                  pictureList.length >= 4 && "opacity-25 cursor-not-allowed"
-                }`}
-                disabled={pictureList.length >= 4 ? true : false}
-                onChange={(e) => {
-                  setPictureUrl(e.target.value)
-                }}
-              ></Field>
-              <button
-                className="ml-1 w-2/12 rounded bg-blue-600 text-white transition-all hover:bg-blue-300"
-                onClick={(e) => {
-                  e.preventDefault()
-                  setPicturesList((arr) => [...arr, { url: pictureUrl }])
+            <input
+              type="file"
+              name="image"
+              className={`border-2 rounded py-1 px-2 w-full cursor-pointer ${
+                (pictureError && "border-red-600",
+                pictureList.length >= 4 && "opacity-25 cursor-not-allowed")
+              }`}
+              disabled={pictureList.length >= 4 ? true : false}
+              onChange={(e) => {
+                const isAnError = checkAndAddImageOnArray(
+                  e.target.files[0],
+                  e.target.value
+                )
 
-                  if (pictureList.length >= 2) {
-                    setPictureError(null)
-                  }
-                }}
-              >
-                + Ajouter l'image
-              </button>
-            </div>
+                if (!isAnError || pictureList.length >= 4) {
+                  e.target.value = null
+                }
+              }}
+            />
             {pictureError && pictureList.length < 4 && (
               <div className="errorField mt-1 text-red-600">{pictureError}</div>
             )}
@@ -263,13 +183,18 @@ const ArticleForm = ({ article }) => {
           <ul className="w-5/6 grid grid-cols-3 place-content-around place-items-center gap-y-5">
             {pictureList.map((item, index) => (
               <li key={index} className="shadow-lg relative">
-                <img src={item.url} width="250" alt="product image" />
+                <Image
+                  src={URL.createObjectURL(item)}
+                  width="250"
+                  height="150"
+                  alt="product image"
+                />
                 <button
                   className="absolute bg-red-600 text-white p-2 rounded-full -right-4 -top-4 transition-all hover:scale-110"
                   onClick={(e) => {
                     e.preventDefault()
                     setPicturesList(
-                      pictureList.filter((el, id) => id !== index)
+                      pictureList.filter((ellement, id) => id !== index)
                     )
                   }}
                 >

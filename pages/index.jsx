@@ -1,5 +1,5 @@
 import Layout from "../src/components/Layout"
-import ArticleList from "../src/components/body/ArticleList"
+import HomeArticleList from "../src/components/body/HomeArticleList"
 
 const HomePage = () => {
   return (
@@ -11,7 +11,7 @@ const HomePage = () => {
       homelink="Produits populaires"
       diplayfooter={1}
     >
-      <ArticleList limit={4} />
+      <HomeArticleList limit={4} />
     </Layout>
   )
 }

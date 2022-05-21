@@ -1,9 +1,28 @@
+import { useCallback, useContext } from "react"
 import { Form, Formik, Field } from "formik"
 import * as Yup from "yup"
+import AppContext from "../../AppContext"
+import api from "../../services/api"
 import PasswordField from "../customFields/PasswordField"
 import FormField from "../FormField"
 
 const UserForm = ({ user }) => {
+  const { router } = useContext(AppContext)
+
+  const handleFormSubmit = useCallback(
+    async ({ email, password, isAdmin }) => {
+      user
+        ? await api.put(`/customer/byId?id=${user.id_category}`, {
+            email,
+            password,
+            isAdmin,
+          })
+        : await api.post("/customer/", { email, password, isAdmin })
+      router.push("/administration/categories")
+    },
+    [router, user]
+  )
+
   let displayingErrorMessagesSchema
 
   user
@@ -57,9 +76,7 @@ const UserForm = ({ user }) => {
         isAdmin: user ? user.isAdmin : false,
       }}
       validationSchema={displayingErrorMessagesSchema}
-      onSubmit={(values) => {
-        alert(JSON.stringify(values, null, 2)) // TODO
-      }}
+      onSubmit={handleFormSubmit}
     >
       {({ errors, touched }) => (
         <Form className="w-4/6 p-12 border mx-auto flex flex-col items-center justify-center rounded">

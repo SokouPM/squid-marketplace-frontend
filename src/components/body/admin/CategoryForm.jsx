@@ -18,8 +18,8 @@ const CategoriesForm = ({ category }) => {
   const handleFormSubmit = useCallback(
     async ({ name }) => {
       category
-        ? await api.put("/category", { name })
-        : await api.post("/category", { name })
+        ? await api.put(`/category/byId?id=${category.id_category}`, { name })
+        : await api.post("/category/", { name })
       router.push("/administration/categories")
     },
     [category, router]

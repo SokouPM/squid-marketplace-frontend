@@ -1,13 +1,30 @@
 import { useRouter } from "next/router"
+import { useState, useEffect } from "react"
+import api from "../../../../src/components/services/api"
 import Layout from "../../../../src/components/Layout"
 import CategoryForm from "../../../../src/components/body/admin/CategoryForm"
-import category from "../../../../src/datas/category"
 import CircularProgress from "@mui/material/CircularProgress"
 
 const ModifyCategoryPage = () => {
   const {
     query: { categoryId },
   } = useRouter()
+
+  const [category, setCategory] = useState(null)
+  // const [apiError, setApiError] = useState(null)
+
+  useEffect(() => {
+    if (categoryId && !isNaN(categoryId)) {
+      api
+        .get(`/category/byId?id=${categoryId}`)
+        .then((response) => setCategory(response.data))
+      // .catch((error) =>
+      //   setApiError(
+      //     error.response ? error.response.data.error : error.message
+      //   )
+      // )
+    }
+  }, [categoryId])
 
   return (
     <Layout

@@ -1,0 +1,12 @@
+[
+  { "value": "red", "name": "Rouge" },
+  { "value": "orange", "name": "Orange" },
+  { "value": "yellow", "name": "Jaune" },
+  { "value": "green", "name": "Vert" },
+  { "value": "blue", "name": "Bleu" },
+  { "value": "purple", "name": "Violet" },
+  { "value": "pink", "name": "Rose" },
+  { "value": "gray", "name": "Gris" },
+  { "value": "white", "name": "Blanc" },
+  { "value": "Black", "name": "Noir" }
+]

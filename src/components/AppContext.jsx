@@ -9,6 +9,7 @@ export const AppContextProvider = (props) => {
   const [session, setSession] = useState()
   const [signInError, setSignInError] = useState(null)
   const [signUpError, setSignUpError] = useState(null)
+  const [cartTotalArticle, setCartTotalArticle] = useState(0)
 
   const initSession = useCallback((jwt) => {
     if (!jwt) {
@@ -94,9 +95,11 @@ export const AppContextProvider = (props) => {
         session,
         signInError,
         signUpError,
+        cartTotalArticle,
         signIn,
         signUp,
         signOut,
+        setCartTotalArticle,
       }}
     />
   )

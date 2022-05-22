@@ -47,7 +47,7 @@ const ArticleList = ({ categoryId }) => {
       .catch((error) =>
         setApiError(error.response ? error.response.data.error : error.message)
       )
-  }, [])
+  }, [categoryId])
 
   if (apiError) {
     return (

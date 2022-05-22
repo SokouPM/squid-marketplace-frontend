@@ -1,6 +1,6 @@
 {
-  "name": "MALM",
-  "description": "Il s'agit bien d'une coiffeuse, avec de la place pour ranger votre maquillage et vos bijoux. Mais elle peut aussi servir de bureau, de table d'appoint pour poser les clés ou le courrier dans l'entrée ou pour ranger des magazines derrière le canapé.",
+  "name": "MALM3",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   "stock": 0,
   "color": "Blanc",
   "price": 149,
@@ -15,5 +15,5 @@
   "orders": [],
   "favorites": [],
   "ratings": [],
-  "id": 1
+  "id": 3
 }

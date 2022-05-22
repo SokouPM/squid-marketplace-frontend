@@ -1,12 +1,13 @@
-import React, { useState } from "react"
-// import Link from "next/link"
+import React, { useState, useContext, useEffect } from "react"
 import { RiShoppingCartLine } from "react-icons/ri"
 import { CgClose } from "react-icons/cg"
 import Box from "@mui/material/Box"
 import Drawer from "@mui/material/Drawer"
+import AppContext from "../AppContext"
 import ArticlesOnCart from "./ArticlesOnCart"
 
 const ChartBar = () => {
+  const { cartTotalArticle, setCartTotalArticle } = useContext(AppContext)
   const [state, setState] = useState({
     right: false,
   })
@@ -15,11 +16,29 @@ const ChartBar = () => {
     setState({ ...state, [anchor]: open })
   }
 
+  useEffect(() => {
+    let cart = []
+
+    if (typeof window !== "undefined") {
+      if (!localStorage.getItem("cart")) {
+        localStorage.setItem("cart", JSON.stringify([]))
+      }
+
+      cart = JSON.parse(localStorage.getItem("cart"))
+    }
+
+    const totalQuantity = cart.reduce(
+      (previousValue, currentValue) => previousValue + currentValue.quantity,
+      0
+    )
+
+    setCartTotalArticle(totalQuantity)
+  })
+
   const list = (anchor) => (
     <Box
       className="bg-primary h-screen overflow-auto flex flex-col text-white"
       sx={{ width: 550 }}
-      // onClick={toggleDrawer(anchor, false)}
     >
       <div className="flex items-center justify-between pt-3 mb-2">
         <p className="font-bold underline ml-12">Votre panier :</p>
@@ -31,9 +50,6 @@ const ChartBar = () => {
         </button>
       </div>
       <ArticlesOnCart />
-      <button className="w-2/3 mt-5 mx-auto bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white transition-all">
-        Commander
-      </button>
     </Box>
   )
 
@@ -47,7 +63,7 @@ const ChartBar = () => {
           >
             <RiShoppingCartLine className="text-2xl" />
             <div className="bg-secondary h-5 w-5 text-white flex items-center justify-center rounded-full absolute -top-2 -right-1">
-              0
+              {cartTotalArticle}
             </div>
           </button>
 

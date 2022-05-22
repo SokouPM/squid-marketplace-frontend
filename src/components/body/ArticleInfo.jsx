@@ -1,8 +1,10 @@
 import Image from "next/image"
+import { useContext } from "react"
 import Rating from "@mui/material/Rating"
 import { GiSquid } from "react-icons/gi"
 import { IoMdStar } from "react-icons/io"
 import data from "../../datas/product.json"
+import AppContext from "../AppContext"
 
 const stockRender = (stockNumber) => {
   const alertLimitNb = 10
@@ -32,7 +34,38 @@ const stockRender = (stockNumber) => {
   }
 }
 
+const addToCart = (article) => {
+  if (!localStorage.getItem("cart")) {
+    localStorage.setItem("cart", JSON.stringify([]))
+  }
+
+  const cart = JSON.parse(localStorage.getItem("cart"))
+
+  if (cart.length) {
+    let addArticle = true
+    cart.map((item) => {
+      if (item.id == article.id) {
+        item.quantity++
+
+        addArticle = false
+      }
+    })
+
+    if (addArticle) {
+      article.quantity = 1
+      cart.push(article)
+    }
+  } else {
+    article.quantity = 1
+    cart.push(article)
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart))
+}
+
 const ArticleInfo = () => {
+  const { setCartTotalArticle } = useContext(AppContext)
+
   return (
     <section className="flex items-start justify-between mt-5">
       <div className="flex w-3/5">
@@ -90,7 +123,13 @@ const ArticleInfo = () => {
           </p>
         </div>
         <div className=" py-3 mb-6">{stockRender(data.stock)}</div>
-        <button className="w-2/3 mx-auto bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white transition-all">
+        <button
+          onClick={() => {
+            addToCart(data)
+            setCartTotalArticle(setCartTotalArticle + 1)
+          }}
+          className="w-2/3 mx-auto bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white transition-all"
+        >
           Ajouter au panier
         </button>
       </div>

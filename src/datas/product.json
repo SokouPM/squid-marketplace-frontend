@@ -1,5 +1,5 @@
 {
-  "name": "MALM3",
+  "name": "MALM1",
   "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   "stock": 0,
   "color": "Blanc",
@@ -15,5 +15,5 @@
   "orders": [],
   "favorites": [],
   "ratings": [],
-  "id": 3
+  "id": 1
 }

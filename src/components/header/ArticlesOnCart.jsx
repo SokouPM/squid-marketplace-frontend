@@ -25,9 +25,18 @@ const changeQuantity = (articleId, isMore) => {
   localStorage.setItem("cart", JSON.stringify(cart))
 }
 
+const getTotalPrice = (cart, total) => {
+  cart.map((item) => {
+    total += item.price * item.quantity
+  })
+
+  return total
+}
+
 const ArticlesOnChart = () => {
   const [, forceUpdate] = useState()
   const doUpdate = useCallback(() => forceUpdate({}), [])
+  let total = 0
 
   if (!localStorage.getItem("cart")) {
     localStorage.setItem("cart", JSON.stringify([]))
@@ -108,6 +117,9 @@ const ArticlesOnChart = () => {
           </li>
         ))}
       </ul>
+      <p className="font-bold text-xl ml-20">
+        Total : {getTotalPrice(cart, total)} €
+      </p>
       <button className="w-2/3 mt-5 mx-auto bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white transition-all">
         Commander
       </button>

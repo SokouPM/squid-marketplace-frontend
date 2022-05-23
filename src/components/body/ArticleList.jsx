@@ -36,7 +36,7 @@ const stockRender = (stockNumber) => {
   }
 }
 
-const ArticleList = ({ limit }) => {
+const ArticleList = () => {
   const [articles, setArticles] = useState(null)
   const [apiError, setApiError] = useState(null)
 
@@ -85,7 +85,7 @@ const ArticleList = ({ limit }) => {
 
   return (
     <ul className="w-5/6 mx-auto flex items-center justify-between flex-wrap mt-5">
-      {articles.map((item, index) => (
+      {articles.map((item) => (
         <Link
           href={{
             pathname: `/articles/${item.id}`,

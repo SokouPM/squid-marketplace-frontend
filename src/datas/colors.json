@@ -1,12 +1,12 @@
 [
-  { "value": "red", "name": "Rouge" },
+  { "value": "rouge", "name": "Rouge" },
   { "value": "orange", "name": "Orange" },
-  { "value": "yellow", "name": "Jaune" },
-  { "value": "green", "name": "Vert" },
-  { "value": "blue", "name": "Bleu" },
-  { "value": "purple", "name": "Violet" },
-  { "value": "pink", "name": "Rose" },
-  { "value": "gray", "name": "Gris" },
-  { "value": "white", "name": "Blanc" },
-  { "value": "Black", "name": "Noir" }
+  { "value": "jaune", "name": "Jaune" },
+  { "value": "vert", "name": "Vert" },
+  { "value": "bleu", "name": "Bleu" },
+  { "value": "violet", "name": "Violet" },
+  { "value": "rose", "name": "Rose" },
+  { "value": "gris", "name": "Gris" },
+  { "value": "blanc", "name": "Blanc" },
+  { "value": "noir", "name": "Noir" }
 ]

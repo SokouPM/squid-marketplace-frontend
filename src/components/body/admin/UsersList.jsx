@@ -1,11 +1,13 @@
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import swal from "sweetalert"
 import CircularProgress from "@mui/material/CircularProgress"
 import { FiAlertTriangle } from "react-icons/fi"
+import AppContext from "../../AppContext"
 import api from "../../services/api"
 
 const UsersList = () => {
+  const { router } = useContext(AppContext)
   const [users, setUsers] = useState(null)
   const [apiError, setApiError] = useState(null)
 
@@ -19,7 +21,10 @@ const UsersList = () => {
   }, [])
 
   const deleteUser = async (userId) => {
-    await api.delete(`/customer/id=${userId}`)
+    await api.delete(`/customer?id=${userId}`)
+    setTimeout(() => {
+      router.reload()
+    }, 1000)
   }
 
   const usersId = 1
@@ -66,18 +71,27 @@ const UsersList = () => {
               key={item.id}
               className={`font-bold ${index % 2 ? "bg-gray-100" : "bg-white"}`}
             >
-              <td className="pl-3 border-l">
-                {item.firstName} {item.LastName}
-              </td>
+              {item.firstName && item.LastName ? (
+                <td className="pl-3 border-l">
+                  {item.firstName} {item.LastName}
+                </td>
+              ) : (
+                <td className="pl-3 border-l text-red-600">Pas de nom</td>
+              )}
+
               <td className="pl-3">{item.mail}</td>
+              {item.address && item.postalCode && item.city ? (
+                <td className="pl-3">
+                  {item.adress} {item.postalCode}, {item.city}
+                </td>
+              ) : (
+                <td className="pl-3 text-red-600">Pas encore d'adresse</td>
+              )}
               <td className="pl-3">
-                {item.adress} {item.postalCode}, {item.city}
-              </td>
-              <td className="pl-3">
-                {item.isAdmin ? "Administrateur" : "Utilisateur"}
+                {item.admin ? "Administrateur" : "Utilisateur"}
               </td>
               <td className="flex items-center justify-center border-x p-1">
-                {!item.isAdmin || usersId === item.id ? (
+                {!item.admin || usersId === item.id ? (
                   <Link
                     href={`/administration/users/${item.id}/modify`}
                     passHref
@@ -95,7 +109,7 @@ const UsersList = () => {
                   </button>
                 )}
 
-                {item.isAdmin && usersId !== item.id ? (
+                {item.admin && usersId !== item.id ? (
                   <button
                     className="p-1 w-1/2 rounded bg-red-300 text-white cursor-not-allowed"
                     title="Vous ne pouvez pas supprimer un autre administrateur"

@@ -42,7 +42,7 @@ const ArticleList = ({ categoryId }) => {
 
   useEffect(() => {
     api
-      .get("/articles/getByCategory", { categoryId })
+      .get(`/articles/getByCategory?id=${categoryId}`)
       .then((response) => setArticles(response.data))
       .catch((error) =>
         setApiError(error.response ? error.response.data.error : error.message)

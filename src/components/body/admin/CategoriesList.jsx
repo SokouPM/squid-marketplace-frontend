@@ -1,11 +1,13 @@
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import swal from "sweetalert"
 import CircularProgress from "@mui/material/CircularProgress"
 import { FiAlertTriangle } from "react-icons/fi"
+import AppContext from "../../AppContext"
 import api from "../../services/api"
 
 const CategoriesList = () => {
+  const { router } = useContext(AppContext)
   const [categories, setCategories] = useState(null)
   const [apiError, setApiError] = useState(null)
 
@@ -19,7 +21,7 @@ const CategoriesList = () => {
   }, [])
 
   const deleteCategory = async (categoryId) => {
-    await api.delete(`/category/byId?id=${categoryId}`)
+    await api.delete(`/category?id=${categoryId}`)
   }
 
   if (apiError) {
@@ -58,13 +60,13 @@ const CategoriesList = () => {
         <tbody>
           {categories.map((item, index) => (
             <tr
-              key={item.id_category}
+              key={item.id}
               className={`font-bold ${index % 2 ? "bg-gray-100" : "bg-white"}`}
             >
               <td className="w-5/6 pl-3 border-x">{item.name}</td>
               <td className="flex items-center justify-center border-x p-1">
                 <Link
-                  href={`/administration/categories/${item.id_category}/modify`}
+                  href={`/administration/categories/${item.id}/modify`}
                   passHref
                 >
                   <button className="p-1 mr-1 w-1/2 rounded bg-blue-600 text-white transition-all hover:bg-blue-300">
@@ -86,7 +88,10 @@ const CategoriesList = () => {
                           title: `La catégorie "${item.name}" à été supprimée`,
                           icon: "success",
                         })
-                        deleteCategory(item.id_category)
+                        deleteCategory(item.id)
+                        setTimeout(() => {
+                          router.reload()
+                        }, 1000)
                       }
                     })
                   }}

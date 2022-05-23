@@ -50,13 +50,7 @@ export const AppContextProvider = (props) => {
         localStorage.setItem("jwt", data)
         initSession(data)
 
-        const {
-          query: { redirect },
-        } = router
-
-        if (redirect) {
-          router.push(decodeURIComponent(redirect))
-        }
+        router.push("/")
       } catch (err) {
         setSignInError(err.response.data)
       }

@@ -19,7 +19,7 @@ const ArticlesList = () => {
   }, [])
 
   const deleteArticle = async (articleId) => {
-    await api.delete(`/articles/id=${articleId}`)
+    await api.delete(`/articles?id=${articleId}`)
   }
 
   if (apiError) {
@@ -76,7 +76,7 @@ const ArticlesList = () => {
                 {item.price} €
               </td>
               <td className="pl-3 h-28 border-x">{item.stock}</td>
-              <td className="pl-3 h-28 border-x">TODO</td>
+              <td className="pl-3 h-28 border-x">{item.category.name}</td>
               <td className="pl-3 h-28 border-x">{item.color}</td>
               <td className="w-3/6 pl-3 h-28 border-x">{item.description}</td>
               <td className="flex items-center justify-center h-28 border-x p-1">

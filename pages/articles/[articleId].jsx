@@ -9,7 +9,7 @@ const ArticlePage = () => {
 
   return (
     <Layout
-      page="Accueil"
+      page="Article"
       diplayheader="true"
       diplaybreadcrumbs="true"
       diplayfooter="true"

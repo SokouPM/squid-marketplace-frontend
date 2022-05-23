@@ -85,56 +85,51 @@ const ArticleList = ({ limit }) => {
 
   return (
     <ul className="w-5/6 mx-auto flex items-center justify-between flex-wrap mt-5">
-      {articles.map(
-        (item, index) =>
-          index < limit && (
-            <Link
-              href={{
-                pathname: `/articles/${item.id}`,
-              }}
-              key={item.id}
-              passHref
-            >
-              <li className="border rounded my-5 cursor-pointer shadow transition-all hover:scale-110 hover:shadow-2xl bg-white">
-                <div className="w-full">
-                  <Image
-                    src="https://place-hold.it/500x300"
-                    alt="image de l'article"
-                    width="450"
-                    height="250"
-                  />
-                </div>
-                <div className="px-2 pb-2">
-                  <p className="mb-4 font-bold text-2xl">{item.name}</p>
-                  <div className="mb-3 w-full flex items-center justify-between  text-xl">
-                    <p>{item.price} €</p>
-                    {stockRender(item.stock)}
-                  </div>
+      {articles.map((item, index) => (
+        <Link
+          href={{
+            pathname: `/articles/${item.id}`,
+          }}
+          key={item.id}
+          passHref
+        >
+          <li className="border rounded my-5 cursor-pointer shadow transition-all hover:scale-110 hover:shadow-2xl bg-white">
+            <div className="w-full">
+              <Image
+                src="https://place-hold.it/500x300"
+                alt="image de l'article"
+                width="450"
+                height="250"
+              />
+            </div>
+            <div className="px-2 pb-2">
+              <p className="mb-4 font-bold text-2xl">{item.name}</p>
+              <div className="mb-3 w-full flex items-center justify-between  text-xl">
+                <p>{item.price} €</p>
+                {stockRender(item.stock)}
+              </div>
 
-                  <div className="w-full flex items-end justify-end">
-                    <p className="w-max text-sm mr-1 italic text-slate-400">
-                      ( {item.ratings.length} )
-                    </p>
-                    <Rating
-                      name="read-only"
-                      value={item.rating}
-                      precision={0.5}
-                      readOnly
-                      icon={<IoMdStar color="#cc0023" fontSize="inherit" />}
-                      emptyIcon={
-                        <IoMdStar color="#272727" fontSize="inherit" />
-                      }
-                      sx={{
-                        width: "auto",
-                        color: "#cc0023",
-                      }}
-                    />
-                  </div>
-                </div>
-              </li>
-            </Link>
-          )
-      )}
+              <div className="w-full flex items-end justify-end">
+                <p className="w-max text-sm mr-1 italic text-slate-400">
+                  ( {item.ratings.length} )
+                </p>
+                <Rating
+                  name="read-only"
+                  value={item.rating}
+                  precision={0.5}
+                  readOnly
+                  icon={<IoMdStar color="#cc0023" fontSize="inherit" />}
+                  emptyIcon={<IoMdStar color="#272727" fontSize="inherit" />}
+                  sx={{
+                    width: "auto",
+                    color: "#cc0023",
+                  }}
+                />
+              </div>
+            </div>
+          </li>
+        </Link>
+      ))}
     </ul>
   )
 }

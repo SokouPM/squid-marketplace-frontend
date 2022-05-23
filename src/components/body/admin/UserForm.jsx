@@ -10,15 +10,15 @@ const UserForm = ({ user }) => {
   const { router } = useContext(AppContext)
 
   const handleFormSubmit = useCallback(
-    async ({ email, password, isAdmin }) => {
+    async ({ mail, password, admin }) => {
       user
-        ? await api.put(`/customer/byId?id=${user.id_category}`, {
-            email,
+        ? await api.put(`/customer?id=${user.id}`, {
+            mail,
             password,
-            isAdmin,
+            admin,
           })
-        : await api.post("/customer/", { email, password, isAdmin })
-      router.push("/administration/categories")
+        : await api.post("/customer", { mail, password, admin })
+      router.push("/administration/users")
     },
     [router, user]
   )
@@ -27,7 +27,7 @@ const UserForm = ({ user }) => {
 
   user
     ? (displayingErrorMessagesSchema = Yup.object().shape({
-        email: Yup.string()
+        mail: Yup.string()
           .email("Le mail est invalide !")
           .required("Le champ est requis !"),
         password: Yup.string()
@@ -47,7 +47,7 @@ const UserForm = ({ user }) => {
           ),
       }))
     : (displayingErrorMessagesSchema = Yup.object().shape({
-        email: Yup.string()
+        mail: Yup.string()
           .email("Le mail est invalide !")
           .required("Le champ est requis !"),
         password: Yup.string()
@@ -71,9 +71,9 @@ const UserForm = ({ user }) => {
   return (
     <Formik
       initialValues={{
-        email: user ? user.email : "",
+        mail: user ? user.mail : "",
         password: "",
-        isAdmin: user ? user.isAdmin : false,
+        admin: user ? user.admin : false,
       }}
       validationSchema={displayingErrorMessagesSchema}
       onSubmit={handleFormSubmit}
@@ -83,11 +83,11 @@ const UserForm = ({ user }) => {
           <FormField
             style="w-5/6 mb-5"
             label="Email"
-            id="email"
-            name="email"
+            id="mail"
+            name="mail"
             placeholder="exemple@mail.com"
-            errorType={errors.email}
-            touchedType={touched.email}
+            errorType={errors.mail}
+            touchedType={touched.mail}
           />
           <FormField
             style="w-5/6 mb-5"
@@ -101,7 +101,7 @@ const UserForm = ({ user }) => {
           />
           <div className="w-5/6 mb-5 select-none">
             <label className="mb-5 cursor-pointer">
-              <Field className="mr-2" type="checkbox" name="isAdmin" />
+              <Field className="mr-2" type="checkbox" name="admin" />
               Administrateur
             </label>
           </div>

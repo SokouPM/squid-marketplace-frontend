@@ -11,18 +11,18 @@ const ModifyUserPage = () => {
   } = useRouter()
 
   const [user, setUser] = useState(null)
-  // const [apiError, setApiError] = useState(null)
+  const [apiError, setApiError] = useState(null)
 
   useEffect(() => {
     if (userId && !isNaN(userId)) {
       api
         .get(`/customer/byId?id=${userId}`)
         .then((response) => setUser(response.data))
-      // .catch((error) =>
-      //   setApiError(
-      //     error.response ? error.response.data.error : error.message
-      //   )
-      // )
+        .catch((error) =>
+          setApiError(
+            error.response ? error.response.data.error : error.message
+          )
+        )
     }
   }, [userId])
 
@@ -38,7 +38,19 @@ const ModifyUserPage = () => {
           <h2 className="my-5 text-3xl text-center font-bold">
             Modifier l'utilisateur "{userId}"
           </h2>
-          <UserForm user={user} />
+          {apiError && <p>{apiError}</p>}
+          {user ? (
+            <UserForm user={user} />
+          ) : (
+            <div className="flex items-center justify-center mt-20">
+              <CircularProgress
+                sx={{
+                  color: "#cc0023",
+                }}
+              />
+              <p className="ml-3">Chargement du formulaire...</p>
+            </div>
+          )}
         </>
       ) : (
         <div className="flex items-center justify-center mt-20">

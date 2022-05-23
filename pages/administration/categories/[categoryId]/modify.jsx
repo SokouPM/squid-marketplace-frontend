@@ -11,18 +11,18 @@ const ModifyCategoryPage = () => {
   } = useRouter()
 
   const [category, setCategory] = useState(null)
-  // const [apiError, setApiError] = useState(null)
+  const [apiError, setApiError] = useState(null)
 
   useEffect(() => {
     if (categoryId && !isNaN(categoryId)) {
       api
         .get(`/category/byId?id=${categoryId}`)
         .then((response) => setCategory(response.data))
-      // .catch((error) =>
-      //   setApiError(
-      //     error.response ? error.response.data.error : error.message
-      //   )
-      // )
+        .catch((error) =>
+          setApiError(
+            error.response ? error.response.data.error : error.message
+          )
+        )
     }
   }, [categoryId])
 
@@ -38,7 +38,19 @@ const ModifyCategoryPage = () => {
           <h2 className="my-5 text-3xl text-center font-bold">
             Modifier la categorie "{categoryId}"
           </h2>
-          <CategoryForm category={category} />
+          {apiError && <p>{apiError}</p>}
+          {category ? (
+            <CategoryForm category={category} />
+          ) : (
+            <div className="flex items-center justify-center mt-20">
+              <CircularProgress
+                sx={{
+                  color: "#cc0023",
+                }}
+              />
+              <p className="ml-3">Chargement du formulaire...</p>
+            </div>
+          )}
         </>
       ) : (
         <div className="flex items-center justify-center mt-20">

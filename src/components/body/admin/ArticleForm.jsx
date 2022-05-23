@@ -57,35 +57,32 @@ const ArticleForm = ({ article }) => {
 
   const handleFormSubmit = useCallback(
     async ({ name, description, category, color, price, stock }) => {
+      if (pictureList.length < 2) {
+        setPictureError("Vous devez mettre au moins 2 images")
+
+        return
+      }
+
       article
-        ? await api.put(`/category/byId?id=${category.id_category}`, {
+        ? await api.put(`/articles?id=${article.id}`, {
             name,
             description,
-            categoryId: category,
+            category: { id: category },
             images: pictureList,
             color,
             price,
             stock,
           })
-        : await api.post("/category/", {
+        : await api.post("/articles", {
             name,
             description,
-            categoryId: category,
+            category: { id: category },
             images: pictureList,
             color,
             price,
             stock,
           })
-      router.push("/administration/categories")
-      await alert({
-        name,
-        description,
-        categoryId: category,
-        images: pictureList,
-        color,
-        price,
-        stock,
-      })
+      router.push("/administration/articles")
     },
     [article, pictureList, router]
   )
@@ -133,21 +130,13 @@ const ArticleForm = ({ article }) => {
       initialValues={{
         name: article ? article.name : "",
         description: article ? article.description : "",
-        category: article ? article.category : categories[0].id,
+        category: article ? article.category.id : categories[0].id,
         color: article ? article.color : "red",
         price: article ? article.price : 0,
         stock: article ? article.stock : 0,
       }}
       validationSchema={displayingErrorMessagesSchema}
-      onSubmit={() => {
-        if (pictureList.length < 2) {
-          setPictureError("Vous devez mettre au moins 2 images")
-
-          return
-        }
-
-        handleFormSubmit
-      }}
+      onSubmit={handleFormSubmit}
     >
       {({ errors, touched }) => (
         <Form className="w-5/6 p-12 border mx-auto mb-5 flex flex-col items-center justify-center rounded">
@@ -241,19 +230,30 @@ const ArticleForm = ({ article }) => {
                   setPictureUrl(e.target.value)
                 }}
               ></Field>
-              <button
-                className="ml-1 w-2/12 rounded bg-blue-600 text-white transition-all hover:bg-blue-300"
-                onClick={(e) => {
-                  e.preventDefault()
-                  setPicturesList((arr) => [...arr, { url: pictureUrl }])
+              {pictureList.length < 4 ? (
+                <button
+                  className="ml-1 w-2/12 rounded bg-blue-600 text-white transition-all hover:bg-blue-300"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setPicturesList((arr) => [...arr, { url: pictureUrl }])
 
-                  if (pictureList.length >= 2) {
-                    setPictureError(null)
-                  }
-                }}
-              >
-                + Ajouter l'image
-              </button>
+                    if (pictureList.length >= 1) {
+                      setPictureError(null)
+                    }
+                  }}
+                >
+                  + Ajouter l'image
+                </button>
+              ) : (
+                <button
+                  onClick={(e) => {
+                    e.preventDefault()
+                  }}
+                  className="ml-1 w-2/12 rounded bg-blue-300 cursor-not-allowed text-white transition-all"
+                >
+                  + Ajouter l'image
+                </button>
+              )}
             </div>
             {pictureError && pictureList.length < 4 && (
               <div className="errorField mt-1 text-red-600">{pictureError}</div>

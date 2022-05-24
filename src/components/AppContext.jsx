@@ -72,7 +72,7 @@ export const AppContextProvider = (props) => {
   )
 
   const signOut = () => {
-    localStorage.clear()
+    localStorage.removeItem("jwt")
     setSession(null)
     router.push("/signin")
   }

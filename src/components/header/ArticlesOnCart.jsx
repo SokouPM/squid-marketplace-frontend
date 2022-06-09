@@ -1,5 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
 import { useCallback, useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import CircularProgress from "@mui/material/CircularProgress"
 import { FaPlus, FaMinus } from "react-icons/fa"
@@ -79,7 +79,7 @@ const ArticlesOnChart = () => {
             <div className="flex items-start">
               <Link href={`/articles/${item.id}`}>
                 <a>
-                  <Image
+                  <img
                     src={item.images[0]}
                     alt="Image de l'article"
                     width={500 / 2.5}
@@ -120,9 +120,11 @@ const ArticlesOnChart = () => {
       <p className="font-bold text-xl ml-20">
         Total : {getTotalPrice(cart, total)} €
       </p>
-      <button className="w-2/3 mt-5 mx-auto bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white transition-all">
-        Commander
-      </button>
+      <Link href="/cart">
+        <a className="w-2/3 mt-5 mx-auto bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-center text-white transition-all">
+          Commander
+        </a>
+      </Link>
     </>
   )
 }

@@ -1,4 +1,4 @@
-import Image from "next/image"
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
 import { useRouter } from "next/router"
 import CircularProgress from "@mui/material/CircularProgress"
@@ -70,7 +70,7 @@ const OrderDetailPage = () => {
                   }`}
                 >
                   <td className="border-x text-center font-normal flex">
-                    <Image
+                    <img
                       src={item.images[0]}
                       alt="squid market place article"
                       width={500 / 1.5}

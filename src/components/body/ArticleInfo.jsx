@@ -1,4 +1,4 @@
-import Image from "next/image"
+/* eslint-disable @next/next/no-img-element */
 import { useContext } from "react"
 import Rating from "@mui/material/Rating"
 import { GiSquid } from "react-icons/gi"
@@ -74,7 +74,7 @@ const ArticleInfo = () => {
             (item, index) =>
               index > 0 && (
                 <li key={index}>
-                  <Image
+                  <img
                     src={item}
                     alt="squid market place article"
                     width={500 / 3}
@@ -88,7 +88,7 @@ const ArticleInfo = () => {
           {data.images.map(
             (item, index) =>
               index === 0 && (
-                <Image
+                <img
                   key={index}
                   src={item}
                   alt="squid market place article"

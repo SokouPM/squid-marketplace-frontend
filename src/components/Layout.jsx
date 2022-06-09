@@ -24,7 +24,7 @@ const Layout = (props) => {
             src="/banner.png"
             alt="squid market place banner"
             width={1900}
-            height={434}
+            height={290}
           />
         </div>
       )}

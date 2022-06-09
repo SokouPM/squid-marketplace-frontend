@@ -50,7 +50,7 @@ export const AppContextProvider = (props) => {
         localStorage.setItem("jwt", data)
         initSession(data)
 
-        router.push("/")
+        router.back()
       } catch (err) {
         setSignInError(err.response.data)
       }

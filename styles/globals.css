@@ -79,6 +79,8 @@ footer {
   border-color: var(--tertiary-color);
 }
 
+/* site title */
+
 h1 {
   font-family: "PT Sans", sans-serif;
   font-style: italic;

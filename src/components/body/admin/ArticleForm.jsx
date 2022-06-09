@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-// import Image from "next/image"
 import Link from "next/link"
 import { useState, useContext, useCallback, useEffect } from "react"
 import { Form, Formik, Field } from "formik"
@@ -10,7 +9,6 @@ import { FiAlertTriangle } from "react-icons/fi"
 import AppContext from "../../AppContext"
 import FormField from "../FormField"
 import api from "../../services/api"
-// import categories from "../../../datas/categories.json"
 import colors from "../../../datas/colors.json"
 
 const displayingErrorMessagesSchema = Yup.object().shape({

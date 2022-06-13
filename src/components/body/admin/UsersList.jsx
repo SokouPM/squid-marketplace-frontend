@@ -48,7 +48,7 @@ const UsersList = () => {
             color: "#cc0023",
           }}
         />
-        <p className="ml-3">Chargement des categories...</p>
+        <p className="ml-3">Chargement des utilisateurs...</p>
       </div>
     )
   }

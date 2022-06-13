@@ -1,6 +1,6 @@
 import Layout from "../src/components/Layout"
-import CartNav from "../src/components/body/CartNav"
-import CartPageArticles from "../src/components/body/CartPageArticles"
+import CartNav from "../src/components/body/cart/CartNav"
+import CartPageArticles from "../src/components/body/cart/CartPageArticles"
 
 const CartPage = () => {
   return (

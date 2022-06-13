@@ -1,9 +1,12 @@
+import { useCallback, useContext } from "react"
 import { Form, Formik, Field } from "formik"
 import * as Yup from "yup"
+import api from "../services/api"
+import AppContext from "../AppContext"
 import FormField from "../body/FormField"
 
 const displayingErrorMessagesSchema = Yup.object().shape({
-  email: Yup.string()
+  mail: Yup.string()
     .email("Le mail est invalide !")
     .max(50, "Le champ doit contenir maximum 50 caractères !")
     .required("Le champ est requis !"),
@@ -16,7 +19,7 @@ const displayingErrorMessagesSchema = Yup.object().shape({
       'Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf "-" !'
     )
     .required("Le champ est requis !"),
-  lastName: Yup.string()
+  name: Yup.string()
     .min(2, "Le champ doit contenir minimum 2 caractères !")
     .max(50, "Le champ doit contenir maximum 50 caractères !")
     .matches(
@@ -40,32 +43,48 @@ const displayingErrorMessagesSchema = Yup.object().shape({
 })
 
 const AccountForm = ({ user }) => {
+  const { router } = useContext(AppContext)
+
+  const handleFormSubmit = useCallback(
+    async ({ mail, civility, firstName, name, address, city, postalCode }) => {
+      await api.put(`/customer?id=${user.id}`, {
+        mail,
+        civility,
+        firstName,
+        name,
+        address,
+        city,
+        postalCode,
+      })
+      router.reload()
+    },
+    [router, user]
+  )
+
   return (
     <Formik
       initialValues={{
-        email: user ? user.email : "",
-        civility: user ? user.civility : "M.",
-        firstName: user ? user.firstName : "",
-        lastName: user ? user.lastName : "",
-        address: user ? user.address : "",
-        city: user ? user.city : "",
-        postalCode: user ? user.postalCode : "",
+        mail: user.mail ? user.mail : "",
+        civility: user.civility ? user.civility : "M.",
+        firstName: user.firstName ? user.firstName : "",
+        name: user.name ? user.name : "",
+        address: user.address ? user.address : "",
+        city: user.city ? user.city : "",
+        postalCode: user.postalCode ? user.postalCode : "",
       }}
       validationSchema={displayingErrorMessagesSchema}
-      onSubmit={(values) => {
-        alert(JSON.stringify(values, null, 2)) // TODO
-      }}
+      onSubmit={handleFormSubmit}
     >
       {({ errors, touched }) => (
         <Form className="w-4/6 mb-10 p-12 border mx-auto flex flex-col items-center justify-center rounded">
           <FormField
             style="w-5/6 mb-5"
             label="Email"
-            id="email"
-            name="email"
+            id="mail"
+            name="mail"
             placeholder="exemple@mail.com"
-            errorType={errors.email}
-            touchedType={touched.email}
+            errorType={errors.mail}
+            touchedType={touched.mail}
           />
 
           <div className="mb-5 w-5/6 flex items-center justify-left">
@@ -108,11 +127,11 @@ const AccountForm = ({ user }) => {
             <FormField
               style="w-3/6 ml-2"
               label="Nom"
-              id="lastName"
-              name="lastName"
+              id="name"
+              name="name"
               placeholder="Doe"
-              errorType={errors.lastName}
-              touchedType={touched.lastName}
+              errorType={errors.name}
+              touchedType={touched.name}
             />
           </div>
 
@@ -142,7 +161,7 @@ const AccountForm = ({ user }) => {
               label="Code postal"
               id="postalCode"
               name="postalCode"
-              placeholder="Doe"
+              placeholder="75000"
               errorType={errors.postalCode}
               touchedType={touched.postalCode}
             />

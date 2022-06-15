@@ -20,7 +20,7 @@ const ModifyCategoryPage = () => {
         .then((response) => setCategory(response.data))
         .catch((error) =>
           setApiError(
-            error.response ? error.response.data.error : error.message
+            error.response ? error.response.data : error.message
           )
         )
     }

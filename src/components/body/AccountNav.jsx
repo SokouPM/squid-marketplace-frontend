@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-const AccountNav = ({ userId, selected }) => {
+const AccountNav = ({ userId, selected, userIsAdmin }) => {
   return (
     <nav className="flex items-center justify-between w-full">
       <Link href={`/users/${userId}`}>
@@ -12,19 +12,10 @@ const AccountNav = ({ userId, selected }) => {
           Mes informations
         </a>
       </Link>
-      <Link href={`/users/${userId}/payment-card`}>
-        <a
-          className={`border-x border-primary w-full text-center py-5 my-5 transition-all ${
-            selected === 2 && "bg-gray-200"
-          } hover:bg-gray-200`}
-        >
-          Ma carte de paiement
-        </a>
-      </Link>
       <Link href={`/users/${userId}/orders`}>
         <a
           className={`border-x border-primary w-full text-center py-5 my-5 transition-all ${
-            selected === 3 && "bg-gray-200"
+            selected === 2 && "bg-gray-200"
           } hover:bg-gray-200`}
         >
           Mes commandes
@@ -33,17 +24,19 @@ const AccountNav = ({ userId, selected }) => {
       <Link href={`/users/${userId}/change-password`}>
         <a
           className={`border-x border-primary w-full text-center py-5 my-5 transition-all ${
-            selected === 4 && "bg-gray-200"
+            selected === 3 && "bg-gray-200"
           } hover:bg-gray-200`}
         >
           Modifier mon mot de passe
         </a>
-      </Link>{" "}
-      <Link href={`/administration`}>
-        <a className="border-x border-primary w-full text-center py-5 my-5 transition-all hover:bg-gray-200">
-          Administration
-        </a>
       </Link>
+      {userIsAdmin && (
+        <Link href={`/administration`}>
+          <a className="border-x border-primary w-full text-center py-5 my-5 transition-all hover:bg-gray-200">
+            Administration
+          </a>
+        </Link>
+      )}
     </nav>
   )
 }

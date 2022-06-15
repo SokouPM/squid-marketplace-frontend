@@ -20,7 +20,7 @@ const ModifyArticlePage = () => {
         .then((response) => setArticle(response.data))
         .catch((error) =>
           setApiError(
-            error.response ? error.response.data.error : error.message
+            error.response ? error.response.data : error.message
           )
         )
     }

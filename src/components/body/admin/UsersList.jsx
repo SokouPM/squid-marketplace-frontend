@@ -16,7 +16,7 @@ const UsersList = () => {
       .get("/customer")
       .then((response) => setUsers(response.data))
       .catch((error) =>
-        setApiError(error.response ? error.response.data.error : error.message)
+        setApiError(error.response ? error.response.data : error.message)
       )
   }, [])
 
@@ -121,7 +121,7 @@ const UsersList = () => {
                     className="p-1 w-1/2 rounded bg-red-600 text-white transition-all hover:bg-red-300"
                     onClick={() => {
                       swal({
-                        title: `Vous êtes sûr de vouloir supprimer l'utilisateur "${item.firstName} ${item.LastName}" ?`,
+                        title: `Vous êtes sûr de vouloir supprimer l'utilisateur "${item.mail}" ?`,
                         text: "Cette action est définitive !",
                         icon: "warning",
                         buttons: ["Non", "Oui"],
@@ -129,7 +129,7 @@ const UsersList = () => {
                       }).then((willDelete) => {
                         if (willDelete) {
                           swal({
-                            title: `L'utilisateur "${item.firstName} ${item.LastName}" à été supprimée`,
+                            title: `L'utilisateur "${item.mail}" à été supprimée`,
                             icon: "success",
                           })
                           deleteUser(item.id)

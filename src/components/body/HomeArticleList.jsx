@@ -45,7 +45,7 @@ const ArticleList = ({ limit }) => {
       .get("/articles")
       .then((response) => setArticles(response.data))
       .catch((error) =>
-        setApiError(error.response ? error.response.data.error : error.message)
+        setApiError(error.response ? error.response.data : error.message)
       )
   }, [])
 

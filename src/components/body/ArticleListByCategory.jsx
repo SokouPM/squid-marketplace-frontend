@@ -45,7 +45,7 @@ const ArticleList = ({ categoryId }) => {
       .get(`/articles/getByCategory?id=${categoryId}`)
       .then((response) => setArticles(response.data))
       .catch((error) =>
-        setApiError(error.response ? error.response.data.error : error.message)
+        setApiError(error.response ? error.response.data : error.message)
       )
   }, [categoryId])
 

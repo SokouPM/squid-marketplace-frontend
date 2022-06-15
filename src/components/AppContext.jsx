@@ -65,7 +65,7 @@ export const AppContextProvider = (props) => {
         router.push("/signin")
         setSignUpError(null)
       } catch (err) {
-        setSignUpError(err.response.data.error)
+        setSignUpError(err.response.data)
       }
     },
     [router]

@@ -41,12 +41,14 @@ const ArticleList = ({ categoryId }) => {
   const [apiError, setApiError] = useState(null)
 
   useEffect(() => {
-    api
-      .get(`/articles/getByCategory?id=${categoryId}`)
-      .then((response) => setArticles(response.data))
-      .catch((error) =>
-        setApiError(error.response ? error.response.data : error.message)
-      )
+    if (categoryId && !isNaN(categoryId)) {
+      api
+        .get(`/articles/getByCategory?id=${categoryId}`)
+        .then((response) => setArticles(response.data))
+        .catch((error) =>
+          setApiError(error.response ? error.response.data : error.message)
+        )
+    }
   }, [categoryId])
 
   if (apiError) {
@@ -96,7 +98,7 @@ const ArticleList = ({ categoryId }) => {
           <li className="border rounded my-5 cursor-pointer shadow transition-all hover:scale-110 hover:shadow-2xl bg-white">
             <div className="w-full">
               <img
-                src="https://place-hold.it/500x300"
+                src={item.images[0].url}
                 alt="image de l'article"
                 width="450"
                 height="250"

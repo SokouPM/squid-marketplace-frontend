@@ -1,10 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import { useContext } from "react"
+import { useContext, useState, useEffect } from "react"
 import Rating from "@mui/material/Rating"
 import { GiSquid } from "react-icons/gi"
 import { IoMdStar } from "react-icons/io"
-import data from "../../datas/product.json"
+import CircularProgress from "@mui/material/CircularProgress"
+import { FiAlertTriangle } from "react-icons/fi"
+// import data from "../../datas/product.json"
 import AppContext from "../AppContext"
+import api from "../services/api"
 
 const stockRender = (stockNumber) => {
   const alertLimitNb = 10
@@ -63,37 +66,78 @@ const addToCart = (article) => {
   localStorage.setItem("cart", JSON.stringify(cart))
 }
 
-const ArticleInfo = () => {
+const ArticleInfo = ({ articleId }) => {
   const { setCartTotalArticle } = useContext(AppContext)
+  const [article, setArticle] = useState(null)
+  const [apiError, setApiError] = useState(null)
+  const [imageSelected, setImageSelected] = useState(0)
+
+  useEffect(() => {
+    if (articleId && !isNaN(articleId)) {
+      api
+        .get(`/articles/byId?id=${articleId}`)
+        .then((response) => setArticle(response.data))
+        .catch((error) =>
+          setApiError(error.response ? error.response.data : error.message)
+        )
+    }
+  }, [articleId])
+
+  if (apiError) {
+    return (
+      <div className="w-full flex items-center justify-center mt-10 p-5 bg-red-200 rounded">
+        <p className="text-3xl font-bold flex items-center justify-center text-red-600">
+          <FiAlertTriangle className="text-5xl mr-3" />
+          {apiError}
+        </p>
+      </div>
+    )
+  }
+
+  if (!article) {
+    return (
+      <div className="w-full flex items-center justify-center mt-10 p-5">
+        <CircularProgress
+          sx={{
+            color: "#cc0023",
+          }}
+          className="mr-5"
+        />
+        <p>Chargement de l'article...</p>
+      </div>
+    )
+  }
 
   return (
     <section className="flex items-start justify-between mt-5">
       <div className="flex w-3/5">
         <ul className="mr-2">
-          {data.images.map(
-            (item, index) =>
-              index > 0 && (
-                <li key={index}>
-                  <img
-                    src={item}
-                    alt="squid market place article"
-                    width={500 / 3}
-                    height={300 / 3}
-                  />
-                </li>
-              )
-          )}
+          {article.images.map((item, index) => (
+            <li
+              key={index}
+              className={`mb-1 ${
+                index === imageSelected &&
+                "border-4 border-secondary cursor-pointer"
+              }`}
+              onMouseOver={() => setImageSelected(index)}
+            >
+              <img
+                src={item.url}
+                alt="squid market place article"
+                width={500 / 3}
+              />
+            </li>
+          ))}
         </ul>
         <div>
-          {data.images.map(
+          {article.images.map(
             (item, index) =>
-              index === 0 && (
+              index === imageSelected && (
                 <img
                   key={index}
-                  src={item}
+                  src={item.url}
                   alt="squid market place article"
                   width={500 * 1.2}
-                  height={300 * 1.2}
                 />
               )
           )}
@@ -101,14 +145,14 @@ const ArticleInfo = () => {
       </div>
       <div className="w-2/5 flex flex-col items-left">
         <div className="flex pb-2 items-center justify-between">
-          <p className="text-2xl font-bold">{data.name}</p>
-          <p className="text-2xl">{data.price} €</p>
+          <p className="text-2xl font-bold">{article.name}</p>
+          <p className="text-2xl">{article.price} €</p>
         </div>
-        <div className="text-justify py-3">{data.description}</div>
+        <div className="text-justify py-3">{article.description}</div>
         <div className="flex items-end justify-left py-3">
           <Rating
             name="read-only"
-            value={data.rating}
+            value={article.rating}
             precision={0.5}
             readOnly
             icon={<IoMdStar color="#cc0023" fontSize="inherit" />}
@@ -119,13 +163,13 @@ const ArticleInfo = () => {
             }}
           />
           <p className="w-max text-sm mr-1 italic text-slate-400">
-            ( {data.ratings.length} )
+            ( {article.ratings.length} )
           </p>
         </div>
-        <div className=" py-3 mb-6">{stockRender(data.stock)}</div>
+        <div className=" py-3 mb-6">{stockRender(article.stock)}</div>
         <button
           onClick={() => {
-            addToCart(data)
+            addToCart(article)
             setCartTotalArticle(setCartTotalArticle + 1)
           }}
           className="w-2/3 mx-auto bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white transition-all"

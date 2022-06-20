@@ -52,7 +52,7 @@ const CartPageArticles = () => {
               <li className="w-full mb-3 transition-all p-2 border rounded cursor-pointer hover:bg-slate-100">
                 <div className="flex items-start">
                   <img
-                    src={item.images[0]}
+                    src={item.images[0].url}
                     alt="Image de l'article"
                     width={500 / 2}
                     height={300 / 2}

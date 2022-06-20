@@ -80,7 +80,7 @@ const ArticlesOnChart = () => {
               <Link href={`/articles/${item.id}`}>
                 <a>
                   <img
-                    src={item.images[0]}
+                    src={item.images[0].url}
                     alt="Image de l'article"
                     width={500 / 2.5}
                     height={300 / 2.5}

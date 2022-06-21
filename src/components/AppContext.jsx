@@ -63,7 +63,9 @@ export const AppContextProvider = (props) => {
 
         const [, payload] = data.split(".")
         const session = atob(payload)
+
         addLocalCartToDb(session)
+        getDbCart(session)
       } catch (err) {
         if (err.response.status === 404) {
           setSignInError("Email incorrect")
@@ -111,6 +113,29 @@ export const AppContextProvider = (props) => {
         )
       })
     }
+
+    localStorage.setItem("cart", JSON.stringify([]))
+  }
+
+  const getDbCart = (session) => {
+    const sessionId = JSON.parse(session).id
+
+    api.get(`/carts/byCustomer?idCustomer=${sessionId}`).then((response) => {
+      let newCart = []
+      let cartArticlesNb = 0
+
+      for (const key in response.data) {
+        cartArticlesNb += response.data[key].articles.price
+        newCart.push({
+          id: response.data[key].articles.id,
+          price: response.data[key].articles.price,
+          quantity: response.data[key].quantity,
+        })
+      }
+
+      setCartTotalArticle(cartArticlesNb)
+      localStorage.setItem("cart", JSON.stringify(newCart))
+    })
   }
 
   return (

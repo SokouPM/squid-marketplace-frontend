@@ -1,11 +1,13 @@
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import swal from "sweetalert"
 import CircularProgress from "@mui/material/CircularProgress"
 import { FiAlertTriangle } from "react-icons/fi"
 import api from "../../services/api"
+import AppContext from "../../AppContext"
 
 const ArticlesList = () => {
+  const { router } = useContext(AppContext)
   const [articles, setArticles] = useState(null)
   const [apiError, setApiError] = useState(null)
 
@@ -20,6 +22,9 @@ const ArticlesList = () => {
 
   const deleteArticle = async (articleId) => {
     await api.delete(`/articles?id=${articleId}`)
+    setTimeout(() => {
+      router.reload()
+    }, 1000)
   }
 
   if (apiError) {

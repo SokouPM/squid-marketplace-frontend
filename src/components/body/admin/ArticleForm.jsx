@@ -53,6 +53,8 @@ const ArticleForm = ({ article }) => {
       )
   }, [])
 
+  useEffect(() => article && setPicturesList(article.images), [article])
+
   const handleFormSubmit = useCallback(
     async ({ name, description, category, color, price, stock }) => {
       if (pictureList.length < 2) {

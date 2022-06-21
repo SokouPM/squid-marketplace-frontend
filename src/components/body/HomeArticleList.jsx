@@ -42,7 +42,7 @@ const ArticleList = ({ limit }) => {
 
   useEffect(() => {
     api
-      .get("/articles") // todo: add /trending
+      .get("/articles/trending")
       .then((response) => setArticles(response.data))
       .catch((error) =>
         setApiError(error.response ? error.response.data : error.message)
@@ -92,7 +92,7 @@ const ArticleList = ({ limit }) => {
               href={{
                 pathname: `/articles/${item.id}`,
               }}
-              key={item.id}
+              key={index}
               passHref
             >
               <li className="border rounded my-5 cursor-pointer shadow transition-all hover:scale-110 hover:shadow-2xl bg-white">
@@ -100,6 +100,7 @@ const ArticleList = ({ limit }) => {
                   <img
                     src={item.images[0].url}
                     alt="image de l'article"
+                    className="rounded-t"
                     width="450"
                     height="250"
                   />

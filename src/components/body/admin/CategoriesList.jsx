@@ -22,6 +22,9 @@ const CategoriesList = () => {
 
   const deleteCategory = async (categoryId) => {
     await api.delete(`/category?id=${categoryId}`)
+    setTimeout(() => {
+      router.reload()
+    }, 1000)
   }
 
   if (apiError) {

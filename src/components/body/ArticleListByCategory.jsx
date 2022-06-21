@@ -13,24 +13,24 @@ const stockRender = (stockNumber) => {
 
   if (stockNumber > alertLimitNb) {
     return (
-      <p className="flex items-center justify-between font-bold text-green-700">
-        <GiSquid className="mr-1 text-xl" /> En stock
+      <p className="flex items-center justify-between font-bold text-sm text-green-700">
+        <GiSquid className="mr-1 text-lg" /> En stock
       </p>
     )
   }
 
   if (stockNumber <= alertLimitNb && stockNumber > 0) {
     return (
-      <p className="flex items-center justify-between font-bold text-yellow-500">
-        <GiSquid className="mr-1 text-xl" /> Plus que {stockNumber} en stock
+      <p className="flex items-center justify-between font-bold text-sm text-yellow-500">
+        <GiSquid className="mr-1 text-lg" /> Plus que {stockNumber} en stock
       </p>
     )
   }
 
   if (stockNumber >= 0) {
     return (
-      <p className="flex items-center justify-between font-bold text-red-600">
-        <GiSquid className="mr-1 text-xl" /> L’article n’est plus disponible
+      <p className="flex items-center justify-between font-bold text-sm text-red-600">
+        <GiSquid className="mr-1 text-lg" /> L’article n’est plus disponible
       </p>
     )
   }
@@ -100,19 +100,19 @@ const ArticleList = ({ categoryId }) => {
               <img
                 src={item.images[0].url}
                 alt="image de l'article"
-                width="450"
-                height="250"
+                className="rounded-t"
+                width="300"
               />
             </div>
             <div className="px-2 pb-2">
-              <p className="mb-4 font-bold text-2xl">{item.name}</p>
-              <div className="mb-3 w-full flex items-center justify-between  text-xl">
+              <p className="mb-4 font-bold text-xl">{item.name}</p>
+              <div className="mb-3 w-full flex items-center justify-between">
                 <p>{item.price} €</p>
                 {stockRender(item.stock)}
               </div>
 
               <div className="w-full flex items-end justify-end">
-                <p className="w-max text-sm mr-1 italic text-slate-400">
+                <p className="w-max text-xs mr-1 italic text-slate-400">
                   ( {item.ratings.length} )
                 </p>
                 <Rating

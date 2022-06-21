@@ -1,30 +1,37 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import Autocomplete from "@mui/material/Autocomplete"
 import { FaSearch } from "react-icons/fa"
 import AppContext from "../AppContext"
-import productsName from "/src/datas/productsName"
+import api from "../services/api"
 
 const SearchBar = () => {
   const { router } = useContext(AppContext)
   const [value, setValue] = useState("")
+  const [articlesNames, setArticlesNames] = useState("")
+
+  useEffect(() => {
+    api
+      .get("/articles/listName")
+      .then((response) => setArticlesNames(response.data))
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    productsName.map((item) => {
+    articlesNames.map((item) => {
       if (value === item.label) {
         router.push(`/articles/${item.id}`)
       }
     })
   }
 
-  if (!productsName) {
+  if (!articlesNames) {
     return null
   }
 
   return (
     <Autocomplete
       className="flex items-center"
-      options={productsName}
+      options={articlesNames}
       noOptionsText="Pas d'article correspondant"
       onInputChange={(e, newInputValue) => {
         setValue(newInputValue)

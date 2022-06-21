@@ -8,7 +8,7 @@ import api from "../../services/api"
 import AccountForm from "../AccountForm"
 
 const CartDeliveryAddress = () => {
-  const { session } = useContext(AppContext)
+  const { session, router } = useContext(AppContext)
   const [user, setUser] = useState(null)
   const [apiError, setApiError] = useState(null)
 
@@ -24,9 +24,7 @@ const CartDeliveryAddress = () => {
         .get(`/customer/byId?id=${accountId}`)
         .then((response) => setUser(response.data))
         .catch((error) =>
-          setApiError(
-            error.response ? error.response.data : error.message
-          )
+          setApiError(error.response ? error.response.data : error.message)
         )
     }
   }, [accountId])
@@ -37,7 +35,7 @@ const CartDeliveryAddress = () => {
         <GiGiantSquid className="text-8xl text-secondary" />
         <div>
           <p>Vous n'êtes pas connecté</p>
-          <Link href="/signin">
+          <Link href={`/signin?redirect=${encodeURIComponent(router.asPath)}`}>
             <a className="font-bold text-secondary hover:underline">
               Cliquez ici pour vous connecter
             </a>

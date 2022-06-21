@@ -3,8 +3,6 @@ import Image from "next/image"
 import { IoCaretBackOutline } from "react-icons/io5"
 
 const AdminHeader = () => {
-  const name = "Pierre Marquet"
-
   return (
     <header className="bg-primary flex items-center justify-between px-4">
       <Link href="/administration">
@@ -18,7 +16,7 @@ const AdminHeader = () => {
       </Link>
 
       <div className="flex items-center justify-center text-white text-3xl">
-        Bienvenue {name}
+        Bienvenue
       </div>
 
       <div className="flex items-center justify-center text-white text-xl">

@@ -1,4 +1,5 @@
 import { useRouter } from "next/router"
+import CircularProgress from "@mui/material/CircularProgress"
 import Layout from "/src/components/Layout"
 import ArticleInfo from "/src/components/body/ArticleInfo"
 
@@ -17,7 +18,14 @@ const ArticlePage = () => {
       {!isNaN(articleId) ? (
         <ArticleInfo articleId={articleId} />
       ) : (
-        <div>⚠ Article Id must be a number</div>
+        <div className="w-full px-5 flex items-center justify-center">
+          <CircularProgress
+            sx={{
+              color: "#cc0023",
+            }}
+          />
+          <p className="ml-3 w-max">Chargement du panier...</p>
+        </div>
       )}
     </Layout>
   )

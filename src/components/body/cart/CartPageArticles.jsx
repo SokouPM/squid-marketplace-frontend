@@ -2,6 +2,7 @@
 import Link from "next/link"
 import CircularProgress from "@mui/material/CircularProgress"
 import { GiGiantSquid } from "react-icons/gi"
+import CartPageArticleInfo from "./CartPageArticleInfo"
 
 const getTotalPrice = (cart, total) => {
   cart.map((item) => {
@@ -44,34 +45,20 @@ const CartPageArticles = () => {
   }
 
   return (
-    <div>
+    <div className="mb-10">
       <div className="w-full flex items-start">
-        <ul className="w-5/6">
-          {cart.map((item, index) => (
-            <Link key={index} href={`/articles/${item.id}`} passHref>
-              <li className="w-full mb-3 transition-all p-2 border rounded cursor-pointer hover:bg-slate-100">
-                <div className="flex items-start">
-                  <img
-                    src={item.images[0].url}
-                    alt="Image de l'article"
-                    width={500 / 2}
-                    height={300 / 2}
-                  />
+        {cart.map((item, index) => (
+          <Link key={index} href={`/articles/${item.id}`}>
+            <a className="w-5/6 mb-3 transition-all p-2 border rounded cursor-pointer hover:bg-slate-100">
+              <CartPageArticleInfo
+                articleId={item.id}
+                price={item.price}
+                quantity={item.quantity}
+              />
+            </a>
+          </Link>
+        ))}
 
-                  <div className="ml-5 w-1/2">
-                    <p className="text-lg font-bold leading-none mb-2">
-                      {item.name}
-                    </p>
-                    <p className="mb-3">{item.description}</p>
-                    <p>
-                      Prix / quantité : {item.price} € x {item.quantity}
-                    </p>
-                  </div>
-                </div>
-              </li>
-            </Link>
-          ))}
-        </ul>
         <div className="border rounded p-5 ml-auto">
           <p className="font-bold text-3xl">
             Total : {getTotalPrice(cart, total)} €

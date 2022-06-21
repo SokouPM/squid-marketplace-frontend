@@ -5,7 +5,6 @@ import { GiSquid } from "react-icons/gi"
 import { IoMdStar } from "react-icons/io"
 import CircularProgress from "@mui/material/CircularProgress"
 import { FiAlertTriangle } from "react-icons/fi"
-// import data from "../../datas/product.json"
 import AppContext from "../AppContext"
 import api from "../services/api"
 
@@ -37,7 +36,7 @@ const stockRender = (stockNumber) => {
   }
 }
 
-const addToCart = (article) => {
+const addToCart = (article, sessionId) => {
   if (!localStorage.getItem("cart")) {
     localStorage.setItem("cart", JSON.stringify([]))
   }
@@ -46,31 +45,68 @@ const addToCart = (article) => {
 
   if (cart.length) {
     let addArticle = true
+
     cart.map((item) => {
       if (item.id == article.id) {
         item.quantity++
 
+        if (item.quantity > 10) {
+          item.quantity = 10
+        }
+
         addArticle = false
+
+        if (sessionId) {
+          api.put(
+            `/carts?idCustomer=${sessionId}&idArticle=${item.id}&quantity=${item.quantity}`
+          )
+        }
       }
     })
 
     if (addArticle) {
-      article.quantity = 1
-      cart.push(article)
+      const id = article.id
+      const price = article.price
+      const articleForCart = { id, price }
+      articleForCart.quantity = 1
+
+      cart.push(articleForCart)
+
+      if (sessionId) {
+        api.post(
+          `/carts/withQuantity?idCustomer=${sessionId}&idArticle=${id}&quantity=${1}`
+        )
+      }
     }
   } else {
-    article.quantity = 1
-    cart.push(article)
+    const id = article.id
+    const price = article.price
+    const articleForCart = { id, price }
+    articleForCart.quantity = 1
+
+    cart.push(articleForCart)
+
+    if (sessionId) {
+      api.post(
+        `/carts/withQuantity?idCustomer=${sessionId}&idArticle=${id}&quantity=${1}`
+      )
+    }
   }
 
   localStorage.setItem("cart", JSON.stringify(cart))
 }
 
 const ArticleInfo = ({ articleId }) => {
-  const { setCartTotalArticle } = useContext(AppContext)
+  const { setCartTotalArticle, session } = useContext(AppContext)
   const [article, setArticle] = useState(null)
   const [apiError, setApiError] = useState(null)
   const [imageSelected, setImageSelected] = useState(0)
+
+  let sessionId = null
+
+  if (session) {
+    sessionId = JSON.parse(session).id
+  }
 
   useEffect(() => {
     if (articleId && !isNaN(articleId)) {
@@ -169,7 +205,7 @@ const ArticleInfo = ({ articleId }) => {
         <div className=" py-3 mb-6">{stockRender(article.stock)}</div>
         <button
           onClick={() => {
-            addToCart(article)
+            addToCart(article, sessionId)
             setCartTotalArticle(setCartTotalArticle + 1)
           }}
           className="w-2/3 mx-auto bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white transition-all"

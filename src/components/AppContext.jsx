@@ -32,7 +32,7 @@ export const AppContextProvider = (props) => {
 
   useEffect(() => {
     if (session === null && Page.private) {
-      router.push(`/signin?redirect=${encodeURIComponent(location.pathname)}`)
+      router.push(`/signin?redirect=${encodeURIComponent(router.asPath)}`)
     }
   }, [Page.private, router, session])
 
@@ -47,12 +47,29 @@ export const AppContextProvider = (props) => {
       try {
         const { data } = await api.post("auth/connection", { mail, password })
         setSignInError(null)
+
+        const {
+          query: { redirect },
+        } = router
+
+        if (redirect) {
+          router.push(decodeURIComponent(redirect))
+        } else {
+          router.push("/")
+        }
+
         localStorage.setItem("jwt", data)
         initSession(data)
 
-        router.back()
+        const [, payload] = data.split(".")
+        const session = atob(payload)
+        addLocalCartToDb(session)
       } catch (err) {
-        setSignInError(err.response.data)
+        if (err.response.status === 404) {
+          setSignInError("Email incorrect")
+        } else {
+          setSignInError(err.response.data)
+        }
       }
     },
     [initSession, router]
@@ -77,8 +94,23 @@ export const AppContextProvider = (props) => {
     router.push("/signin")
   }
 
-  if (!session && Page.private) {
-    return null
+  const addLocalCartToDb = (session) => {
+    let cart = []
+    const sessionId = JSON.parse(session).id
+
+    if (!localStorage.getItem("cart")) {
+      localStorage.setItem("cart", JSON.stringify([]))
+    }
+
+    cart = JSON.parse(localStorage.getItem("cart"))
+
+    if (cart.length) {
+      cart.map((item) => {
+        api.post(
+          `/carts/withQuantity?idCustomer=${sessionId}&idArticle=${item.id}&quantity=${item.quantity}`
+        )
+      })
+    }
   }
 
   return (
@@ -94,6 +126,7 @@ export const AppContextProvider = (props) => {
         signUp,
         signOut,
         setCartTotalArticle,
+        addLocalCartToDb,
       }}
     />
   )

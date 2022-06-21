@@ -4,7 +4,7 @@ import { CgClose } from "react-icons/cg"
 import Box from "@mui/material/Box"
 import Drawer from "@mui/material/Drawer"
 import AppContext from "../AppContext"
-import ArticlesOnCart from "./ArticlesOnCart"
+import CartArticlesList from "./CartArticlesList"
 
 const ChartBar = () => {
   const { cartTotalArticle, setCartTotalArticle } = useContext(AppContext)
@@ -49,7 +49,7 @@ const ChartBar = () => {
           <CgClose />
         </button>
       </div>
-      <ArticlesOnCart />
+      <CartArticlesList />
     </Box>
   )
 

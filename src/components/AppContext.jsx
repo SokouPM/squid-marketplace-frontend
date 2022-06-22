@@ -67,11 +67,7 @@ export const AppContextProvider = (props) => {
         addLocalCartToDb(session)
         getDbCart(session)
       } catch (err) {
-        if (err.response.status === 404) {
-          setSignInError("Email incorrect")
-        } else {
-          setSignInError(err.response.data)
-        }
+        setSignInError("Email ou mot de passe invalide")
       }
     },
     [initSession, router]

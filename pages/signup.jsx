@@ -92,7 +92,7 @@ const SignUpPage = () => {
                   touchedType={touched.password}
                 />
                 <FormField
-                  style="mb-5"
+                  style="mb-10"
                   label="Confirmer le mot de passe"
                   type={PasswordField}
                   id="passwordConfirm"
@@ -108,9 +108,6 @@ const SignUpPage = () => {
                   >
                     Inscription
                   </button>
-                </div>
-                <div className="flex flex-col items-center justify-center">
-                  <span className="mt-5 text-gray-400">---- ou ----</span>
                 </div>
               </Form>
             )}

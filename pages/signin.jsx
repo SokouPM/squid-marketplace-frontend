@@ -1,5 +1,5 @@
 import { useCallback, useContext } from "react"
-import { Form, Formik, Field } from "formik"
+import { Form, Formik } from "formik"
 import { FiAlertTriangle } from "react-icons/fi"
 import AppContext from "../src/components/AppContext"
 import * as Yup from "yup"
@@ -76,19 +76,12 @@ const SignInPage = () => {
                   </div>
                 )}
                 <div className="flex items-center justify-evenly w-full">
-                  <label className="cursor-pointer select-none">
-                    <Field className="mr-2" type="checkbox" name="rememberMe" />
-                    Se souvenir de moi
-                  </label>
                   <button
                     className="bg-secondary hover-text-primary hover-bg-tertiary px-10 py-1 rounded-full text-white transition-all"
                     type="submit"
                   >
                     Connexion
                   </button>
-                </div>
-                <div className="flex flex-col items-center justify-center">
-                  <span className="mt-5 text-gray-400">---- ou ----</span>
                 </div>
               </Form>
             )}

@@ -1,14 +1,14 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
 
 const CheckoutForm = () => {
   const stripe = useStripe()
   const elements = useElements()
 
-  const [message, setMessage] = React.useState(null)
-  const [isLoading, setIsLoading] = React.useState(false)
+  const [message, setMessage] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!stripe) {
       return
     }
@@ -27,20 +27,20 @@ const CheckoutForm = () => {
           setMessage("Payment succeeded!")
 
           break
-        
+
         case "processing":
           setMessage("Your payment is processing.")
 
           break
-        
+
         case "requires_payment_method":
           setMessage("Your payment was not successful, please try again.")
 
           break
-        
+
         default:
           setMessage("Something went wrong.")
-          
+
           break
       }
     })

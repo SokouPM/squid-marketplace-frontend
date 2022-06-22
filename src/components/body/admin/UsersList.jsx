@@ -15,9 +15,7 @@ const UsersList = () => {
     api
       .get("/customer")
       .then((response) => setUsers(response.data))
-      .catch((error) =>
-        setApiError(error.response ? error.response.data : error.message)
-      )
+      .catch(() => setApiError("Erreur de chargement"))
   }, [])
 
   const deleteUser = async (userId) => {

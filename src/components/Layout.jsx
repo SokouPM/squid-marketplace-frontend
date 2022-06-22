@@ -1,5 +1,7 @@
 import Head from "next/head"
 import Image from "next/image"
+import { useContext, useEffect } from "react"
+import AppContext from "./AppContext"
 import Header from "./Header"
 import AdminHeader from "./AdminHeader"
 import BreadCrumbs from "./body/BreadCrumbs"
@@ -7,6 +9,13 @@ import Footer from "./Footer"
 
 const Layout = (props) => {
   const { children, ...otherProps } = props
+  const { session, getDbCart } = useContext(AppContext)
+
+  useEffect(() => {
+    if (session) {
+      getDbCart(session)
+    }
+  }, [session])
 
   return (
     <div {...otherProps}>

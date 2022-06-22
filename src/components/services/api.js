@@ -12,7 +12,7 @@ const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
   transformRequest: [
     (data, headers) => {
-      headers.authentication = getJWT()
+      headers.token = getJWT()
       headers.post["Content-Type"] = "application/json"
       headers.patch["Content-Type"] = "application/json"
       headers.put["Content-Type"] = "application/json"

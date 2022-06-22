@@ -122,10 +122,10 @@ export const AppContextProvider = (props) => {
       let cartArticlesNb = 0
 
       for (const key in response.data) {
-        cartArticlesNb += response.data[key].articles.price
+        cartArticlesNb += response.data[key].article.price
         newCart.push({
-          id: response.data[key].articles.id,
-          price: response.data[key].articles.price,
+          id: response.data[key].article.id,
+          price: response.data[key].article.price,
           quantity: response.data[key].quantity,
         })
       }
@@ -149,6 +149,7 @@ export const AppContextProvider = (props) => {
         signOut,
         setCartTotalArticle,
         addLocalCartToDb,
+        getDbCart,
       }}
     />
   )

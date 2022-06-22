@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback, useContext } from "react"
 import { Form, Formik } from "formik"
 import * as Yup from "yup"
 import { FiAlertTriangle } from "react-icons/fi"
@@ -8,6 +8,7 @@ import AccountNav from "../../../src/components/body/AccountNav"
 import FormField from "../../../src/components/body/FormField"
 import PasswordField from "../../../src/components/body/customFields/PasswordField"
 import api from "../../../src/components/services/api"
+import AppContext from "../../../src/components/AppContext"
 
 const displayingErrorMessagesSchema = Yup.object().shape({
   oldPassword: Yup.string().required("Le champ est requis !"),
@@ -40,8 +41,15 @@ const UserInformationsPage = () => {
     query: { userId },
   } = useRouter()
 
+  const { session, router } = useContext(AppContext)
   const [user, setUser] = useState(null)
   const [apiError, setApiError] = useState(null)
+
+  let accountId = null
+
+  if (session) {
+    accountId = JSON.parse(session).id
+  }
 
   useEffect(() => {
     if (userId && !isNaN(userId)) {
@@ -53,6 +61,26 @@ const UserInformationsPage = () => {
         )
     }
   }, [userId])
+
+  const handleFormSubmit = useCallback(
+    async ({ oldPassword, password }) => {
+      await api.put(
+        `/customer/editPassword?oldPassword=${oldPassword}&newPassword=${password}&idCustomer=${userId}`,
+        {
+          oldPassword,
+          password,
+        }
+      )
+      router.push(`/users/${accountId}`)
+    },
+    [accountId, router, userId]
+  )
+
+  if (userId && accountId && userId != accountId) {
+    router.push(`/users/${accountId}/change-password`)
+
+    return null
+  }
 
   return (
     <Layout
@@ -83,9 +111,7 @@ const UserInformationsPage = () => {
             password: "",
           }}
           validationSchema={displayingErrorMessagesSchema}
-          onSubmit={(values) => {
-            alert(JSON.stringify(values, null, 2)) // TODO
-          }}
+          onSubmit={handleFormSubmit}
         >
           {({ errors, touched }) => (
             <Form className="w-4/6 mb-10 p-12 border mx-auto flex flex-col items-center justify-center rounded">

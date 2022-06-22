@@ -16,9 +16,10 @@ const PaymentPage = () => {
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     fetch("/create-payment-intent", {
+      // wait back endpoint
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
+      body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }), // cart content
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret))

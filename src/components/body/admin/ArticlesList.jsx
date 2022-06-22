@@ -15,9 +15,7 @@ const ArticlesList = () => {
     api
       .get("/articles")
       .then((response) => setArticles(response.data))
-      .catch((error) =>
-        setApiError(error.response ? error.response.data : error.message)
-      )
+      .catch(() => setApiError("Erreur de chargement"))
   }, [])
 
   const deleteArticle = async (articleId) => {

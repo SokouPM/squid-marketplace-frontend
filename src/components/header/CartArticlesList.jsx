@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
-import { useCallback, useState, useContext } from "react"
+import { useCallback, useState, useContext, useEffect } from "react"
 import CircularProgress from "@mui/material/CircularProgress"
 import { FaPlus, FaMinus } from "react-icons/fa"
 import { GiGiantSquid } from "react-icons/gi"
@@ -53,9 +53,13 @@ const getTotalPrice = (cart, total) => {
 }
 
 const ArticlesOnChart = () => {
-  const { session } = useContext(AppContext)
+  const { session, getDbCart } = useContext(AppContext)
   const [, forceUpdate] = useState()
   const doUpdate = useCallback(() => forceUpdate({}), [])
+
+  useEffect(() => {
+    getDbCart(session)
+  }, [])
 
   let total = 0
   let sessionId = null

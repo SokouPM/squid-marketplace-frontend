@@ -19,9 +19,7 @@ const ModifyArticlePage = () => {
         .get(`/articles/byId?id=${articleId}`)
         .then((response) => setArticle(response.data))
         .catch((error) =>
-          setApiError(
-            error.response ? error.response.data : error.message
-          )
+          setApiError(error.response ? error.response.data : error.message)
         )
     }
   }, [articleId])

@@ -47,19 +47,20 @@ const CartPageArticles = () => {
   return (
     <div className="mb-10">
       <div className="w-full flex items-start">
-        {cart.map((item, index) => (
-          <Link key={index} href={`/articles/${item.id}`}>
-            <a className="w-5/6 mb-3 transition-all p-2 border rounded cursor-pointer hover:bg-slate-100">
-              <CartPageArticleInfo
-                articleId={item.id}
-                price={item.price}
-                quantity={item.quantity}
-              />
-            </a>
-          </Link>
-        ))}
-
-        <div className="border rounded p-5 ml-auto">
+        <div className="flex flex-col w-5/6">
+          {cart.map((item, index) => (
+            <Link key={index} href={`/articles/${item.id}`}>
+              <a className="mb-3 transition-all p-2 border rounded cursor-pointer hover:bg-slate-100">
+                <CartPageArticleInfo
+                  articleId={item.id}
+                  price={item.price}
+                  quantity={item.quantity}
+                />
+              </a>
+            </Link>
+          ))}
+        </div>
+        <div className="border rounded p-5 ml-10 w-2/6">
           <p className="font-bold text-3xl">
             Total : {getTotalPrice(cart, total)} €
           </p>

@@ -112,3 +112,8 @@ h1 {
     transform: translateX(0);
   }
 }
+
+.colorRadio:checked + .colorImg {
+  border: 3px solid var(--secondary-color);
+  transform: scale(125%);
+}

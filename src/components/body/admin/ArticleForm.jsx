@@ -119,7 +119,7 @@ const ArticleForm = ({ article }) => {
           Veuillez créer des catégories{" "}
           <Link href="/administration/categories">
             <a>ici</a>
-          </Link>{" "}
+          </Link>
         </p>
       </div>
     )
@@ -163,7 +163,7 @@ const ArticleForm = ({ article }) => {
             <div className="w-2/5 flex flex-col items-start">
               <label htmlFor="category">Catégorie</label>
               <Field
-                className="border-2 rounded py-1 px-2 w-full"
+                className="border-2 cursor-pointer bg-gray-200 rounded py-1 px-2 w-full"
                 id="category"
                 name="category"
                 as="select"
@@ -178,7 +178,7 @@ const ArticleForm = ({ article }) => {
             <div className="w-2/5">
               <label htmlFor="color">Couleur</label>
               <Field
-                className="border-2 rounded py-1 px-2 w-full"
+                className="border-2 cursor-pointer bg-gray-200 rounded py-1 px-2 w-full"
                 id="color"
                 name="color"
                 as="select"

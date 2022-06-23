@@ -113,9 +113,7 @@ const ArticleInfo = ({ articleId }) => {
       api
         .get(`/articles/byId?id=${articleId}`)
         .then((response) => setArticle(response.data))
-        .catch((error) =>
-          setApiError(error.response ? error.response.data : error.message)
-        )
+        .catch(() => setApiError("Erreur de chargement"))
     }
   }, [articleId])
 

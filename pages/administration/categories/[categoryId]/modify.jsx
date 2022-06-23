@@ -18,11 +18,7 @@ const ModifyCategoryPage = () => {
       api
         .get(`/category/byId?id=${categoryId}`)
         .then((response) => setCategory(response.data))
-        .catch((error) =>
-          setApiError(
-            error.response ? error.response.data : error.message
-          )
-        )
+        .catch(() => setApiError("Erreur de chargement"))
     }
   }, [categoryId])
 

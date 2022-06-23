@@ -23,9 +23,7 @@ const CartDeliveryAddress = () => {
       api
         .get(`/customer/byId?id=${accountId}`)
         .then((response) => setUser(response.data))
-        .catch((error) =>
-          setApiError(error.response ? error.response.data : error.message)
-        )
+        .catch(() => setApiError("Erreur de chargement"))
     }
   }, [accountId])
 

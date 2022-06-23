@@ -18,11 +18,7 @@ const ModifyUserPage = () => {
       api
         .get(`/customer/byId?id=${userId}`)
         .then((response) => setUser(response.data))
-        .catch((error) =>
-          setApiError(
-            error.response ? error.response.data : error.message
-          )
-        )
+        .catch(() => setApiError("Erreur de chargement"))
     }
   }, [userId])
 

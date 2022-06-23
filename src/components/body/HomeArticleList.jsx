@@ -44,9 +44,7 @@ const ArticleList = ({ limit }) => {
     api
       .get("/articles/trending")
       .then((response) => setArticles(response.data))
-      .catch((error) =>
-        setApiError(error.response ? error.response.data : error.message)
-      )
+      .catch(() => setApiError("Erreur de chargement"))
   }, [])
 
   if (apiError) {

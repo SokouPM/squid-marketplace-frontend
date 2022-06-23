@@ -12,9 +12,7 @@ const NavCategoriesList = () => {
     api
       .get("/category")
       .then((response) => setCategories(response.data))
-      .catch((error) =>
-        setApiError(error.response ? error.response.data : error.message)
-      )
+      .catch(() => setApiError("Erreur de chargement"))
   }, [])
 
   if (apiError) {

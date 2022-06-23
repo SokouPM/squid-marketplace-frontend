@@ -62,4 +62,7 @@ const ModifyCategoryPage = () => {
   )
 }
 
+ModifyCategoryPage.private = true
+ModifyCategoryPage.administration = true
+
 export default ModifyCategoryPage

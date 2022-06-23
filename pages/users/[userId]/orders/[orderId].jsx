@@ -105,4 +105,6 @@ const OrderDetailPage = () => {
   )
 }
 
+OrderDetailPage.private = true
+
 export default OrderDetailPage

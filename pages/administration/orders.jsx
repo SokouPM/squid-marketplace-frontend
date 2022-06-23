@@ -16,4 +16,7 @@ const OrdersAdminPage = () => {
   )
 }
 
+OrdersAdminPage.private = true
+OrdersAdminPage.administration = true
+
 export default OrdersAdminPage

@@ -1,39 +1,57 @@
-import Router from "next/router"
+import { useCallback, useContext } from "react"
 import { Form, Formik } from "formik"
 import * as Yup from "yup"
+import AppContext from "../src/components/AppContext"
 import Layout from "../src/components/Layout"
+import api from "../src/components/services/api"
 import FormField from "../src/components/body/FormField"
 
+const displayingErrorMessagesSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .min(2, "Le champ doit contenir minimum 2 caractères !")
+    .max(150, "Le champ doit contenir maximum 150 caractères !")
+    .matches(
+      /^[a-zA-Z\-\s]*$/,
+      'Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf "-" !'
+    )
+    .required("Le champ est requis !"),
+  lastName: Yup.string()
+    .min(2, "Le champ doit contenir minimum 2 caractères !")
+    .max(150, "Le champ doit contenir maximum 150 caractères !")
+    .matches(
+      /^[a-zA-Z\-\s]*$/,
+      'Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf "-" !'
+    )
+    .required("Le champ est requis !"),
+  email: Yup.string()
+    .email("Le mail est invalide !")
+    .required("Le champ est requis !"),
+  subject: Yup.string()
+    .min(2, "Le champ doit contenir minimum 2 caractères !")
+    .max(150, "Le champ doit contenir maximum 150 caractères !")
+    .required("Le champ est requis !"),
+  message: Yup.string()
+    .min(2, "Le champ doit contenir minimum 2 caractères !")
+    .max(500, "Le champ doit contenir maximum 500 caractères !")
+    .required("Le champ est requis !"),
+})
+
 const ContactPage = () => {
-  const displayingErrorMessagesSchema = Yup.object().shape({
-    firstname: Yup.string()
-      .min(2, "Le champ doit contenir minimum 2 caractères !")
-      .max(150, "Le champ doit contenir maximum 150 caractères !")
-      .matches(
-        /^[a-zA-Z\-\s]*$/,
-        'Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf "-" !'
-      )
-      .required("Le champ est requis !"),
-    lastname: Yup.string()
-      .min(2, "Le champ doit contenir minimum 2 caractères !")
-      .max(150, "Le champ doit contenir maximum 150 caractères !")
-      .matches(
-        /^[a-zA-Z\-\s]*$/,
-        'Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf "-" !'
-      )
-      .required("Le champ est requis !"),
-    email: Yup.string()
-      .email("Le mail est invalide !")
-      .required("Le champ est requis !"),
-    subject: Yup.string()
-      .min(2, "Le champ doit contenir minimum 2 caractères !")
-      .max(150, "Le champ doit contenir maximum 150 caractères !")
-      .required("Le champ est requis !"),
-    message: Yup.string()
-      .min(2, "Le champ doit contenir minimum 2 caractères !")
-      .max(500, "Le champ doit contenir maximum 500 caractères !")
-      .required("Le champ est requis !"),
-  })
+  const { router } = useContext(AppContext)
+
+  const handleFormSubmit = useCallback(
+    async ({ firstName, lastName, email, subject, message }) => {
+      await api.post(`/contact`, {
+        firstName,
+        lastName,
+        email,
+        subject,
+        message,
+      })
+      router.push("/")
+    },
+    [router]
+  )
 
   return (
     <Layout
@@ -50,17 +68,14 @@ const ContactPage = () => {
 
           <Formik
             initialValues={{
-              firstname: "",
-              lastname: "",
+              firstName: "",
+              lastName: "",
               email: "",
               subject: "",
               message: "",
             }}
             validationSchema={displayingErrorMessagesSchema}
-            onSubmit={(values) => {
-              alert(JSON.stringify(values, null, 2))
-              Router.push("/") // TODO
-            }}
+            onSubmit={handleFormSubmit}
           >
             {({ errors, touched }) => (
               <Form>
@@ -68,20 +83,20 @@ const ContactPage = () => {
                   <FormField
                     style="mb-2 w-full mr-2"
                     label="Prénom"
-                    id="firstname"
-                    name="firstname"
+                    id="firstName"
+                    name="firstName"
                     placeholder="Votre prénom"
-                    errorType={errors.firstname}
-                    touchedType={touched.firstname}
+                    errorType={errors.firstName}
+                    touchedType={touched.firstName}
                   />
                   <FormField
                     style="mb-2 w-full ml-2"
                     label="Nom"
-                    id="lastname"
-                    name="lastname"
+                    id="lastName"
+                    name="lastName"
                     placeholder="Votre nom"
-                    errorType={errors.lastname}
-                    touchedType={touched.lastname}
+                    errorType={errors.lastName}
+                    touchedType={touched.lastName}
                   />
                 </div>
                 <div className="flex justify-between w-full">

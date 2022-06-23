@@ -11,12 +11,13 @@ const ArticleSort = ({ articlesArray, apiError }) => {
   const [value, setValue] = useState([20, 37])
   const colors = [
     { value: "red", name: "Rouge", taiwindClass: "bg-red-600" },
-    { value: "orange", name: "Orange", taiwindClass: "bg-orange-600" },
-    { value: "yellow", name: "Jaune", taiwindClass: "bg-yellow-400" },
+    { value: "orange", name: "Orange", taiwindClass: "bg-orange-500" },
+    { value: "yellow", name: "Jaune", taiwindClass: "bg-yellow-300" },
     { value: "green", name: "Vert", taiwindClass: "bg-green-600" },
     { value: "blue", name: "Bleu", taiwindClass: "bg-blue-600" },
     { value: "violet", name: "Violet", taiwindClass: "bg-violet-600" },
-    { value: "rose", name: "Rose", taiwindClass: "bg-rose-600" },
+    { value: "rose", name: "Rose", taiwindClass: "bg-rose-400" },
+    { value: "brown", name: "Maron", taiwindClass: "bg-yellow-900" },
     { value: "gray", name: "Gris", taiwindClass: "bg-gray-400" },
     { value: "white", name: "Blanc", taiwindClass: "bg-white" },
     { value: "black", name: "Noir", taiwindClass: "bg-black" },

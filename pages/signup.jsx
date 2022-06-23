@@ -123,4 +123,6 @@ const SignUpPage = () => {
   )
 }
 
+SignUpPage.noSessionOnly = true
+
 export default SignUpPage

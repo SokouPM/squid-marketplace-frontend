@@ -51,4 +51,7 @@ const ModifyArticlePage = () => {
   )
 }
 
+ModifyArticlePage.private = true
+ModifyArticlePage.administration = true
+
 export default ModifyArticlePage

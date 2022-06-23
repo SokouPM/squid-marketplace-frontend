@@ -17,4 +17,7 @@ const ArticlesAdminPage = () => {
   )
 }
 
+ArticlesAdminPage.private = true
+ArticlesAdminPage.administration = true
+
 export default ArticlesAdminPage

@@ -9,12 +9,7 @@ const orderConfirmationPage = () => {
   }
 
   return (
-    <Layout
-      page="Confirmation de commande"
-      diplayheader={1}
-      diplaybreadcrumbs={1}
-      diplayfooter={1}
-    >
+    <Layout page="Confirmation de commande" diplayheader={1} diplayfooter={1}>
       <CartNav cartStepNb={4} />
       <div className="mt-20 mb-5 flex flex-col items-center justify-center">
         <div className="flex items-center justify-center mb-2">
@@ -30,5 +25,7 @@ const orderConfirmationPage = () => {
     </Layout>
   )
 }
+
+orderConfirmationPage.private = true
 
 export default orderConfirmationPage

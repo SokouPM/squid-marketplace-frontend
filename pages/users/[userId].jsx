@@ -97,4 +97,6 @@ const UserInformationsPage = () => {
   )
 }
 
+UserInformationsPage.private = true
+
 export default UserInformationsPage

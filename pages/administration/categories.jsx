@@ -17,4 +17,7 @@ const CategoriesAdminPage = () => {
   )
 }
 
+CategoriesAdminPage.private = true
+CategoriesAdminPage.administration = true
+
 export default CategoriesAdminPage

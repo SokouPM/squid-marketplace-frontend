@@ -17,4 +17,7 @@ const UsersAdminPage = () => {
   )
 }
 
+UsersAdminPage.private = true
+UsersAdminPage.administration = true
+
 export default UsersAdminPage

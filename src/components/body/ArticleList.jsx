@@ -70,7 +70,7 @@ const ArticleList = ({ sortedArticles, apiError }) => {
   }
 
   return (
-    <ul className="w-5/6 mx-auto flex items-center justify-between flex-wrap mt-5">
+    <ul className="w-5/6 mx-auto flex items-end justify-between flex-wrap mt-5">
       {sortedArticles.map((item) => (
         <Link
           href={{
@@ -85,7 +85,7 @@ const ArticleList = ({ sortedArticles, apiError }) => {
                 src={item.images[0].url}
                 alt="image de l'article"
                 className="rounded-t"
-                width="300"
+                width="250"
               />
             </div>
             <div className="px-2 pb-2">

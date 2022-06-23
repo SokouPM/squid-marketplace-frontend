@@ -80,13 +80,27 @@ const CheckoutForm = () => {
   }
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
+    <form
+      id="payment-form"
+      onSubmit={handleSubmit}
+      className="w-2/3 mx-auto border rounded p-5"
+    >
       <PaymentElement id="payment-element" />
-      <button disabled={isLoading || !stripe || !elements} id="submit">
-        <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
-        </span>
-      </button>
+      <div className="w-full flex items-center justify-center">
+        <button
+          disabled={isLoading || !stripe || !elements}
+          id="submit"
+          className="mx-auto mt-5 bg-secondary hover-bg-tertiary hover-text-primary px-10 py-1 rounded-full text-white transition-all"
+        >
+          <span id="button-text">
+            {isLoading ? (
+              <div className="spinner" id="spinner"></div>
+            ) : (
+              "Confirmer le paiement"
+            )}
+          </span>
+        </button>
+      </div>
       {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}
     </form>

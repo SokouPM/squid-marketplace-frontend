@@ -17,4 +17,7 @@ const AddCategoryPage = () => {
   )
 }
 
+AddCategoryPage.private = true
+AddCategoryPage.administration = true
+
 export default AddCategoryPage

@@ -7,9 +7,15 @@ import AppContext from "../../AppContext"
 import api from "../../services/api"
 
 const UsersList = () => {
-  const { router } = useContext(AppContext)
+  const { router, session } = useContext(AppContext)
   const [users, setUsers] = useState(null)
   const [apiError, setApiError] = useState(null)
+
+  let accountId = null
+
+  if (session) {
+    accountId = JSON.parse(session).id
+  }
 
   useEffect(() => {
     api
@@ -18,14 +24,12 @@ const UsersList = () => {
       .catch(() => setApiError("Erreur de chargement"))
   }, [])
 
-  const deleteUser = async (userId) => {
-    await api.delete(`/customer?id=${userId}`)
+  const deleteUser = async (accountId) => {
+    await api.delete(`/customer?id=${accountId}`)
     setTimeout(() => {
       router.reload()
     }, 1000)
   }
-
-  const usersId = 1
 
   if (apiError) {
     return (
@@ -89,7 +93,7 @@ const UsersList = () => {
                 {item.admin ? "Administrateur" : "Utilisateur"}
               </td>
               <td className="flex items-center justify-center border-x p-1">
-                {!item.admin || usersId === item.id ? (
+                {!item.admin || accountId === item.id ? (
                   <Link
                     href={`/administration/users/${item.id}/modify`}
                     passHref
@@ -107,7 +111,7 @@ const UsersList = () => {
                   </button>
                 )}
 
-                {item.admin && usersId !== item.id ? (
+                {item.admin && accountId !== item.id ? (
                   <button
                     className="p-1 w-1/2 rounded bg-red-300 text-white cursor-not-allowed"
                     title="Vous ne pouvez pas supprimer un autre administrateur"

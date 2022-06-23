@@ -40,7 +40,17 @@ export const AppContextProvider = (props) => {
     if (session !== null && session !== undefined && Page.noSessionOnly) {
       router.push("/")
     }
-  }, [Page.noSessionOnly, Page.private, router, session])
+  }, [Page.noSessionOnly, router, session])
+
+  useEffect(() => {
+    if (session && Page.administration) {
+      const isAdmin = JSON.parse(session).isAdmin
+
+      if (!isAdmin) {
+        router.push("/")
+      }
+    }
+  }, [Page.administration, router, session])
 
   const signIn = useCallback(
     async (mail, password) => {

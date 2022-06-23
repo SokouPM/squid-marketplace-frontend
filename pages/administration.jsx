@@ -89,4 +89,7 @@ const AdministrationPage = () => {
   )
 }
 
+AdministrationPage.private = true
+AdministrationPage.administration = true
+
 export default AdministrationPage

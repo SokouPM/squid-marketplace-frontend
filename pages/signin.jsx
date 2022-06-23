@@ -92,4 +92,6 @@ const SignInPage = () => {
   )
 }
 
+SignInPage.noSessionOnly = true
+
 export default SignInPage

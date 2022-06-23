@@ -1,8 +1,18 @@
 import Link from "next/link"
 import Image from "next/image"
+import { useContext } from "react"
 import { IoCaretBackOutline } from "react-icons/io5"
+import AppContext from "./AppContext"
 
 const AdminHeader = () => {
+  const { session } = useContext(AppContext)
+
+  let accountEmail = null
+
+  if (session) {
+    accountEmail = JSON.parse(session).email
+  }
+
   return (
     <header className="bg-primary flex items-center justify-between px-4">
       <Link href="/administration">
@@ -16,7 +26,7 @@ const AdminHeader = () => {
       </Link>
 
       <div className="flex items-center justify-center text-white text-3xl">
-        Bienvenue
+        Bienvenue {accountEmail}
       </div>
 
       <div className="flex items-center justify-center text-white text-xl">

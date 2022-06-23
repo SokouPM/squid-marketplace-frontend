@@ -17,4 +17,7 @@ const AddArticlePage = () => {
   )
 }
 
+AddArticlePage.private = true
+AddArticlePage.administration = true
+
 export default AddArticlePage

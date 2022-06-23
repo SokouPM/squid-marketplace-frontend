@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { loadStripe } from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js"
 import Layout from "../../src/components/Layout"
 import CartNav from "../../src/components/body/cart/CartNav"
 import CheckoutForm from "../../src/components/body/stripe/ChekoutForm"
+import AppContext from "../../src/components/AppContext"
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
@@ -12,18 +13,33 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 const PaymentPage = () => {
   const [clientSecret, setClientSecret] = useState("")
+  const { session } = useContext(AppContext)
+
+  let accountId = null
+
+  if (session) {
+    accountId = JSON.parse(session).id
+  }
 
   useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    fetch("/create-payment-intent", {
-      // wait back endpoint
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }), // cart content
-    })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret))
-  }, [])
+    if (accountId) {
+      // Create PaymentIntent as soon as the page loads
+      fetch(
+        `https://test-bash-squid.herokuapp.com/create-payment-intent?idCustomer=${accountId}`,
+        {
+          // wait back endpoint
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            token: localStorage.getItem("jwt"),
+          },
+          // body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => setClientSecret(data.clientSecret))
+    }
+  }, [accountId])
 
   const appearance = {
     theme: "stripe",
@@ -52,5 +68,7 @@ const PaymentPage = () => {
     </Layout>
   )
 }
+
+PaymentPage.private = true
 
 export default PaymentPage

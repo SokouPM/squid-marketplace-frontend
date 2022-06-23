@@ -44,6 +44,7 @@ const UserInformationsPage = () => {
   const { session, router } = useContext(AppContext)
   const [user, setUser] = useState(null)
   const [apiError, setApiError] = useState(null)
+  const [passwordError, setPasswordError] = useState(null)
 
   let accountId = null
 
@@ -62,14 +63,18 @@ const UserInformationsPage = () => {
 
   const handleFormSubmit = useCallback(
     async ({ oldPassword, password }) => {
-      await api.put(
-        `/customer/editPassword?oldPassword=${oldPassword}&newPassword=${password}&idCustomer=${userId}`,
-        {
-          oldPassword,
-          password,
-        }
-      )
-      router.push(`/users/${accountId}`)
+      try {
+        await api.put(
+          `/customer/editPassword?oldPassword=${oldPassword}&newPassword=${password}&idCustomer=${userId}`,
+          {
+            oldPassword,
+            password,
+          }
+        )
+        router.push(`/users/${accountId}`)
+      } catch (err) {
+        setPasswordError(err.response.data)
+      }
     },
     [accountId, router, userId]
   )
@@ -123,7 +128,6 @@ const UserInformationsPage = () => {
                 errorType={errors.oldPassword}
                 touchedType={touched.oldPassword}
               />
-
               <FormField
                 style="w-5/6 mb-5"
                 label="Nouveau mot de passe"
@@ -144,7 +148,7 @@ const UserInformationsPage = () => {
                 errorType={errors.passwordConfirm}
                 touchedType={touched.passwordConfirm}
               />
-
+              {passwordError && <p>{passwordError}</p>}
               <button
                 className="bg-secondary hover-text-primary hover-bg-tertiary px-10 py-1 rounded-full text-white transition-all"
                 type="submit"

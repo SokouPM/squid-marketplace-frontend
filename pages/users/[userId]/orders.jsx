@@ -125,4 +125,6 @@ const UserOrdersPage = () => {
   )
 }
 
+UserOrdersPage.private = true
+
 export default UserOrdersPage

@@ -1,17 +1,25 @@
 import { useRouter } from "next/router"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
+import CircularProgress from "@mui/material/CircularProgress"
+import AppContext from "../../../../src/components/AppContext"
 import api from "../../../../src/components/services/api"
 import Layout from "../../../../src/components/Layout"
 import UserForm from "../../../../src/components/body/admin/UserForm"
-import CircularProgress from "@mui/material/CircularProgress"
 
 const ModifyUserPage = () => {
   const {
     query: { userId },
   } = useRouter()
 
+  const { session, router } = useContext(AppContext)
   const [user, setUser] = useState(null)
   const [apiError, setApiError] = useState(null)
+
+  let accountId = null
+
+  if (session) {
+    accountId = JSON.parse(session).id
+  }
 
   useEffect(() => {
     if (userId && !isNaN(userId)) {
@@ -21,6 +29,10 @@ const ModifyUserPage = () => {
         .catch(() => setApiError("Erreur de chargement"))
     }
   }, [userId])
+
+  if (user && user.admin && user.id !== accountId) {
+    router.back()
+  }
 
   return (
     <Layout
@@ -61,5 +73,8 @@ const ModifyUserPage = () => {
     </Layout>
   )
 }
+
+ModifyUserPage.private = true
+ModifyUserPage.administration = true
 
 export default ModifyUserPage

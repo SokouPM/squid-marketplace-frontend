@@ -22,7 +22,7 @@ const displayingErrorMessagesSchema = Yup.object().shape({
     .max(300, "Maximum 300 caractères"),
   price: Yup.number()
     .typeError("Le prix doit être un nombre")
-    .min(0, "Le prix doit être supérieur ou égal à 0")
+    .min(1, "Le prix doit être supérieur ou égal à 1")
     .max(999999, "Le prix doit être inférieur ou égal à 999999")
     .required("Le champ est requis !"),
   category: Yup.string().required("Le champ est requis !"),

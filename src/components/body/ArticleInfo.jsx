@@ -201,15 +201,22 @@ const ArticleInfo = ({ articleId }) => {
           </p>
         </div>
         <div className=" py-3 mb-6">{stockRender(article.stock)}</div>
-        <button
-          onClick={() => {
-            addToCart(article, sessionId)
-            setCartTotalArticle(setCartTotalArticle + 1)
-          }}
-          className="w-2/3 mx-auto bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white transition-all"
-        >
-          Ajouter au panier
-        </button>
+
+        {article.stock > 0 ? (
+          <button
+            onClick={() => {
+              addToCart(article, sessionId)
+              setCartTotalArticle(setCartTotalArticle + 1)
+            }}
+            className="w-2/3 mx-auto bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white transition-all"
+          >
+            Ajouter au panier
+          </button>
+        ) : (
+          <button className="w-2/3 mx-auto bg-secondary px-10 py-2 rounded-full text-white opacity-25 cursor-not-allowed">
+            Ajouter au panier
+          </button>
+        )}
       </div>
     </section>
   )

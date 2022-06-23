@@ -1,12 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
-import { useEffect, useState } from "react"
 import Rating from "@mui/material/Rating"
 import CircularProgress from "@mui/material/CircularProgress"
 import { IoMdStar } from "react-icons/io"
 import { GiSquid, GiGiantSquid } from "react-icons/gi"
 import { FiAlertTriangle } from "react-icons/fi"
-import api from "../services/api"
 
 const stockRender = (stockNumber) => {
   const alertLimitNb = 10
@@ -36,17 +34,7 @@ const stockRender = (stockNumber) => {
   }
 }
 
-const ArticleList = () => {
-  const [articles, setArticles] = useState(null)
-  const [apiError, setApiError] = useState(null)
-
-  useEffect(() => {
-    api
-      .get("/articles")
-      .then((response) => setArticles(response.data))
-      .catch(() => setApiError("Erreur de chargement"))
-  }, [])
-
+const ArticleList = ({ sortedArticles, apiError }) => {
   if (apiError) {
     return (
       <div className="w-full flex items-center justify-center mt-10 p-5 bg-red-200 rounded">
@@ -58,7 +46,7 @@ const ArticleList = () => {
     )
   }
 
-  if (!articles) {
+  if (!sortedArticles) {
     return (
       <div className="w-full flex items-center justify-center mt-10 p-5">
         <CircularProgress
@@ -72,7 +60,7 @@ const ArticleList = () => {
     )
   }
 
-  if (!articles.length) {
+  if (!sortedArticles.length) {
     return (
       <div className="w-full flex items-center justify-center mt-10 p-5">
         <GiGiantSquid className="text-5xl mr-3 text-secondary" />
@@ -83,7 +71,7 @@ const ArticleList = () => {
 
   return (
     <ul className="w-5/6 mx-auto flex items-center justify-between flex-wrap mt-5">
-      {articles.map((item) => (
+      {sortedArticles.map((item) => (
         <Link
           href={{
             pathname: `/articles/${item.id}`,

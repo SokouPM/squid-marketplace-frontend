@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
 import { useCallback, useState, useContext, useEffect } from "react"
 import CircularProgress from "@mui/material/CircularProgress"
@@ -59,8 +58,10 @@ const ArticlesOnChart = () => {
   const doUpdate = useCallback(() => forceUpdate({}), [])
 
   useEffect(() => {
-    getDbCart(session)
-  }, [])
+    if (session) {
+      getDbCart(session)
+    }
+  }, [session])
 
   let total = 0
   let sessionId = null

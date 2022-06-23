@@ -1,8 +1,19 @@
+import { useEffect, useState } from "react"
 import Layout from "../src/components/Layout"
-import ArticleList from "../src/components/body/ArticleList"
 import ArticleSort from "../src/components/body/ArticleSort"
+import api from "../src/components/services/api"
 
 const ArticlesPage = () => {
+  const [articles, setArticles] = useState(null)
+  const [apiError, setApiError] = useState(null)
+
+  useEffect(() => {
+    api
+      .get("/articles")
+      .then((response) => setArticles(response.data))
+      .catch(() => setApiError("Erreur de chargement"))
+  }, [])
+
   return (
     <Layout
       page="Articles"
@@ -11,8 +22,7 @@ const ArticlesPage = () => {
       diplayfooter={1}
     >
       <div className="border rounded mb-5">
-        <ArticleSort />
-        <ArticleList />
+        <ArticleSort articlesArray={articles} apiError={apiError} />
       </div>
     </Layout>
   )

@@ -73,9 +73,9 @@ const UsersList = () => {
               key={item.id}
               className={`font-bold ${index % 2 ? "bg-gray-100" : "bg-white"}`}
             >
-              {item.firstName && item.LastName ? (
+              {item.firstName && item.name ? (
                 <td className="pl-3 border-l">
-                  {item.firstName} {item.LastName}
+                  {item.firstName} {item.name}
                 </td>
               ) : (
                 <td className="pl-3 border-l text-red-600">Pas de nom</td>

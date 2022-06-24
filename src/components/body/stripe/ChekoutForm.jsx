@@ -61,7 +61,7 @@ const CheckoutForm = () => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000/cart/order-confirmation",
+        return_url: "https://squid-marketplace-frontend.vercel.app/cart/order-confirmation",
       },
     })
 

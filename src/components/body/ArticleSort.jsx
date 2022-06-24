@@ -46,13 +46,14 @@ const sortArticles = (
     }
   }
 
-  // color sorting
+  // color filter
   if (colorSelected && articlesArray) {
     articlesArray = articlesArray.filter((ell) => {
       return ell.color === colorSelected
     })
   }
 
+  // Price filter
   if (priceFilterValues && articlesArray) {
     articlesArray = articlesArray.filter((ell) => {
       return (

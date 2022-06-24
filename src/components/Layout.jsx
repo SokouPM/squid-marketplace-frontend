@@ -14,10 +14,11 @@ const Layout = (props) => {
 
   useEffect(() => {
     if (session) {
-      getDbCart(session)
+      getDbCart(session) // to get cart content from db
     }
   }, [session])
 
+  // Template for all pages
   return (
     <div {...otherProps}>
       <Head>

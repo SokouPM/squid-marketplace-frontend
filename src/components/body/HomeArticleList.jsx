@@ -27,7 +27,7 @@ const stockRender = (stockNumber) => {
     )
   }
 
-  if (stockNumber >= 0) {
+  if (stockNumber <= 0) {
     return (
       <p className="flex items-center justify-between font-bold text-red-600">
         <GiSquid className="mr-1 text-xl" /> L’article n’est plus disponible

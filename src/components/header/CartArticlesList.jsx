@@ -71,6 +71,7 @@ const ArticlesOnChart = () => {
   }
 
   if (!localStorage.getItem("cart")) {
+    // create local cart if not exist
     localStorage.setItem("cart", JSON.stringify([]))
   }
 

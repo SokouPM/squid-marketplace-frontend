@@ -9,7 +9,7 @@ import NavCategoriesList from "./NavCategoryList"
 const NavSideBar = () => {
   const [state, setState] = useState({
     left: false,
-  })
+  }) // side of the sidebar
 
   const toggleDrawer = (anchor, open) => () => {
     setState({ ...state, [anchor]: open })

@@ -10,7 +10,7 @@ const ChartBar = () => {
   const { cartTotalArticle, setCartTotalArticle } = useContext(AppContext)
   const [state, setState] = useState({
     right: false,
-  })
+  }) // side of the sidebar
 
   const toggleDrawer = (anchor, open) => () => {
     setState({ ...state, [anchor]: open })
@@ -21,6 +21,7 @@ const ChartBar = () => {
 
     if (typeof window !== "undefined") {
       if (!localStorage.getItem("cart")) {
+        // create local cart if not exist
         localStorage.setItem("cart", JSON.stringify([]))
       }
 

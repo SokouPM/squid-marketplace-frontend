@@ -8,7 +8,6 @@ import Layout from "../../../../src/components/Layout"
 import AccountNav from "../../../../src/components/body/AccountNav"
 import AppContext from "../../../../src/components/AppContext"
 import api from "../../../../src/components/services/api"
-// import order from "../../../../src/datas/order"
 
 const OrderDetailPage = () => {
   const {

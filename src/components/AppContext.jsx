@@ -103,11 +103,13 @@ export const AppContextProvider = (props) => {
     router.push("/signin")
   }
 
+  // POST local cart to database when user sign-in
   const addLocalCartToDb = (session) => {
     let cart = []
     const sessionId = JSON.parse(session).id
 
     if (!localStorage.getItem("cart")) {
+      // create local cart if not exist
       localStorage.setItem("cart", JSON.stringify([]))
     }
 
@@ -125,15 +127,16 @@ export const AppContextProvider = (props) => {
   }
 
   const getDbCart = (session) => {
+    // get cart content from database
     const sessionId = JSON.parse(session).id
 
     api.get(`/carts/byCustomer?idCustomer=${sessionId}`).then((response) => {
-      let newCart = []
+      let localCart = []
       let cartArticlesNb = 0
 
       for (const key in response.data) {
         cartArticlesNb += response.data[key].article.price
-        newCart.push({
+        localCart.push({
           id: response.data[key].article.id,
           price: response.data[key].article.price,
           quantity: response.data[key].quantity,
@@ -141,7 +144,7 @@ export const AppContextProvider = (props) => {
       }
 
       setCartTotalArticle(cartArticlesNb)
-      localStorage.setItem("cart", JSON.stringify(newCart))
+      localStorage.setItem("cart", JSON.stringify(localCart))
     })
   }
 

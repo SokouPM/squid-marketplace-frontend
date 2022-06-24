@@ -1,6 +1,6 @@
 const CartNav = ({ cartStepNb }) => {
   return (
-    <div className="flex items-center justify-evenly w-1/2 mx-auto mb-4">
+    <div className="flex items-center justify-evenly w-1/2 mx-auto mb-4 mt-2">
       <p
         className={`border ${
           cartStepNb === 1

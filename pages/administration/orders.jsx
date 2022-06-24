@@ -9,7 +9,7 @@ const OrdersAdminPage = () => {
       diplayfooter={1}
     >
       <h2 className="my-5 text-3xl text-center font-bold">
-        Liste des factures
+        Liste des commandes
       </h2>
       <OrdersList />
     </Layout>

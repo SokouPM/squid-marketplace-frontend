@@ -9,7 +9,6 @@ import { FiAlertTriangle } from "react-icons/fi"
 import AppContext from "../../AppContext"
 import FormField from "../FormField"
 import api from "../../services/api"
-import colors from "../../../datas/colors.json"
 
 const displayingErrorMessagesSchema = Yup.object().shape({
   name: Yup.string()
@@ -43,6 +42,19 @@ const ArticleForm = ({ article }) => {
 
   const [categories, setCategories] = useState(null)
   const [apiError, setApiError] = useState(null)
+  const colors = [
+    { value: "red", name: "Rouge" },
+    { value: "orange", name: "Orange" },
+    { value: "yellow", name: "Jaune" },
+    { value: "green", name: "Vert" },
+    { value: "blue", name: "Bleu" },
+    { value: "violet", name: "Violet" },
+    { value: "rose", name: "Rose" },
+    { value: "brown", name: "Maron" },
+    { value: "gray", name: "Gris" },
+    { value: "white", name: "Blanc" },
+    { value: "black", name: "Noir" },
+  ]
 
   useEffect(() => {
     api

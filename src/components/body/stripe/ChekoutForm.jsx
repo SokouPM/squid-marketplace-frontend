@@ -1,12 +1,21 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
+import AppContext from "../../AppContext"
+import api from "../../services/api"
 
 const CheckoutForm = () => {
   const stripe = useStripe()
   const elements = useElements()
 
+  const { session, router } = useContext(AppContext)
   const [message, setMessage] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
+
+  let accountId = null
+
+  if (session) {
+    accountId = JSON.parse(session).id
+  }
 
   useEffect(() => {
     if (!stripe) {
@@ -25,7 +34,12 @@ const CheckoutForm = () => {
       switch (paymentIntent.status) {
         case "succeeded":
           setMessage("Payment succeeded!")
-          //todo: api confirm payment
+
+          if (accountId) {
+            api.post(`/confirmOrder?idCustomer=${accountId}`)
+          }
+
+          router.push("/cart/order-confirmation")
 
           break
 
@@ -45,7 +59,7 @@ const CheckoutForm = () => {
           break
       }
     })
-  }, [stripe])
+  }, [accountId, router, stripe])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -62,7 +76,7 @@ const CheckoutForm = () => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000/cart/order-confirmation",
+        return_url: "http://localhost:3000/cart/payment",
       },
     })
 
@@ -103,7 +117,11 @@ const CheckoutForm = () => {
         </button>
       </div>
       {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
+      {message && (
+        <div id="payment-message" className="text-center">
+          {message}
+        </div>
+      )}
     </form>
   )
 }

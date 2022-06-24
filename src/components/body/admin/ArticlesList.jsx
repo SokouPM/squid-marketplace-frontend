@@ -70,19 +70,15 @@ const ArticlesList = () => {
           {articles.map((item, index) => (
             <tr
               key={item.id}
-              className={`font-bold h-28 ${
-                index % 2 ? "bg-gray-100" : "bg-white"
-              }`}
+              className={`font-bold ${index % 2 ? "bg-gray-100" : "bg-white"}`}
             >
-              <td className="w-1/6 pl-3 h-28 border-x">{item.name}</td>
-              <td className="p-3 h-28 border-x whitespace-nowrap">
-                {item.price} €
-              </td>
-              <td className="pl-3 h-28 border-x">{item.stock}</td>
-              <td className="pl-3 h-28 border-x">{item.category.name}</td>
-              <td className="pl-3 h-28 border-x">{item.color}</td>
-              <td className="w-3/6 pl-3 h-28 border-x">{item.description}</td>
-              <td className="flex items-center justify-center h-28 border-x p-1">
+              <td className="w-1/6 pl-3 border-x">{item.name}</td>
+              <td className="p-3 border-x whitespace-nowrap">{item.price} €</td>
+              <td className="pl-3 border-x">{item.stock}</td>
+              <td className="pl-3 border-x">{item.category.name}</td>
+              <td className="pl-3 border-x">{item.color}</td>
+              <td className="w-3/6 pl-3 border-x">{item.description}</td>
+              <td className="flex items-center justify-center border-x p-1">
                 <Link
                   href={`/administration/articles/${item.id}/modify`}
                   passHref

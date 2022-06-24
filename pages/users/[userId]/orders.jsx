@@ -5,7 +5,6 @@ import CircularProgress from "@mui/material/CircularProgress"
 import { FiAlertTriangle } from "react-icons/fi"
 import Layout from "../../../src/components/Layout"
 import AccountNav from "../../../src/components/body/AccountNav"
-import orders from "../../../src/datas/orders"
 import api from "../../../src/components/services/api"
 import AppContext from "../../../src/components/AppContext"
 
@@ -17,6 +16,7 @@ const UserOrdersPage = () => {
   const { session, router } = useContext(AppContext)
   const [user, setUser] = useState(null)
   const [apiError, setApiError] = useState(null)
+  const [orders, setOrders] = useState(null)
 
   let accountId = null
 
@@ -31,6 +31,13 @@ const UserOrdersPage = () => {
         .then((response) => setUser(response.data))
         .catch(() => setApiError("Erreur de chargement"))
     }
+  }, [userId])
+
+  useEffect(() => {
+    api
+      .get(`/order/byCustomer?idCustomer=${userId}`)
+      .then((response) => setOrders(response.data))
+      .catch(() => setApiError("Erreur de chargement"))
   }, [userId])
 
   if (userId && accountId && userId != accountId) {
@@ -85,17 +92,17 @@ const UserOrdersPage = () => {
                           smp.{item.id}
                         </td>
                         <td className="border-x text-center font-normal w-1/3">
-                          {item.deliveryStatus === "Livré" ? (
+                          {item.shipperyState === "Livré" ? (
                             <p>
                               Livré le{" "}
                               {new Date(item.deliveryDate).toLocaleDateString()}
                             </p>
                           ) : (
-                            <p>{item.deliveryStatus}</p>
+                            <p>{item.shipperyState}</p>
                           )}
                         </td>
                         <td className="border-x text-center font-normal w-1/3">
-                          {item.price} €
+                          {item.totalAmmount} €
                         </td>
                         <td className="border-x text-center font-normal py-2">
                           <Link href={`/users/${userId}/orders/${item.id}`}>

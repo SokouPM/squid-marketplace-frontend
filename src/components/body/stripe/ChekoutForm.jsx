@@ -25,6 +25,7 @@ const CheckoutForm = () => {
       switch (paymentIntent.status) {
         case "succeeded":
           setMessage("Payment succeeded!")
+          //todo: api confirm payment
 
           break
 
@@ -61,7 +62,7 @@ const CheckoutForm = () => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "https://squid-marketplace-frontend.vercel.app/cart/order-confirmation",
+        return_url: "http://localhost:3000/cart/order-confirmation",
       },
     })
 

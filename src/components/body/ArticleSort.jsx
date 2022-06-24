@@ -1,10 +1,73 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Slider from "@mui/material/Slider"
 import { ImCross } from "react-icons/im"
 import ArticleList from "./ArticleList"
 
+const sortArticles = (
+  articlesArray,
+  sortType,
+  colorSelected,
+  priceFilterValues
+) => {
+  // price / name sorting
+  if (articlesArray) {
+    switch (sortType) {
+      case "ascendingPrice":
+        articlesArray.sort((a, b) => {
+          return a.price - b.price
+        })
+
+        break
+
+      case "decreasingPrice":
+        articlesArray.sort((a, b) => {
+          return b.price - a.price
+        })
+
+        break
+
+      case "name":
+        articlesArray.sort((a, b) => {
+          if (a.name < b.name) {
+            return -1
+          }
+
+          if (a.name > b.name) {
+            return 1
+          }
+
+          return 0
+        })
+
+        break
+
+      default:
+        break
+    }
+  }
+
+  // color sorting
+  if (colorSelected && articlesArray) {
+    articlesArray = articlesArray.filter((ell) => {
+      return ell.color === colorSelected
+    })
+  }
+
+  if (priceFilterValues && articlesArray) {
+    articlesArray = articlesArray.filter((ell) => {
+      return (
+        ell.price >= priceFilterValues[0] && ell.price <= priceFilterValues[1]
+      )
+    })
+  }
+
+  return articlesArray
+}
+
 const ArticleSort = ({ articlesArray, apiError }) => {
-  const [value, setValue] = useState([20, 37])
+  const [slideValues, setSlideValues] = useState([0, 100])
+  const [sort, setSort] = useState("ascendingPrice")
+  const [colorSelected, setColorSelected] = useState(null)
   const colors = [
     { value: "red", name: "Rouge", taiwindClass: "bg-red-600" },
     { value: "orange", name: "Orange", taiwindClass: "bg-orange-500" },
@@ -19,9 +82,35 @@ const ArticleSort = ({ articlesArray, apiError }) => {
     { value: "black", name: "Noir", taiwindClass: "bg-black" },
   ]
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
+  let maxPrice = 0
+  let minPrice = Infinity
+
+  if (articlesArray) {
+    articlesArray.map((item) => {
+      if (maxPrice < item.price) {
+        maxPrice = item.price
+      }
+
+      if (minPrice > item.price) {
+        minPrice = item.price
+      }
+    })
   }
+
+  useEffect(() => {
+    setSlideValues([minPrice, maxPrice])
+  }, [maxPrice, minPrice])
+
+  const handleSlideChange = (event, newValue) => {
+    setSlideValues(newValue)
+  }
+
+  const sortedArticlesArray = sortArticles(
+    articlesArray,
+    sort,
+    colorSelected,
+    slideValues
+  )
 
   return (
     <>
@@ -35,9 +124,11 @@ const ArticleSort = ({ articlesArray, apiError }) => {
             <div>
               <Slider
                 getAriaLabel={() => "Gamme de prix"}
-                value={value}
-                onChange={handleChange}
+                value={slideValues}
+                onChange={handleSlideChange}
                 valueLabelDisplay="auto"
+                min={minPrice || 0}
+                max={maxPrice || 100}
               />
             </div>
           </div>
@@ -50,6 +141,9 @@ const ArticleSort = ({ articlesArray, apiError }) => {
                   name="color-radio"
                   value={item.value}
                   className="colorRadio hidden"
+                  onChange={(e) => {
+                    setColorSelected(e.target.value)
+                  }}
                 />
                 <div
                   className={`colorImg h-10 w-10 rounded-full border-2 ${item.taiwindClass} transition-all hover:scale-125`}
@@ -62,6 +156,9 @@ const ArticleSort = ({ articlesArray, apiError }) => {
                 name="color-radio"
                 value={undefined}
                 className="colorRadio hidden"
+                onChange={(e) => {
+                  setColorSelected(e.target.value)
+                }}
                 defaultChecked
               />
               <div className="colorImg h-10 w-10 rounded-full border-2 flex items-center justify-center transition-all hover:border-4 hover:scale-125">
@@ -74,17 +171,19 @@ const ArticleSort = ({ articlesArray, apiError }) => {
             <select
               name="sorting"
               className="w-full p-2 rounded cursor-pointer bg-gray-200"
+              onChange={(e) => {
+                setSort(e.target.value)
+              }}
             >
               <option value="ascendingPrice">Prix croissant</option>
               <option value="decreasingPrice">Prix décroissant</option>
               <option value="name">Nom</option>
-              <option value="note">Note Client</option>
             </select>
           </div>
         </div>
       </div>
 
-      <ArticleList sortedArticles={articlesArray} apiError={apiError} />
+      <ArticleList sortedArticles={sortedArticlesArray} apiError={apiError} />
     </>
   )
 }

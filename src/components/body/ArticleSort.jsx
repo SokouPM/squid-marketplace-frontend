@@ -3,10 +3,6 @@ import Slider from "@mui/material/Slider"
 import { ImCross } from "react-icons/im"
 import ArticleList from "./ArticleList"
 
-function valuetext(value) {
-  return `${value}`
-}
-
 const ArticleSort = ({ articlesArray, apiError }) => {
   const [value, setValue] = useState([20, 37])
   const colors = [
@@ -42,7 +38,6 @@ const ArticleSort = ({ articlesArray, apiError }) => {
                 value={value}
                 onChange={handleChange}
                 valueLabelDisplay="auto"
-                getAriaValueText={valuetext}
               />
             </div>
           </div>

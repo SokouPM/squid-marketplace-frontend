@@ -30,14 +30,12 @@ const UserOrdersPage = () => {
         .get(`/customer/byId?id=${userId}`)
         .then((response) => setUser(response.data))
         .catch(() => setApiError("Erreur de chargement"))
-    }
-  }, [userId])
 
-  useEffect(() => {
-    api
-      .get(`/order/byCustomer?idCustomer=${userId}`)
-      .then((response) => setOrders(response.data))
-      .catch(() => setApiError("Erreur de chargement"))
+      api
+        .get(`/order/byCustomer?idCustomer=${userId}`)
+        .then((response) => setOrders(response.data))
+        .catch(() => setApiError("Erreur de chargement"))
+    }
   }, [userId])
 
   if (userId && accountId && userId != accountId) {

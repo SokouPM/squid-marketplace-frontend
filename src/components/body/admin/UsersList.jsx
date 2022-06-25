@@ -84,7 +84,7 @@ const UsersList = () => {
               <td className="pl-3">{item.mail}</td>
               {item.address && item.postalCode && item.city ? (
                 <td className="pl-3">
-                  {item.adress} {item.postalCode}, {item.city}
+                  {item.address} {item.postalCode}, {item.city}
                 </td>
               ) : (
                 <td className="pl-3 text-red-600">Pas encore d'adresse</td>

@@ -31,18 +31,21 @@ export const AppContextProvider = (props) => {
   }, [initSession])
 
   useEffect(() => {
+    // Redirects the user if he is not logged in and if the page is private
     if (session === null && Page.private) {
       router.push(`/signin?redirect=${encodeURIComponent(router.asPath)}`)
     }
   }, [Page.private, router, session])
 
   useEffect(() => {
+    // Redirects the user if he is logged in and if the page is only available non-logged-in users (signin and signup pages).
     if (session !== null && session !== undefined && Page.noSessionOnly) {
       router.push("/")
     }
   }, [Page.noSessionOnly, router, session])
 
   useEffect(() => {
+    // Redirects the user if he is not logged or not administrator in and if the page is only accessible for administrators
     if (session && Page.administration) {
       const isAdmin = JSON.parse(session).isAdmin
 

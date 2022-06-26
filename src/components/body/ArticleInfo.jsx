@@ -1,40 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { useContext, useState, useEffect } from "react"
 import Rating from "@mui/material/Rating"
-import { GiSquid } from "react-icons/gi"
 import { IoMdStar } from "react-icons/io"
 import CircularProgress from "@mui/material/CircularProgress"
 import { FiAlertTriangle } from "react-icons/fi"
 import AppContext from "../AppContext"
 import api from "../services/api"
-
-const stockRender = (stockNumber) => {
-  const alertLimitNb = 10
-
-  if (stockNumber > alertLimitNb) {
-    return (
-      <p className="flex items-center justify-left font-bold text-green-700">
-        <GiSquid className="mr-1 text-xl" /> En stock
-      </p>
-    )
-  }
-
-  if (stockNumber <= alertLimitNb && stockNumber > 0) {
-    return (
-      <p className="flex items-center justify-left font-bold text-yellow-500">
-        <GiSquid className="mr-1 text-xl" /> Plus que {stockNumber} en stock
-      </p>
-    )
-  }
-
-  if (stockNumber >= 0) {
-    return (
-      <p className="flex items-center justify-left font-bold text-red-600">
-        <GiSquid className="mr-1 text-xl" /> L’article n’est plus disponible
-      </p>
-    )
-  }
-}
+import StockRender from "./stockRender"
 
 const addToCart = (article, sessionId) => {
   if (!localStorage.getItem("cart")) {
@@ -114,7 +86,13 @@ const ArticleInfo = ({ articleId }) => {
       api
         .get(`/articles/byId?id=${articleId}`)
         .then((response) => setArticle(response.data))
-        .catch(() => setApiError("Erreur de chargement"))
+        .catch((err) => {
+          if (err.response.status === 404) {
+            err.response.data = { error: "Non trouvé" }
+          }
+
+          setApiError(err.response.data.error)
+        })
     }
   }, [articleId])
 
@@ -201,7 +179,9 @@ const ArticleInfo = ({ articleId }) => {
             ( {article.ratings.length} )
           </p>
         </div>
-        <div className=" py-3 mb-6">{stockRender(article.stock)}</div>
+        <div className="py-3 mb-6">
+          <StockRender stockNumber={article.stock} />
+        </div>
 
         {article.stock > 0 ? (
           <button

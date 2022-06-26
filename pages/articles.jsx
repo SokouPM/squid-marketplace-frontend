@@ -11,7 +11,13 @@ const ArticlesPage = () => {
     api
       .get("/articles")
       .then((response) => setArticles(response.data))
-      .catch(() => setApiError("Erreur de chargement"))
+      .catch((err) => {
+        if (err.response.status === 404) {
+          err.response.data = { error: "Non trouvé" }
+        }
+
+        setApiError(err.response.data.error)
+      })
   }, [])
 
   return (

@@ -55,6 +55,7 @@ const AccountForm = ({ user }) => {
         address,
         city,
         postalCode,
+        admin: user.admin,
       })
       router.reload()
     },

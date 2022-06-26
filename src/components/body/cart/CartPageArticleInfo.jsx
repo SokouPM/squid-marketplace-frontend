@@ -14,7 +14,13 @@ const ArticleOnCartInfos = ({ articleId, price, quantity }) => {
       api
         .get(`/articles/byId?id=${articleId}`)
         .then((response) => setArticle(response.data))
-        .catch(() => setApiError("Erreur de chargement"))
+        .catch((err) => {
+          if (err.response.status === 404) {
+            err.response.data = { error: "Non trouvé" }
+          }
+
+          setApiError(err.response.data.error)
+        })
     }
   }, [articleId])
 

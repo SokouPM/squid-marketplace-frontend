@@ -15,7 +15,13 @@ const CategoriesList = () => {
     api
       .get("/category")
       .then((response) => setCategories(response.data))
-      .catch(() => setApiError("Erreur de chargement"))
+      .catch((err) => {
+        if (err.response.status === 404) {
+          err.response.data = { error: "Non trouvé" }
+        }
+
+        setApiError(err.response.data.error)
+      })
   }, [])
 
   const deleteCategory = async (categoryId) => {

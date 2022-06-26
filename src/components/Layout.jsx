@@ -1,6 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 import Head from "next/head"
-import Image from "next/image"
 import { useContext, useEffect } from "react"
 import AppContext from "./AppContext"
 import Header from "./Header"
@@ -31,12 +31,7 @@ const Layout = (props) => {
       {props.diplayadminheader && <AdminHeader />}
       {props.diplaybanner && (
         <div className="w-full bg-blue-900 flex items-center justify-center">
-          <Image
-            src="/banner.png"
-            alt="squid market place banner"
-            width={1900}
-            height={290}
-          />
+          <img src="/banner.png" alt="squid market place banner" width="100%" />
         </div>
       )}
       <main

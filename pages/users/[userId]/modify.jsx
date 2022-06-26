@@ -28,7 +28,13 @@ const UserInformationsPage = () => {
       api
         .get(`/customer/byId?id=${userId}`)
         .then((response) => setUser(response.data))
-        .catch(() => setApiError("Erreur de chargement"))
+        .catch((err) => {
+          if (err.response.status === 404) {
+            err.response.data = { error: "Non trouvé" }
+          }
+
+          setApiError(err.response.data.error)
+        })
     }
   }, [userId])
 

@@ -5,7 +5,7 @@ import AppContext from "../AppContext"
 const BreadCrumbs = ({ homelink }) => {
   const { router } = useContext(AppContext)
   const pathTab = router.asPath.split("/")
-  pathTab[0] = homelink ? homelink : "Accueil"
+  pathTab[0] = homelink ? homelink : "Accueil" // for choosing home name in breadcrumbs
 
   let link = ""
 

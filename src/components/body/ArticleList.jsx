@@ -3,36 +3,9 @@ import Link from "next/link"
 import Rating from "@mui/material/Rating"
 import CircularProgress from "@mui/material/CircularProgress"
 import { IoMdStar } from "react-icons/io"
-import { GiSquid, GiGiantSquid } from "react-icons/gi"
+import { GiGiantSquid } from "react-icons/gi"
 import { FiAlertTriangle } from "react-icons/fi"
-
-const stockRender = (stockNumber) => {
-  const alertLimitNb = 10
-
-  if (stockNumber > alertLimitNb) {
-    return (
-      <p className="flex items-center justify-between font-bold text-sm text-green-700">
-        <GiSquid className="mr-1 text-lg" /> En stock
-      </p>
-    )
-  }
-
-  if (stockNumber <= alertLimitNb && stockNumber > 0) {
-    return (
-      <p className="flex items-center justify-between font-bold text-sm text-yellow-500">
-        <GiSquid className="mr-1 text-lg" /> Plus que {stockNumber} en stock
-      </p>
-    )
-  }
-
-  if (stockNumber <= 0) {
-    return (
-      <p className="flex items-center justify-between font-bold text-sm text-red-600">
-        <GiSquid className="mr-1 text-lg" /> L’article n’est plus disponible
-      </p>
-    )
-  }
-}
+import StockRender from "./stockRender"
 
 const ArticleList = ({ sortedArticles, apiError }) => {
   if (apiError) {
@@ -92,7 +65,7 @@ const ArticleList = ({ sortedArticles, apiError }) => {
               <p className="mb-4 font-bold text-xl">{item.name}</p>
               <div className="mb-3 w-full flex items-center justify-between">
                 <p>{item.price} €</p>
-                {stockRender(item.stock)}
+                <StockRender stockNumber={item.stock} />
               </div>
 
               <div className="w-full flex items-end justify-end">

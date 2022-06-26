@@ -58,11 +58,14 @@ export const AppContextProvider = (props) => {
   const signIn = useCallback(
     async (mail, password) => {
       try {
-        const { data } = await api.post("auth/connection", { mail, password })
-        setSignInError(null)
+        const { data } = await api.post("auth/connection", {
+          mail,
+          password,
+        })
+        setSignInError(null) // remove signin error message
 
         const {
-          query: { redirect },
+          query: { redirect }, // get redirect param from url if exist
         } = router
 
         if (redirect) {
@@ -71,16 +74,13 @@ export const AppContextProvider = (props) => {
           router.push("/")
         }
 
-        localStorage.setItem("jwt", data)
-        initSession(data)
-
-        const [, payload] = data.split(".")
-        const session = atob(payload)
-
-        addLocalCartToDb(session)
-        getDbCart(session)
+        initSession(data) // run session with jwt
       } catch (err) {
-        setSignInError("Email ou mot de passe invalide")
+        if (err.response.status === 404) {
+          err.response.data = { error: "Email incorrect" }
+        }
+
+        setSignInError(err.response.data.error)
       }
     },
     [initSession, router]
@@ -91,9 +91,9 @@ export const AppContextProvider = (props) => {
       try {
         await api.post("auth/inscription", { mail, password })
         router.push("/signin")
-        setSignUpError(null)
+        setSignUpError(null) // remove signup error message
       } catch (err) {
-        setSignUpError(err.response.data)
+        setSignUpError(err.response.data.error) // remove signup error message
       }
     },
     [router]

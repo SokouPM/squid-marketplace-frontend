@@ -21,7 +21,13 @@ const UsersList = () => {
     api
       .get("/customer")
       .then((response) => setUsers(response.data))
-      .catch(() => setApiError("Erreur de chargement"))
+      .catch((err) => {
+        if (err.response.status === 404) {
+          err.response.data = { error: "Non trouvé" }
+        }
+
+        setApiError(err.response.data.error)
+      })
   }, [])
 
   const deleteUser = async (accountId) => {

@@ -15,7 +15,13 @@ const OrdersList = () => {
     api
       .get("/order")
       .then((response) => setOrders(response.data))
-      .catch(() => setApiError("Erreur de chargement"))
+      .catch((err) => {
+        if (err.response.status === 404) {
+          err.response.data = { error: "Non trouvé" }
+        }
+
+        setApiError(err.response.data.error)
+      })
   }, [])
 
   const deleteOrder = async (orderId) => {

@@ -7,7 +7,7 @@ import { IoMdStar } from "react-icons/io"
 import { GiGiantSquid } from "react-icons/gi"
 import { FiAlertTriangle } from "react-icons/fi"
 import api from "../services/api"
-import StockRender from "./stockRender"
+import StockRender from "./StockRender"
 
 const ArticleList = ({ limit }) => {
   const [articles, setArticles] = useState(null)

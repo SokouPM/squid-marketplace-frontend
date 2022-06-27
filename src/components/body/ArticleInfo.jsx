@@ -6,7 +6,7 @@ import CircularProgress from "@mui/material/CircularProgress"
 import { FiAlertTriangle } from "react-icons/fi"
 import AppContext from "../AppContext"
 import api from "../services/api"
-import StockRender from "./stockRender"
+import StockRender from "./StockRender"
 
 const addToCart = (article, sessionId) => {
   if (!localStorage.getItem("cart")) {

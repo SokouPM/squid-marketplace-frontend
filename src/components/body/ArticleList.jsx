@@ -5,7 +5,7 @@ import CircularProgress from "@mui/material/CircularProgress"
 import { IoMdStar } from "react-icons/io"
 import { GiGiantSquid } from "react-icons/gi"
 import { FiAlertTriangle } from "react-icons/fi"
-import StockRender from "./stockRender"
+import StockRender from "./StockRender"
 
 const ArticleList = ({ sortedArticles, apiError }) => {
   if (apiError) {

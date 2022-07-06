@@ -68,7 +68,7 @@ const CartPageArticles = () => {
       </div>
       <Link href="/cart/delivery-address">
         <a className="w-1/4 mt-5 bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white text-center transition-all">
-          Valider er payer
+          Valider et payer
         </a>
       </Link>
     </div>

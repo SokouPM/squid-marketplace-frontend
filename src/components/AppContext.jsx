@@ -63,7 +63,7 @@ export const AppContextProvider = (props) => {
           password,
         })
         setSignInError(null) // remove signin error message
-
+        localStorage.setItem("jwt", data)
         const {
           query: { redirect }, // get redirect param from url if exist
         } = router

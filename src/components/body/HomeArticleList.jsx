@@ -18,19 +18,23 @@ const ArticleList = () => {
   }, [])
 
   async function getBestArticles() {
-    const { data, error } = await supabase
-      .from("article")
-      .select(
-        `name,
+    const { data, error } = await supabase.from("article").select(
+      `name,
         price,
         category:category_name,
         articleImage:article_image(url),
         stock,
         ratingNb:customer_to_article!left(rating.count()),
         ratingAvg:customer_to_article!left(rating.avg())`
-      )
-      .limit(4)
-    setBestArticles(data)
+    )
+
+    const orderedData = data.sort((a, b) => {
+      return b.ratingAvg[0].avg - a.ratingAvg[0].avg
+    })
+
+    orderedData.length = 4
+
+    setBestArticles(orderedData)
     setApiError(error?.message)
   }
 

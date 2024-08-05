@@ -1,40 +1,41 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Link from "next/link"
-import { useCallback, useState, useContext, useEffect } from "react"
+import { useCallback, useContext, useEffect, useState } from "react"
 import CircularProgress from "@mui/material/CircularProgress"
-import { FaPlus, FaMinus } from "react-icons/fa"
+import { FaMinus, FaPlus } from "react-icons/fa"
 import { GiGiantSquid } from "react-icons/gi"
 import ArticleOnCartInfos from "./ArticleOnCartInfos"
 import AppContext from "../AppContext"
-import api from "../services/api"
 
-const changeQuantity = (sessionId, articleId, isMore) => {
+const changeQuantity = (sessionId, articleName, isMore) => {
   let cart = JSON.parse(localStorage.getItem("cart"))
 
   cart.map((item) => {
-    if (item.id === articleId) {
+    console.log(item)
+    
+    if (item.name === articleName) {
       if (isMore) {
         item.quantity++
 
         if (sessionId) {
-          api.put(
-            `/carts?idCustomer=${sessionId}&idArticle=${item.id}&quantity=${item.quantity}`
-          )
+          // TODO
         }
       } else {
         item.quantity--
 
         if (item.quantity <= 0) {
-          cart = cart.filter((item) => item.id !== articleId)
+          cart = cart.filter((item) => item.name !== articleName)
 
           if (sessionId) {
-            api.delete(`/carts?idCustomer=${sessionId}&idArticle=${item.id}`)
+            //pi.delete(`/carts?idCustomer=${sessionId}&idArticle=${item.name}`)
+            // TODO
           }
         } else {
           if (sessionId) {
-            api.put(
+            /*api.put(
               `/carts?idCustomer=${sessionId}&idArticle=${item.id}&quantity=${item.quantity}`
-            )
+            )*/
+            // TODO
           }
         }
       }
@@ -110,9 +111,9 @@ const ArticlesOnChart = () => {
             className="px-5 mb-3 hover-text-secondary transition-all pl-4 py-1 hover:pl-6 hover:bg-black/30"
           >
             <div className="flex items-start relative">
-              <ArticleOnCartInfos articleId={item.id} />
+              <ArticleOnCartInfos articleName={item.name} />
               <div className="ml-5 w-1/2 absolute right-5 bottom-1">
-                <Link href={`/articles/${item.id}`}>
+                <Link href={`/articles/${item.name}`}>
                   <a>
                     <p>Prix : {item.price * item.quantity} €</p>
                   </a>
@@ -120,7 +121,7 @@ const ArticlesOnChart = () => {
                 <div className="w-full flex items-center justify-center mt-3">
                   <button
                     onClick={() =>
-                      changeQuantity(sessionId, item.id, false) + doUpdate()
+                      changeQuantity(sessionId, item.name, false) + doUpdate()
                     }
                     className="hover-bg-secondary text-primary p-2 rounded-full bg-white transition-all hover:text-white"
                   >
@@ -137,7 +138,7 @@ const ArticlesOnChart = () => {
                   ) : (
                     <button
                       onClick={() =>
-                        changeQuantity(sessionId, item.id, true) + doUpdate()
+                        changeQuantity(sessionId, item.name, true) + doUpdate()
                       }
                       className="hover-bg-secondary text-primary p-2 rounded-full bg-white transition-all hover:text-white"
                     >

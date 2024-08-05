@@ -1,8 +1,7 @@
-import { useState, useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import Autocomplete from "@mui/material/Autocomplete"
 import { FaSearch } from "react-icons/fa"
 import AppContext from "../AppContext"
-import api from "../services/api"
 
 const SearchBar = () => {
   const { router } = useContext(AppContext)
@@ -10,9 +9,7 @@ const SearchBar = () => {
   const [articlesNames, setArticlesNames] = useState("")
 
   useEffect(() => {
-    api
-      .get("/articles/listName")
-      .then((response) => setArticlesNames(response.data))
+    // TODO
   }, [])
 
   const handleSubmit = (e) => {
@@ -47,7 +44,8 @@ const SearchBar = () => {
             {...params.inputProps}
             className="h-8 w-80 px-3 rounded-l-full"
           />
-          <button className="bg-secondary hover-bg-tertiary hover-text-primary px-3 h-8 text-white rounded-r-full transition-all">
+          <button
+            className="bg-secondary hover-bg-tertiary hover-text-primary px-3 h-8 text-white rounded-r-full transition-all">
             <FaSearch />
           </button>
         </form>

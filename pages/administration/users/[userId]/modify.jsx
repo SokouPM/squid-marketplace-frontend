@@ -1,14 +1,13 @@
 import { useRouter } from "next/router"
-import { useState, useEffect, useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import CircularProgress from "@mui/material/CircularProgress"
 import AppContext from "../../../../src/components/AppContext"
-import api from "../../../../src/components/services/api"
 import Layout from "../../../../src/components/Layout"
 import UserForm from "../../../../src/components/body/admin/UserForm"
 
 const ModifyUserPage = () => {
   const {
-    query: { userId },
+    query: { userId }
   } = useRouter()
 
   const { session, router } = useContext(AppContext)
@@ -23,16 +22,7 @@ const ModifyUserPage = () => {
 
   useEffect(() => {
     if (userId && !isNaN(userId)) {
-      api
-        .get(`/customer/byId?id=${userId}`)
-        .then((response) => setUser(response.data))
-        .catch((err) => {
-          if (err.response.status === 404) {
-            err.response.data = { error: "Non trouvé" }
-          }
-
-          setApiError(err.response.data.error)
-        })
+      // TODO
     }
   }, [userId])
 
@@ -59,7 +49,7 @@ const ModifyUserPage = () => {
             <div className="flex items-center justify-center mt-20">
               <CircularProgress
                 sx={{
-                  color: "#cc0023",
+                  color: "#cc0023"
                 }}
               />
               <p className="ml-3">Chargement du formulaire...</p>
@@ -70,7 +60,7 @@ const ModifyUserPage = () => {
         <div className="flex items-center justify-center mt-20">
           <CircularProgress
             sx={{
-              color: "#cc0023",
+              color: "#cc0023"
             }}
           />
           <p className="ml-3">Chargement du formulaire...</p>

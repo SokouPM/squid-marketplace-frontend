@@ -1,24 +1,30 @@
 import { useEffect, useState } from "react"
 import Layout from "../src/components/Layout"
 import ArticleSort from "../src/components/body/ArticleSort"
-import api from "../src/components/services/api"
+import { supabase } from "../src/utils/supabase"
 
 const ArticlesPage = () => {
   const [articles, setArticles] = useState(null)
   const [apiError, setApiError] = useState(null)
 
   useEffect(() => {
-    api
-      .get("/articles")
-      .then((response) => setArticles(response.data))
-      .catch((err) => {
-        if (err.response.status === 404) {
-          err.response.data = { error: "Non trouvé" }
-        }
-
-        setApiError(err.response.data.error)
-      })
+    getArticles()
   }, [])
+
+  async function getArticles() {
+    const { data, error } = await supabase.from("article").select(
+      `name,
+        price,
+        category:category_name,
+        articleImage:article_image(url),
+        stock,
+        color,
+        ratingNb:customer_to_article!left(rating.count()),
+        ratingAvg:customer_to_article!left(rating.avg())`
+    )
+    setArticles(data)
+    setApiError(error?.message)
+  }
 
   return (
     <Layout
@@ -27,7 +33,7 @@ const ArticlesPage = () => {
       diplaybreadcrumbs={1}
       diplayfooter={1}
     >
-      <div className="border rounded mb-5">
+      <div className="border rounded pb-5 mb-5">
         <ArticleSort articlesArray={articles} apiError={apiError} />
       </div>
     </Layout>

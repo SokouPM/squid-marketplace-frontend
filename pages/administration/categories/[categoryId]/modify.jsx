@@ -1,13 +1,12 @@
 import { useRouter } from "next/router"
-import { useState, useEffect } from "react"
-import api from "../../../../src/components/services/api"
+import { useEffect, useState } from "react"
 import Layout from "../../../../src/components/Layout"
 import CategoryForm from "../../../../src/components/body/admin/CategoryForm"
 import CircularProgress from "@mui/material/CircularProgress"
 
 const ModifyCategoryPage = () => {
   const {
-    query: { categoryId },
+    query: { categoryId }
   } = useRouter()
 
   const [category, setCategory] = useState(null)
@@ -15,16 +14,7 @@ const ModifyCategoryPage = () => {
 
   useEffect(() => {
     if (categoryId && !isNaN(categoryId)) {
-      api
-        .get(`/category/byId?id=${categoryId}`)
-        .then((response) => setCategory(response.data))
-        .catch((err) => {
-          if (err.response.status === 404) {
-            err.response.data = { error: "Non trouvé" }
-          }
-
-          setApiError(err.response.data.error)
-        })
+      // TODO
     }
   }, [categoryId])
 
@@ -47,7 +37,7 @@ const ModifyCategoryPage = () => {
             <div className="flex items-center justify-center mt-20">
               <CircularProgress
                 sx={{
-                  color: "#cc0023",
+                  color: "#cc0023"
                 }}
               />
               <p className="ml-3">Chargement du formulaire...</p>
@@ -58,7 +48,7 @@ const ModifyCategoryPage = () => {
         <div className="flex items-center justify-center mt-20">
           <CircularProgress
             sx={{
-              color: "#cc0023",
+              color: "#cc0023"
             }}
           />
           <p className="ml-3">Chargement du formulaire...</p>

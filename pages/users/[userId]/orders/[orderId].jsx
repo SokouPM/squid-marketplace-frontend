@@ -1,17 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
-import { useState, useEffect, useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import CircularProgress from "@mui/material/CircularProgress"
 import { FiAlertTriangle } from "react-icons/fi"
 import Layout from "../../../../src/components/Layout"
 import AccountNav from "../../../../src/components/body/AccountNav"
 import AppContext from "../../../../src/components/AppContext"
-import api from "../../../../src/components/services/api"
 
 const OrderDetailPage = () => {
   const {
-    query: { userId, orderId },
+    query: { userId, orderId }
   } = useRouter()
 
   const { session, router } = useContext(AppContext)
@@ -27,31 +26,13 @@ const OrderDetailPage = () => {
 
   useEffect(() => {
     if (userId && !isNaN(userId)) {
-      api
-        .get(`/customer/byId?id=${userId}`)
-        .then((response) => setUser(response.data))
-        .catch((err) => {
-          if (err.response.status === 404) {
-            err.response.data = { error: "Non trouvé" }
-          }
-
-          setApiError(err.response.data.error)
-        })
+      // TODO
     }
   }, [userId])
 
   useEffect(() => {
     if (orderId && !isNaN(orderId)) {
-      api
-        .get(`/order/byId?id=${orderId}`)
-        .then((response) => setOrder(response.data))
-        .catch((err) => {
-          if (err.response.status === 404) {
-            err.response.data = { error: "Non trouvé" }
-          }
-
-          setApiError(err.response.data.error)
-        })
+      // TODO
     }
   }, [orderId, userId])
 
@@ -105,46 +86,47 @@ const OrderDetailPage = () => {
               <div className="mb-2 flex items-end justify-between">
                 <p className="font-bold text-2xl">Détail de votre commande</p>
                 <Link href={`/users/${userId}/orders/${order.id}/download`}>
-                  <a className="py-2 px-6 w-max rounded-full bg-secondary text-white whitespace-nowrap transition-all hover-text-primary hover-bg-tertiary">
+                  <a
+                    className="py-2 px-6 w-max rounded-full bg-secondary text-white whitespace-nowrap transition-all hover-text-primary hover-bg-tertiary">
                     Télécharger la facture
                   </a>
                 </Link>
               </div>
               <table className="w-full mx-auto">
                 <thead>
-                  <tr>
-                    <th className="w-2/6 border"></th>
-                    <th className="w-2/6 border">Nom</th>
-                    <th className="w-1/6 border">Quantité</th>
-                    <th className="w-1/6 border">Prix</th>
-                  </tr>
+                <tr>
+                  <th className="w-2/6 border"></th>
+                  <th className="w-2/6 border">Nom</th>
+                  <th className="w-1/6 border">Quantité</th>
+                  <th className="w-1/6 border">Prix</th>
+                </tr>
                 </thead>
                 <tbody>
-                  {order.articlesToOrder.map((item, index) => (
-                    <tr
-                      key={index}
-                      className={`font-bold border ${
-                        index % 2 ? "bg-gray-100" : "bg-white"
-                      }`}
-                    >
-                      <td className="border-x text-center font-normal flex">
-                        <img
-                          src={item.imagePresArticle}
-                          alt="squid market place article"
-                          height="200"
-                        />
-                      </td>
-                      <td className="border-x text-center font-normal">
-                        {item.nameArticle}
-                      </td>
-                      <td className="border-x text-center font-normal">
-                        {item.quantity}
-                      </td>
-                      <td className="border-x text-center font-normal">
-                        {item.priceWhenBuying}
-                      </td>
-                    </tr>
-                  ))}
+                {order.articlesToOrder.map((item, index) => (
+                  <tr
+                    key={index}
+                    className={`font-bold border ${
+                      index % 2 ? "bg-gray-100" : "bg-white"
+                    }`}
+                  >
+                    <td className="border-x text-center font-normal flex">
+                      <img
+                        src={item.imagePresArticle}
+                        alt="squid market place article"
+                        height="200"
+                      />
+                    </td>
+                    <td className="border-x text-center font-normal">
+                      {item.nameArticle}
+                    </td>
+                    <td className="border-x text-center font-normal">
+                      {item.quantity}
+                    </td>
+                    <td className="border-x text-center font-normal">
+                      {item.priceWhenBuying}
+                    </td>
+                  </tr>
+                ))}
                 </tbody>
               </table>
             </section>
@@ -152,7 +134,7 @@ const OrderDetailPage = () => {
             <div className="flex items-center justify-center">
               <CircularProgress
                 sx={{
-                  color: "#cc0023",
+                  color: "#cc0023"
                 }}
               />
               <p className="ml-3">Chargement des informations...</p>

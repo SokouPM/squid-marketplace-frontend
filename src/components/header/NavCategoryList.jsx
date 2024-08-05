@@ -1,25 +1,22 @@
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import CircularProgress from "@mui/material/CircularProgress"
 import { FiAlertTriangle } from "react-icons/fi"
-import api from "../services/api"
+import { supabase } from "../../utils/supabase"
 
 const NavCategoriesList = () => {
   const [categories, setCategories] = useState(null)
   const [apiError, setApiError] = useState(null)
 
   useEffect(() => {
-    api
-      .get("/category")
-      .then((response) => setCategories(response.data))
-      .catch((err) => {
-        if (err.response.status === 404) {
-          err.response.data = { error: "Non trouvé" }
-        }
-
-        setApiError(err.response.data.error)
-      })
+    getAllCategories()
   }, [])
+
+  async function getAllCategories() {
+    const { data, error } = await supabase.from("category").select("name")
+    setCategories(data)
+    setApiError(error?.message)
+  }
 
   if (apiError) {
     return (
@@ -52,7 +49,7 @@ const NavCategoriesList = () => {
   return (
     <div className="w-full flex flex-col items-start justify-center">
       {categories.map((item) => (
-        <Link key={item.id} href={`/categories/${item.id}`}>
+        <Link key={item.name} href={`/categories/${item.name}`}>
           <a className="w-full hover-text-secondary transition-all pl-4 py-1 hover:pl-6 hover:bg-black/30">
             {item.name}
           </a>

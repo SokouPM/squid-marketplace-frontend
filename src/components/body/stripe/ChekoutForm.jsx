@@ -1,7 +1,6 @@
-import { useEffect, useState, useContext } from "react"
-import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
+import { useContext, useEffect, useState } from "react"
+import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import AppContext from "../../AppContext"
-import api from "../../services/api"
 
 const CheckoutForm = () => {
   const stripe = useStripe()
@@ -36,7 +35,7 @@ const CheckoutForm = () => {
           setMessage("Payment succeeded!")
 
           if (accountId) {
-            api.post(`/confirmOrder?idCustomer=${accountId}`)
+            // TODO
           }
 
           router.push("/cart/order-confirmation")
@@ -77,8 +76,8 @@ const CheckoutForm = () => {
       confirmParams: {
         // Make sure to change this to your payment completion page
         return_url:
-          "https://squid-marketplace-frontend.vercel.app/cart/payment",
-      },
+          "https://squid-marketplace-frontend.vercel.app/cart/payment"
+      }
     })
 
     // This point will only be reached if there is an immediate error when

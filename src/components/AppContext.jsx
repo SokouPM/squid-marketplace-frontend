@@ -1,5 +1,4 @@
 import { createContext, useCallback, useEffect, useState } from "react"
-import api from "./services/api"
 
 const AppContext = createContext({})
 
@@ -58,10 +57,11 @@ export const AppContextProvider = (props) => {
   const signIn = useCallback(
     async (mail, password) => {
       try {
-        const { data } = await api.post("auth/connection", {
-          mail,
-          password,
-        })
+        // const { data } = await api.post("auth/connection", {
+        //   mail,
+        //   password,
+        // })
+        // TODO
         setSignInError(null) // remove signin error message
         localStorage.setItem("jwt", data)
         const {
@@ -89,8 +89,9 @@ export const AppContextProvider = (props) => {
   const signUp = useCallback(
     async (mail, password) => {
       try {
-        await api.post("auth/inscription", { mail, password })
+        // await api.post("auth/inscription", { mail, password })
         router.push("/signin")
+        // TODO
         setSignUpError(null) // remove signup error message
       } catch (err) {
         setSignUpError(err.response.data.error) // remove signup error message
@@ -120,9 +121,10 @@ export const AppContextProvider = (props) => {
 
     if (cart.length) {
       cart.map((item) => {
-        api.post(
+        /*api.post(
           `/carts/withQuantity?idCustomer=${sessionId}&idArticle=${item.id}&quantity=${item.quantity}`
-        )
+        )*/
+        // TODO
       })
     }
 

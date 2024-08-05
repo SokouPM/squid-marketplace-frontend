@@ -1,7 +1,6 @@
 import { useCallback, useContext } from "react"
-import { Form, Formik, Field } from "formik"
+import { Field, Form, Formik } from "formik"
 import * as Yup from "yup"
-import api from "../services/api"
 import AppContext from "../AppContext"
 import FormField from "../body/FormField"
 
@@ -16,7 +15,7 @@ const displayingErrorMessagesSchema = Yup.object().shape({
     .max(50, "Le champ doit contenir maximum 50 caractères !")
     .matches(
       /^[a-zA-Z\-\s]*$/,
-      'Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf "-" !'
+      "Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf \"-\" !"
     )
     .required("Le champ est requis !"),
   name: Yup.string()
@@ -24,7 +23,7 @@ const displayingErrorMessagesSchema = Yup.object().shape({
     .max(50, "Le champ doit contenir maximum 50 caractères !")
     .matches(
       /^[a-zA-Z\-\s]*$/,
-      'Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf "-" !'
+      "Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf \"-\" !"
     )
     .required("Le champ est requis !"),
   address: Yup.string()
@@ -39,7 +38,7 @@ const displayingErrorMessagesSchema = Yup.object().shape({
     .typeError("Le code postal doit être un nombre")
     .min(0, "Le code postal doit être supérieur ou égal à 0")
     .max(999999, "Le code postal doit être inférieur ou égal à 999999")
-    .required("Le champ est requis !"),
+    .required("Le champ est requis !")
 })
 
 const AccountForm = ({ user }) => {
@@ -47,16 +46,7 @@ const AccountForm = ({ user }) => {
 
   const handleFormSubmit = useCallback(
     async ({ mail, civility, firstName, name, address, city, postalCode }) => {
-      await api.put(`/customer?id=${user.id}`, {
-        mail,
-        civility,
-        firstName,
-        name,
-        address,
-        city,
-        postalCode,
-        admin: user.admin,
-      })
+      // TODO
       router.reload()
     },
     [router, user]
@@ -71,7 +61,7 @@ const AccountForm = ({ user }) => {
         name: user.name ? user.name : "",
         address: user.address ? user.address : "",
         city: user.city ? user.city : "",
-        postalCode: user.postalCode ? user.postalCode : "",
+        postalCode: user.postalCode ? user.postalCode : ""
       }}
       validationSchema={displayingErrorMessagesSchema}
       onSubmit={handleFormSubmit}

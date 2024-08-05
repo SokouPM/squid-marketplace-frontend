@@ -49,10 +49,10 @@ const CartPageArticles = () => {
       <div className="w-full flex items-start">
         <div className="flex flex-col w-5/6">
           {cart.map((item, index) => (
-            <Link key={index} href={`/articles/${item.id}`}>
+            <Link key={index} href={`/articles/${item.name}`}>
               <a className="mb-3 transition-all p-2 border rounded cursor-pointer hover:bg-slate-100">
                 <CartPageArticleInfo
-                  articleId={item.id}
+                  articleName={item.name}
                   price={item.price}
                   quantity={item.quantity}
                 />

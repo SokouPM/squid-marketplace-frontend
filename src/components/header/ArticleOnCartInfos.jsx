@@ -1,28 +1,33 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import CircularProgress from "@mui/material/CircularProgress"
 import { FiAlertTriangle } from "react-icons/fi"
-import api from "../services/api"
+import { supabase } from "../../utils/supabase"
 
-const ArticleOnCartInfos = ({ articleId }) => {
+const ArticleOnCartInfos = ({ articleName }) => {
   const [article, setArticle] = useState(null)
   const [apiError, setApiError] = useState(null)
 
   useEffect(() => {
-    if (articleId && !isNaN(articleId)) {
-      api
-        .get(`/articles/byId?id=${articleId}`)
-        .then((response) => setArticle(response.data))
-        .catch((err) => {
-          if (err.response.status === 404) {
-            err.response.data = { error: "Non trouvé" }
-          }
+    getArticle(articleName)
+  }, [articleName])
 
-          setApiError(err.response.data.error)
-        })
-    }
-  }, [articleId])
+  async function getArticle(articleName) {
+    const { data, error } = await supabase
+      .from("article")
+      .select(
+        `name,
+        price,
+        articleImage:article_image(url),
+        stock`
+      )
+      .eq("name", articleName)
+      .maybeSingle()
+
+    setArticle(data)
+    setApiError(error?.message)
+  }
 
   if (apiError) {
     return (
@@ -50,10 +55,10 @@ const ArticleOnCartInfos = ({ articleId }) => {
   }
 
   return (
-    <Link href={`/articles/${articleId}`}>
+    <Link href={`/articles/${articleName}`}>
       <a className="flex">
         <img
-          src={article.images[0].url}
+          src={article.articleImage[0].url}
           alt="Squid Marketplace image article"
           width={200}
         />

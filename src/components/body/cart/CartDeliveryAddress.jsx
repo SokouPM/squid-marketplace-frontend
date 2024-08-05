@@ -1,10 +1,9 @@
 import Link from "next/link"
-import { useContext, useState, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { FiAlertTriangle } from "react-icons/fi"
 import { GiGiantSquid } from "react-icons/gi"
 import CircularProgress from "@mui/material/CircularProgress"
 import AppContext from "../../AppContext"
-import api from "../../services/api"
 import AccountForm from "../AccountForm"
 
 const CartDeliveryAddress = () => {
@@ -20,16 +19,7 @@ const CartDeliveryAddress = () => {
 
   useEffect(() => {
     if (accountId && !isNaN(accountId)) {
-      api
-        .get(`/customer/byId?id=${accountId}`)
-        .then((response) => setUser(response.data))
-        .catch((err) => {
-          if (err.response.status === 404) {
-            err.response.data = { error: "Non trouvé" }
-          }
-
-          setApiError(err.response.data.error)
-        })
+      // TODO
     }
   }, [accountId])
 
@@ -52,7 +42,8 @@ const CartDeliveryAddress = () => {
   if (apiError) {
     return (
       <section>
-        <div className="w-full mb-7 py-2 bg-red-200 flex items-center justify-center text-red-600 text-center font-bold text-2xl rounded">
+        <div
+          className="w-full mb-7 py-2 bg-red-200 flex items-center justify-center text-red-600 text-center font-bold text-2xl rounded">
           <FiAlertTriangle className="text-5xl mr-3" /> {apiError}
         </div>
       </section>
@@ -62,7 +53,8 @@ const CartDeliveryAddress = () => {
   if (isNaN(accountId)) {
     return (
       <section>
-        <div className="w-full mb-7 py-2 bg-red-200 flex items-center justify-center text-red-600 text-center font-bold text-2xl rounded">
+        <div
+          className="w-full mb-7 py-2 bg-red-200 flex items-center justify-center text-red-600 text-center font-bold text-2xl rounded">
           <FiAlertTriangle className="text-5xl mr-3" /> User Id must be a number
         </div>
       </section>
@@ -74,7 +66,7 @@ const CartDeliveryAddress = () => {
       <div className="flex items-center justify-center">
         <CircularProgress
           sx={{
-            color: "#cc0023",
+            color: "#cc0023"
           }}
         />
         <p className="ml-3">Chargement...</p>
@@ -105,7 +97,8 @@ const CartDeliveryAddress = () => {
         </p>
       </div>
       <Link href="/cart/payment">
-        <a className="bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white transition-all">
+        <a
+          className="bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white transition-all">
           Confirmer et payer
         </a>
       </Link>

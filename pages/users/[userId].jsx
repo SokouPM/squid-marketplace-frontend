@@ -1,16 +1,15 @@
 import { useRouter } from "next/router"
 import Link from "next/link"
-import { useState, useEffect, useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import CircularProgress from "@mui/material/CircularProgress"
 import { FiAlertTriangle } from "react-icons/fi"
 import Layout from "../../src/components/Layout"
-import api from "../../src/components/services/api"
 import AccountNav from "../../src/components/body/AccountNav"
 import AppContext from "../../src/components/AppContext"
 
 const UserInformationsPage = () => {
   const {
-    query: { userId },
+    query: { userId }
   } = useRouter()
 
   const { session, router } = useContext(AppContext)
@@ -25,16 +24,7 @@ const UserInformationsPage = () => {
 
   useEffect(() => {
     if (userId && !isNaN(userId)) {
-      api
-        .get(`/customer/byId?id=${userId}`)
-        .then((response) => setUser(response.data))
-        .catch((err) => {
-          if (err.response.status === 404) {
-            err.response.data = { error: "Non trouvé" }
-          }
-
-          setApiError(err.response.data.error)
-        })
+      // TODO
     }
   }, [userId])
 
@@ -82,7 +72,8 @@ const UserInformationsPage = () => {
               </div>
 
               <Link href={`/users/${userId}/modify`}>
-                <a className="bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white transition-all">
+                <a
+                  className="bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white transition-all">
                   Modifier mes informations
                 </a>
               </Link>
@@ -91,7 +82,7 @@ const UserInformationsPage = () => {
             <div className="flex items-center justify-center">
               <CircularProgress
                 sx={{
-                  color: "#cc0023",
+                  color: "#cc0023"
                 }}
               />
               <p className="ml-3">Chargement des informations...</p>

@@ -1,14 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
-import { useState, useContext, useCallback, useEffect } from "react"
-import { Form, Formik, Field } from "formik"
+import { useCallback, useContext, useEffect, useState } from "react"
+import { Field, Form, Formik } from "formik"
 import * as Yup from "yup"
 import CircularProgress from "@mui/material/CircularProgress"
 import { ImCross } from "react-icons/im"
 import { FiAlertTriangle } from "react-icons/fi"
 import AppContext from "../../AppContext"
 import FormField from "../FormField"
-import api from "../../services/api"
 
 const displayingErrorMessagesSchema = Yup.object().shape({
   name: Yup.string()
@@ -30,7 +29,7 @@ const displayingErrorMessagesSchema = Yup.object().shape({
     .typeError("Le stock doit être un nombre")
     .min(0, "Le stock doit être supérieur ou égal à 0")
     .max(999999, "Le stock doit être inférieur ou égal à 999999")
-    .required("Le champ est requis !"),
+    .required("Le champ est requis !")
 })
 
 const ArticleForm = ({ article }) => {
@@ -53,20 +52,11 @@ const ArticleForm = ({ article }) => {
     { value: "brown", name: "Maron" },
     { value: "gray", name: "Gris" },
     { value: "white", name: "Blanc" },
-    { value: "black", name: "Noir" },
+    { value: "black", name: "Noir" }
   ]
 
   useEffect(() => {
-    api
-      .get("/category")
-      .then((response) => setCategories(response.data))
-      .catch((err) => {
-        if (err.response.status === 404) {
-          err.response.data = { error: "Non trouvé" }
-        }
-
-        setApiError(err.response.data.error)
-      })
+    // TODO
   }, [])
 
   useEffect(() => article && setPicturesList(article.images), [article])
@@ -79,25 +69,7 @@ const ArticleForm = ({ article }) => {
         return
       }
 
-      article
-        ? await api.put(`/articles?id=${article.id}`, {
-            name,
-            description,
-            category: { id: category },
-            images: pictureList,
-            color,
-            price,
-            stock,
-          })
-        : await api.post("/articles", {
-            name,
-            description,
-            category: { id: category },
-            images: pictureList,
-            color,
-            price,
-            stock,
-          })
+      // TODO article => put or !article => post
       router.push("/administration/articles")
     },
     [article, pictureList, router]
@@ -119,7 +91,7 @@ const ArticleForm = ({ article }) => {
       <div className="w-full flex items-center justify-center mt-10 p-5">
         <CircularProgress
           sx={{
-            color: "#cc0023",
+            color: "#cc0023"
           }}
           className="mr-5"
         />
@@ -149,7 +121,7 @@ const ArticleForm = ({ article }) => {
         category: article ? article.category.id : categories[0].id,
         color: article ? article.color : "red",
         price: article ? article.price : 0,
-        stock: article ? article.stock : 0,
+        stock: article ? article.stock : 0
       }}
       validationSchema={displayingErrorMessagesSchema}
       onSubmit={handleFormSubmit}

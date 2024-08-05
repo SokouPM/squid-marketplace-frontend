@@ -2,14 +2,13 @@ import { useCallback, useContext } from "react"
 import { Form, Formik } from "formik"
 import * as Yup from "yup"
 import AppContext from "../../AppContext"
-import api from "../../services/api"
 import FormField from "../FormField"
 
 const displayingErrorMessagesSchema = Yup.object().shape({
   name: Yup.string()
     .required("Le champ est requis !")
     .min(3, "Minimum 3 caractères")
-    .max(40, "Maximum 40 caractères"),
+    .max(40, "Maximum 40 caractères")
 })
 
 const CategoriesForm = ({ category }) => {
@@ -17,9 +16,7 @@ const CategoriesForm = ({ category }) => {
 
   const handleFormSubmit = useCallback(
     async ({ name }) => {
-      category
-        ? await api.put(`/category?id=${category.id}`, { name })
-        : await api.post("/category", { name })
+      // TODO category => put or !category => post
       router.push("/administration/categories")
     },
     [category, router]
@@ -28,7 +25,7 @@ const CategoriesForm = ({ category }) => {
   return (
     <Formik
       initialValues={{
-        name: category ? category.name : "",
+        name: category ? category.name : ""
       }}
       validationSchema={displayingErrorMessagesSchema}
       onSubmit={handleFormSubmit}

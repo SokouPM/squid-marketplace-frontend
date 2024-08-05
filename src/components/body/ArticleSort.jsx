@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import Slider from "@mui/material/Slider"
 import { ImCross } from "react-icons/im"
 import ArticleList from "./ArticleList"
@@ -80,7 +80,7 @@ const ArticleSort = ({ articlesArray, apiError }) => {
     { value: "brown", name: "Maron", taiwindClass: "bg-yellow-900" },
     { value: "gray", name: "Gris", taiwindClass: "bg-gray-400" },
     { value: "white", name: "Blanc", taiwindClass: "bg-white" },
-    { value: "black", name: "Noir", taiwindClass: "bg-black" },
+    { value: "black", name: "Noir", taiwindClass: "bg-black" }
   ]
 
   let maxPrice = 0
@@ -162,7 +162,8 @@ const ArticleSort = ({ articlesArray, apiError }) => {
                 }}
                 defaultChecked
               />
-              <div className="colorImg h-10 w-10 rounded-full border-2 flex items-center justify-center transition-all hover:border-4 hover:scale-125">
+              <div
+                className="colorImg h-10 w-10 rounded-full border-2 flex items-center justify-center transition-all hover:border-4 hover:scale-125">
                 <ImCross className="text-slate-500" />
               </div>
             </label>

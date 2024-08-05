@@ -3,7 +3,6 @@ import { Form, Formik } from "formik"
 import * as Yup from "yup"
 import AppContext from "../src/components/AppContext"
 import Layout from "../src/components/Layout"
-import api from "../src/components/services/api"
 import FormField from "../src/components/body/FormField"
 
 const displayingErrorMessagesSchema = Yup.object().shape({
@@ -12,7 +11,7 @@ const displayingErrorMessagesSchema = Yup.object().shape({
     .max(150, "Le champ doit contenir maximum 150 caractères !")
     .matches(
       /^[a-zA-Z\-\s]*$/,
-      'Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf "-" !'
+      "Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf \"-\" !"
     )
     .required("Le champ est requis !"),
   lastName: Yup.string()
@@ -20,7 +19,7 @@ const displayingErrorMessagesSchema = Yup.object().shape({
     .max(150, "Le champ doit contenir maximum 150 caractères !")
     .matches(
       /^[a-zA-Z\-\s]*$/,
-      'Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf "-" !'
+      "Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf \"-\" !"
     )
     .required("Le champ est requis !"),
   email: Yup.string()
@@ -33,7 +32,7 @@ const displayingErrorMessagesSchema = Yup.object().shape({
   message: Yup.string()
     .min(2, "Le champ doit contenir minimum 2 caractères !")
     .max(500, "Le champ doit contenir maximum 500 caractères !")
-    .required("Le champ est requis !"),
+    .required("Le champ est requis !")
 })
 
 const ContactPage = () => {
@@ -41,13 +40,7 @@ const ContactPage = () => {
 
   const handleFormSubmit = useCallback(
     async ({ firstName, lastName, email, subject, message }) => {
-      await api.post(`/contact`, {
-        firstName,
-        lastName,
-        email,
-        subject,
-        message,
-      })
+      // TODO
       router.push("/")
     },
     [router]
@@ -72,7 +65,7 @@ const ContactPage = () => {
               lastName: "",
               email: "",
               subject: "",
-              message: "",
+              message: ""
             }}
             validationSchema={displayingErrorMessagesSchema}
             onSubmit={handleFormSubmit}

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import { useState, useEffect, useCallback, useContext } from "react"
+import { useCallback, useContext, useEffect, useState } from "react"
 import { Form, Formik } from "formik"
 import * as Yup from "yup"
 import { FiAlertTriangle } from "react-icons/fi"
@@ -7,7 +7,6 @@ import Layout from "../../../src/components/Layout"
 import AccountNav from "../../../src/components/body/AccountNav"
 import FormField from "../../../src/components/body/FormField"
 import PasswordField from "../../../src/components/body/customFields/PasswordField"
-import api from "../../../src/components/services/api"
 import AppContext from "../../../src/components/AppContext"
 
 const displayingErrorMessagesSchema = Yup.object().shape({
@@ -33,12 +32,12 @@ const displayingErrorMessagesSchema = Yup.object().shape({
       [Yup.ref("password"), null],
       "Les mots de passe doivent correspondre"
     )
-    .required("Le champ est requis !"),
+    .required("Le champ est requis !")
 })
 
 const UserInformationsPage = () => {
   const {
-    query: { userId },
+    query: { userId }
   } = useRouter()
 
   const { session, router } = useContext(AppContext)
@@ -54,29 +53,14 @@ const UserInformationsPage = () => {
 
   useEffect(() => {
     if (userId && !isNaN(userId)) {
-      api
-        .get(`/customer/byId?id=${userId}`)
-        .then((response) => setUser(response.data))
-        .catch((err) => {
-          if (err.response.status === 404) {
-            err.response.data = { error: "Non trouvé" }
-          }
-
-          setApiError(err.response.data.error)
-        })
+      // TODO
     }
   }, [userId])
 
   const handleFormSubmit = useCallback(
     async ({ oldPassword, password }) => {
       try {
-        await api.put(
-          `/customer/editPassword?oldPassword=${oldPassword}&newPassword=${password}&idCustomer=${userId}`,
-          {
-            oldPassword,
-            password,
-          }
-        )
+        // TODO
         router.push(`/users/${accountId}`)
       } catch (err) {
         setPasswordError(err.response.data)
@@ -117,7 +101,7 @@ const UserInformationsPage = () => {
         <Formik
           initialValues={{
             oldPassword: "",
-            password: "",
+            password: ""
           }}
           validationSchema={displayingErrorMessagesSchema}
           onSubmit={handleFormSubmit}

@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import { useContext, useState, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import Rating from "@mui/material/Rating"
 import { IoMdStar } from "react-icons/io"
 import CircularProgress from "@mui/material/CircularProgress"
 import { FiAlertTriangle } from "react-icons/fi"
 import AppContext from "../AppContext"
-import api from "../services/api"
 import StockRender from "./StockRender"
+import { supabase } from "../../utils/supabase"
 
 const addToCart = (article, sessionId) => {
   if (!localStorage.getItem("cart")) {
@@ -20,7 +20,7 @@ const addToCart = (article, sessionId) => {
     let addArticle = true
 
     cart.map((item) => {
-      if (item.id == article.id) {
+      if (item.name === article.name) {
         item.quantity++
 
         if (item.quantity > 10) {
@@ -30,46 +30,40 @@ const addToCart = (article, sessionId) => {
         addArticle = false
 
         if (sessionId) {
-          api.put(
-            `/carts?idCustomer=${sessionId}&idArticle=${item.id}&quantity=${item.quantity}`
-          )
+          // TODO
         }
       }
     })
 
     if (addArticle) {
-      const id = article.id
+      const name = article.name
       const price = article.price
-      const articleForCart = { id, price }
+      const articleForCart = { name, price }
       articleForCart.quantity = 1
 
       cart.push(articleForCart)
 
       if (sessionId) {
-        api.post(
-          `/carts/withQuantity?idCustomer=${sessionId}&idArticle=${id}&quantity=${1}`
-        )
+        // TODO
       }
     }
   } else {
-    const id = article.id
+    const name = article.name
     const price = article.price
-    const articleForCart = { id, price }
+    const articleForCart = { name, price }
     articleForCart.quantity = 1
 
     cart.push(articleForCart)
 
     if (sessionId) {
-      api.post(
-        `/carts/withQuantity?idCustomer=${sessionId}&idArticle=${id}&quantity=${1}`
-      )
+      // TODO
     }
   }
 
   localStorage.setItem("cart", JSON.stringify(cart))
 }
 
-const ArticleInfo = ({ articleId }) => {
+const ArticleInfo = ({ articleName }) => {
   const { setCartTotalArticle, session } = useContext(AppContext)
   const [article, setArticle] = useState(null)
   const [apiError, setApiError] = useState(null)
@@ -82,19 +76,31 @@ const ArticleInfo = ({ articleId }) => {
   }
 
   useEffect(() => {
-    if (articleId && !isNaN(articleId)) {
-      api
-        .get(`/articles/byId?id=${articleId}`)
-        .then((response) => setArticle(response.data))
-        .catch((err) => {
-          if (err.response.status === 404) {
-            err.response.data = { error: "Non trouvé" }
-          }
-
-          setApiError(err.response.data.error)
-        })
+    if (articleName) {
+      getArticle(articleName)
     }
-  }, [articleId])
+  }, [articleName])
+
+  async function getArticle(articleName) {
+    const { data, error } = await supabase
+      .from("article")
+      .select(
+        `name,
+        description,
+        price,
+        color,
+        category:category_name,
+        articleImage:article_image(url),
+        stock,
+        ratingNb:customer_to_article!left(rating.count()),
+        ratingAvg:customer_to_article!left(rating.avg())`
+      )
+      .eq("name", articleName)
+      .maybeSingle()
+
+    setArticle(data)
+    setApiError(error?.message)
+  }
 
   if (apiError) {
     return (
@@ -107,7 +113,7 @@ const ArticleInfo = ({ articleId }) => {
     )
   }
 
-  if (!article) {
+  if (!article || !articleName) {
     return (
       <div className="w-full flex items-center justify-center mt-10 p-5">
         <CircularProgress
@@ -125,7 +131,7 @@ const ArticleInfo = ({ articleId }) => {
     <section className="flex items-start justify-between mt-5">
       <div className="flex w-3/5">
         <ul className="mr-2">
-          {article.images.map((item, index) => (
+          {article.articleImage.map((item, index) => (
             <li
               key={index}
               className={`mb-1 ${
@@ -142,8 +148,8 @@ const ArticleInfo = ({ articleId }) => {
             </li>
           ))}
         </ul>
-        <div>
-          {article.images.map(
+        <div className="mr-4">
+          {article.articleImage.map(
             (item, index) =>
               index === imageSelected && (
                 <img
@@ -165,8 +171,8 @@ const ArticleInfo = ({ articleId }) => {
         <div className="flex items-end justify-left py-3">
           <Rating
             name="read-only"
-            value={article.rating}
-            precision={0.5}
+            value={article.ratingAvg[0].avg}
+            precision={1}
             readOnly
             icon={<IoMdStar color="#cc0023" fontSize="inherit" />}
             emptyIcon={<IoMdStar color="#272727" fontSize="inherit" />}
@@ -176,7 +182,7 @@ const ArticleInfo = ({ articleId }) => {
             }}
           />
           <p className="w-max text-sm mr-1 italic text-slate-400">
-            ( {article.ratings.length} )
+            ( {article.ratingNb[0].count} )
           </p>
         </div>
         <div className="py-3 mb-6">

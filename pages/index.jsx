@@ -11,7 +11,7 @@ const HomePage = () => {
       homelink="Produits populaires"
       diplayfooter={1}
     >
-      <HomeArticleList limit={4} />
+      <HomeArticleList />
     </Layout>
   )
 }

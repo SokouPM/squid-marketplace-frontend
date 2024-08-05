@@ -43,22 +43,21 @@ const ArticleList = ({ sortedArticles, apiError }) => {
   }
 
   return (
-    <ul className="w-5/6 mx-auto flex items-end justify-between flex-wrap mt-5">
+    <ul className="w-5/6 mx-auto grid grid-cols-3 mt-5 gap-5">
       {sortedArticles.map((item) => (
         <Link
           href={{
-            pathname: `/articles/${item.id}`,
+            pathname: `/articles/${item.name}`,
           }}
-          key={item.id}
+          key={item.name}
           passHref
         >
-          <li className="border rounded my-5 cursor-pointer shadow transition-all hover:scale-110 hover:shadow-2xl bg-white">
+          <li className="border rounded cursor-pointer shadow transition-all hover:scale-110 hover:shadow-2xl bg-white">
             <div className="w-full">
               <img
-                src={item.images[0].url}
+                src={item.articleImage[0].url}
                 alt="image de l'article"
                 className="rounded-t"
-                width="250"
               />
             </div>
             <div className="px-2 pb-2">
@@ -70,12 +69,12 @@ const ArticleList = ({ sortedArticles, apiError }) => {
 
               <div className="w-full flex items-end justify-end">
                 <p className="w-max text-xs mr-1 italic text-slate-400">
-                  ( {item.ratings.length} )
+                  ( {item.ratingNb[0].count} )
                 </p>
                 <Rating
                   name="read-only"
-                  value={item.rating}
-                  precision={0.5}
+                  value={item.ratingAvg[0].avg}
+                  precision={1}
                   readOnly
                   icon={<IoMdStar color="#cc0023" fontSize="inherit" />}
                   emptyIcon={<IoMdStar color="#272727" fontSize="inherit" />}

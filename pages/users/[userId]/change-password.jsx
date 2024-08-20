@@ -2,7 +2,6 @@ import { useRouter } from "next/router"
 import { useCallback, useContext, useEffect, useState } from "react"
 import { Form, Formik } from "formik"
 import * as Yup from "yup"
-import { FiAlertTriangle } from "react-icons/fi"
 import Layout from "../../../src/components/Layout"
 import AccountNav from "../../../src/components/body/AccountNav"
 import FormField from "../../../src/components/body/FormField"
@@ -32,17 +31,16 @@ const displayingErrorMessagesSchema = Yup.object().shape({
       [Yup.ref("password"), null],
       "Les mots de passe doivent correspondre"
     )
-    .required("Le champ est requis !")
+    .required("Le champ est requis !"),
 })
 
 const UserInformationsPage = () => {
   const {
-    query: { userId }
+    query: { userId },
   } = useRouter()
 
   const { session, router } = useContext(AppContext)
   const [user, setUser] = useState(null)
-  const [apiError, setApiError] = useState(null)
   const [passwordError, setPasswordError] = useState(null)
 
   let accountId = null
@@ -52,15 +50,15 @@ const UserInformationsPage = () => {
   }
 
   useEffect(() => {
-    if (userId && !isNaN(userId)) {
-      // TODO
+    if (session && userId && !isNaN(userId)) {
+      setUser(JSON.parse(session))
     }
-  }, [userId])
+  }, [userId, session])
 
   const handleFormSubmit = useCallback(
     async ({ oldPassword, password }) => {
       try {
-        // TODO
+        oldPassword, password
         router.push(`/users/${accountId}`)
       } catch (err) {
         setPasswordError(err.response.data)
@@ -69,7 +67,7 @@ const UserInformationsPage = () => {
     [accountId, router, userId]
   )
 
-  if (userId && accountId && userId != accountId) {
+  if (userId && accountId && Number(userId) !== accountId) {
     router.push(`/users/${accountId}/change-password`)
 
     return null
@@ -90,65 +88,56 @@ const UserInformationsPage = () => {
       <h2 className="text-center text-3xl mb-5 font-bold">
         Modifier mon mot de passe
       </h2>
-      {apiError ? (
-        <div className="w-full flex items-center justify-center mt-10 p-5 bg-red-200 rounded">
-          <p className="text-3xl font-bold flex items-center justify-center text-red-600">
-            <FiAlertTriangle className="text-5xl mr-3" />
-            {apiError}
-          </p>
-        </div>
-      ) : (
-        <Formik
-          initialValues={{
-            oldPassword: "",
-            password: ""
-          }}
-          validationSchema={displayingErrorMessagesSchema}
-          onSubmit={handleFormSubmit}
-        >
-          {({ errors, touched }) => (
-            <Form className="w-4/6 mb-10 p-12 border mx-auto flex flex-col items-center justify-center rounded">
-              <FormField
-                style="w-5/6 mb-5"
-                label="Ancien mot de passe"
-                type={PasswordField}
-                id="oldPassword"
-                name="oldPassword"
-                placeholder="Votre ancien mot de passe"
-                errorType={errors.oldPassword}
-                touchedType={touched.oldPassword}
-              />
-              <FormField
-                style="w-5/6 mb-5"
-                label="Nouveau mot de passe"
-                type={PasswordField}
-                id="password"
-                name="password"
-                placeholder="1 majuscule, 1 minuscule, 1 nombre et entre 6 et 50 caractères"
-                errorType={errors.password}
-                touchedType={touched.password}
-              />
-              <FormField
-                style="w-5/6 mb-5"
-                label="Confirmer le mot de passe"
-                type={PasswordField}
-                id="passwordConfirm"
-                name="passwordConfirm"
-                placeholder="Identique au mot de passe"
-                errorType={errors.passwordConfirm}
-                touchedType={touched.passwordConfirm}
-              />
-              {passwordError && <p>{passwordError}</p>}
-              <button
-                className="bg-secondary hover-text-primary hover-bg-tertiary px-10 py-1 rounded-full text-white transition-all"
-                type="submit"
-              >
-                Valider
-              </button>
-            </Form>
-          )}
-        </Formik>
-      )}
+      <Formik
+        initialValues={{
+          oldPassword: "",
+          password: "",
+        }}
+        validationSchema={displayingErrorMessagesSchema}
+        onSubmit={handleFormSubmit}
+      >
+        {({ errors, touched }) => (
+          <Form className="w-4/6 mb-10 p-12 border mx-auto flex flex-col items-center justify-center rounded">
+            <FormField
+              style="w-5/6 mb-5"
+              label="Ancien mot de passe"
+              type={PasswordField}
+              id="oldPassword"
+              name="oldPassword"
+              placeholder="Votre ancien mot de passe"
+              errorType={errors.oldPassword}
+              touchedType={touched.oldPassword}
+            />
+            <FormField
+              style="w-5/6 mb-5"
+              label="Nouveau mot de passe"
+              type={PasswordField}
+              id="password"
+              name="password"
+              placeholder="1 majuscule, 1 minuscule, 1 nombre et entre 6 et 50 caractères"
+              errorType={errors.password}
+              touchedType={touched.password}
+            />
+            <FormField
+              style="w-5/6 mb-5"
+              label="Confirmer le mot de passe"
+              type={PasswordField}
+              id="passwordConfirm"
+              name="passwordConfirm"
+              placeholder="Identique au mot de passe"
+              errorType={errors.passwordConfirm}
+              touchedType={touched.passwordConfirm}
+            />
+            {passwordError ? <p>{passwordError}</p> : null}
+            <button
+              className="bg-secondary hover-text-primary hover-bg-tertiary px-10 py-1 rounded-full text-white transition-all"
+              type="submit"
+            >
+              Valider
+            </button>
+          </Form>
+        )}
+      </Formik>
     </Layout>
   )
 }

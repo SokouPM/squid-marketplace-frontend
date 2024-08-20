@@ -5,17 +5,13 @@ import AppContext from "../AppContext"
 import FormField from "../body/FormField"
 
 const displayingErrorMessagesSchema = Yup.object().shape({
-  mail: Yup.string()
-    .email("Le mail est invalide !")
-    .max(50, "Le champ doit contenir maximum 50 caractères !")
-    .required("Le champ est requis !"),
   civility: Yup.string().required("Le champ est requis !"),
   firstName: Yup.string()
     .min(2, "Le champ doit contenir minimum 2 caractères !")
     .max(50, "Le champ doit contenir maximum 50 caractères !")
     .matches(
       /^[a-zA-Z\-\s]*$/,
-      "Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf \"-\" !"
+      'Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf "-" !'
     )
     .required("Le champ est requis !"),
   name: Yup.string()
@@ -23,7 +19,7 @@ const displayingErrorMessagesSchema = Yup.object().shape({
     .max(50, "Le champ doit contenir maximum 50 caractères !")
     .matches(
       /^[a-zA-Z\-\s]*$/,
-      "Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf \"-\" !"
+      'Le champ ne doit pas contenir de nombres ou caractère spéciaux sauf "-" !'
     )
     .required("Le champ est requis !"),
   address: Yup.string()
@@ -38,46 +34,36 @@ const displayingErrorMessagesSchema = Yup.object().shape({
     .typeError("Le code postal doit être un nombre")
     .min(0, "Le code postal doit être supérieur ou égal à 0")
     .max(999999, "Le code postal doit être inférieur ou égal à 999999")
-    .required("Le champ est requis !")
+    .required("Le champ est requis !"),
 })
 
 const AccountForm = ({ user }) => {
   const { router } = useContext(AppContext)
 
   const handleFormSubmit = useCallback(
-    async ({ mail, civility, firstName, name, address, city, postalCode }) => {
+    async ({ civility, firstName, name, address, city, postalCode }) => {
       // TODO
+      civility, firstName, name, address, city, postalCode
       router.reload()
     },
-    [router, user]
+    [router]
   )
 
   return (
     <Formik
       initialValues={{
-        mail: user.mail ? user.mail : "",
         civility: user.civility ? user.civility : "M.",
-        firstName: user.firstName ? user.firstName : "",
-        name: user.name ? user.name : "",
+        firstName: user.firstname ? user.firstname : "",
+        name: user.lastname ? user.lastname : "",
         address: user.address ? user.address : "",
         city: user.city ? user.city : "",
-        postalCode: user.postalCode ? user.postalCode : ""
+        postalCode: user.postalCode ? user.postalCode : "",
       }}
       validationSchema={displayingErrorMessagesSchema}
       onSubmit={handleFormSubmit}
     >
       {({ errors, touched }) => (
         <Form className="w-4/6 mb-10 p-12 border mx-auto flex flex-col items-center justify-center rounded">
-          <FormField
-            style="w-5/6 mb-5"
-            label="Email"
-            id="mail"
-            name="mail"
-            placeholder="exemple@mail.com"
-            errorType={errors.mail}
-            touchedType={touched.mail}
-          />
-
           <div className="mb-5 w-5/6 flex items-center justify-left">
             <label htmlFor="civility" className="mr-5">
               Civilité :
@@ -88,7 +74,7 @@ const AccountForm = ({ user }) => {
                   className="mr-1"
                   type="radio"
                   name="civility"
-                  value="M."
+                  value="male"
                 />
                 M.
               </label>
@@ -97,7 +83,7 @@ const AccountForm = ({ user }) => {
                   className="mr-1"
                   type="radio"
                   name="civility"
-                  value="Mme."
+                  value="female"
                 />
                 Mme.
               </label>

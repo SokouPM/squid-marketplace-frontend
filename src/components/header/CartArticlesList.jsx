@@ -11,8 +11,6 @@ const changeQuantity = (sessionId, articleName, isMore) => {
   let cart = JSON.parse(localStorage.getItem("cart"))
 
   cart.map((item) => {
-    console.log(item)
-    
     if (item.name === articleName) {
       if (isMore) {
         item.quantity++

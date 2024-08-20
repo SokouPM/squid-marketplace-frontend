@@ -42,7 +42,11 @@ const Header = () => {
             </button>
             <Link href={`/users/${user.id}/orders`}>
               <a className="hover-bg-secondary text-primary py-1 pl-2 pr-1 flex items-center justify-center bg-white rounded-r-full transition-all hover:text-white">
-                <p>{user.email}</p>
+                <p>
+                  {user.firstname && user.lastname
+                    ? user.firstname + " " + user.lastname
+                    : user.email}
+                </p>
                 <MdAccountCircle className="ml-1 text-2xl" />
               </a>
             </Link>

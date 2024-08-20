@@ -1,4 +1,5 @@
 import { createContext, useCallback, useEffect, useState } from "react"
+import { supabase } from "../utils/supabase"
 
 const AppContext = createContext({})
 
@@ -6,27 +7,50 @@ export const AppContextProvider = (props) => {
   const { pageComponent: Page, router, ...otherProps } = props
 
   const [session, setSession] = useState()
-  const [signInError, setSignInError] = useState(null)
-  const [signUpError, setSignUpError] = useState(null)
   const [cartTotalArticle, setCartTotalArticle] = useState(0)
 
-  const initSession = useCallback((jwt) => {
-    if (!jwt) {
+  const initSession = useCallback(async (token) => {
+    if (!token) {
       setSession(null)
 
       return
     }
 
-    const [, payload] = jwt.split(".")
-    const session = atob(payload)
+    const jwt = localStorage.getItem("token")
 
-    setSession(session)
+    if (!jwt) {
+      return
+    }
+
+    const userId = localStorage.getItem("user")
+
+    if (!userId) {
+      return
+    }
+
+    const { data, error } = await supabase
+      .from("customer")
+      .select(
+        `address, city, id, civility, firstname, lastname, postalCode:postal_code, isAdmin:is_admin`
+      )
+      .eq("user_id", userId)
+      .single()
+
+    const { data: authData, error: authError } = await supabase.auth.getUser(
+      jwt
+    )
+
+    if (error || authError) {
+      return
+    }
+
+    setSession(JSON.stringify({ ...data, email: authData.user.email }))
   }, [])
 
   useEffect(() => {
-    const jwt = localStorage.getItem("jwt")
+    const token = localStorage.getItem("token")
 
-    initSession(jwt)
+    initSession(token)
   }, [initSession])
 
   useEffect(() => {
@@ -54,103 +78,45 @@ export const AppContextProvider = (props) => {
     }
   }, [Page.administration, router, session])
 
-  const signIn = useCallback(
-    async (mail, password) => {
-      try {
-        // const { data } = await api.post("auth/connection", {
-        //   mail,
-        //   password,
-        // })
-        // TODO
-        setSignInError(null) // remove signin error message
-        localStorage.setItem("jwt", data)
-        const {
-          query: { redirect }, // get redirect param from url if exist
-        } = router
-
-        if (redirect) {
-          router.push(decodeURIComponent(redirect))
-        } else {
-          router.push("/")
-        }
-
-        initSession(data) // run session with jwt
-      } catch (err) {
-        if (err.response.status === 404) {
-          err.response.data = { error: "Email incorrect" }
-        }
-
-        setSignInError(err.response.data.error)
-      }
-    },
-    [initSession, router]
-  )
-
-  const signUp = useCallback(
-    async (mail, password) => {
-      try {
-        // await api.post("auth/inscription", { mail, password })
-        router.push("/signin")
-        // TODO
-        setSignUpError(null) // remove signup error message
-      } catch (err) {
-        setSignUpError(err.response.data.error) // remove signup error message
-      }
-    },
-    [router]
-  )
-
   const signOut = () => {
-    localStorage.removeItem("jwt")
+    localStorage.removeItem("token")
+    localStorage.removeItem("user")
     localStorage.setItem("cart", JSON.stringify([]))
     setSession(null)
     router.push("/signin")
   }
 
-  // POST local cart to database when user sign-in
+  // POST local cart to the database when user sign-in
   const addLocalCartToDb = (session) => {
-    let cart = []
-    const sessionId = JSON.parse(session).id
-
-    if (!localStorage.getItem("cart")) {
-      // create local cart if not exist
-      localStorage.setItem("cart", JSON.stringify([]))
-    }
-
-    cart = JSON.parse(localStorage.getItem("cart"))
-
-    if (cart.length) {
-      cart.map((item) => {
-        /*api.post(
-          `/carts/withQuantity?idCustomer=${sessionId}&idArticle=${item.id}&quantity=${item.quantity}`
-        )*/
-        // TODO
-      })
-    }
-
-    localStorage.setItem("cart", JSON.stringify([]))
+    session
+    //! let cart = []
+    //! getLogedCustomer().then((data) => {
+    //! const sessionId = data.id
+    //! if (!localStorage.getItem("cart")) {
+    //!   // create local cart if not exist
+    //!   localStorage.setItem("cart", JSON.stringify([]))
+    //! }
+    //! cart = JSON.parse(localStorage.getItem("cart"))
+    //! if (cart.length) {
+    //!  cart.map((item) => {
+    //!    /*api.post(
+    //!      `/carts/withQuantity?idCustomer=${sessionId}&idArticle=${item.id}&quantity=${item.quantity}`
+    //!    )*/
+    //!    // TODO
+    //!  })
+    //!}
+    //! localStorage.setItem("cart", JSON.stringify([]))
+    //! })
   }
 
   const getDbCart = (session) => {
-    // get cart content from database
-    const sessionId = JSON.parse(session).id
-
-    api.get(`/carts/byCustomer?idCustomer=${sessionId}`).then((response) => {
-      let localCart = []
-      let cartArticlesNb = 0
-
-      for (const key in response.data) {
-        cartArticlesNb += response.data[key].article.price
-        localCart.push({
-          id: response.data[key].article.id,
-          price: response.data[key].article.price,
-          quantity: response.data[key].quantity,
-        })
-      }
-
-      setCartTotalArticle(cartArticlesNb)
-      localStorage.setItem("cart", JSON.stringify(localCart))
-    })
+    session
+    //! getLogedCustomer().then((data) => {
+    //!   const sessionId = data.id
+    //!
+    //!   // get cart content from database
+    //!   // TODO
+    //! })
   }
 
   return (
@@ -159,11 +125,7 @@ export const AppContextProvider = (props) => {
       value={{
         router,
         session,
-        signInError,
-        signUpError,
         cartTotalArticle,
-        signIn,
-        signUp,
         signOut,
         setCartTotalArticle,
         addLocalCartToDb,

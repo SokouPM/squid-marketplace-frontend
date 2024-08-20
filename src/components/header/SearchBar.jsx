@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react"
-import Autocomplete from "@mui/material/Autocomplete"
-import { FaSearch } from "react-icons/fa"
 import AppContext from "../AppContext"
+import { supabase } from "../../utils/supabase"
+import { Autocomplete } from "@mui/material"
+import { FaSearch } from "react-icons/fa"
 
 const SearchBar = () => {
   const { router } = useContext(AppContext)
@@ -9,14 +10,19 @@ const SearchBar = () => {
   const [articlesNames, setArticlesNames] = useState("")
 
   useEffect(() => {
-    // TODO
+    getArticles()
   }, [])
+
+  async function getArticles() {
+    const { data } = await supabase.from("article").select(`label:name`)
+    setArticlesNames(data)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     articlesNames.map((item) => {
       if (value === item.label) {
-        router.push(`/articles/${item.id}`)
+        router.push(`/articles/${item.label}`)
       }
     })
   }
@@ -44,8 +50,7 @@ const SearchBar = () => {
             {...params.inputProps}
             className="h-8 w-80 px-3 rounded-l-full"
           />
-          <button
-            className="bg-secondary hover-bg-tertiary hover-text-primary px-3 h-8 text-white rounded-r-full transition-all">
+          <button className="bg-secondary hover-bg-tertiary hover-text-primary px-3 h-8 text-white rounded-r-full transition-all">
             <FaSearch />
           </button>
         </form>

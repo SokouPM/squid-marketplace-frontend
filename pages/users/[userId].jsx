@@ -2,19 +2,17 @@ import { useRouter } from "next/router"
 import Link from "next/link"
 import { useContext, useEffect, useState } from "react"
 import CircularProgress from "@mui/material/CircularProgress"
-import { FiAlertTriangle } from "react-icons/fi"
 import Layout from "../../src/components/Layout"
 import AccountNav from "../../src/components/body/AccountNav"
 import AppContext from "../../src/components/AppContext"
 
 const UserInformationsPage = () => {
   const {
-    query: { userId }
+    query: { userId },
   } = useRouter()
 
   const { session, router } = useContext(AppContext)
   const [user, setUser] = useState(null)
-  const [apiError, setApiError] = useState(null)
 
   let accountId = null
 
@@ -23,15 +21,31 @@ const UserInformationsPage = () => {
   }
 
   useEffect(() => {
-    if (userId && !isNaN(userId)) {
-      // TODO
+    if (session && userId && !isNaN(userId)) {
+      setUser(JSON.parse(session))
     }
-  }, [userId])
+  }, [userId, session])
 
-  if (userId && accountId && userId != accountId) {
+  if (userId && accountId && Number(userId) !== accountId) {
     router.push(`/users/${accountId}`)
 
     return null
+  }
+
+  const renderCivility = (civility) => {
+    switch (civility) {
+      case "male":
+        return "M."
+
+      case "female":
+        return "Mme."
+
+      case "other":
+        return "Mx."
+
+      default:
+        return ""
+    }
   }
 
   return (
@@ -47,49 +61,40 @@ const UserInformationsPage = () => {
         selected={1}
       />
       <h2 className="text-center text-3xl mb-5 font-bold">Mes informations</h2>
-      {apiError ? (
-        <div className="w-full flex items-center justify-center mt-10 p-5 bg-red-200 rounded">
-          <p className="text-3xl font-bold flex items-center justify-center text-red-600">
-            <FiAlertTriangle className="text-5xl mr-3" />
-            {apiError}
-          </p>
-        </div>
-      ) : (
-        <div>
-          {user ? (
-            <div className="flex flex-col items-center justify-center">
-              <div className="border rounded w-3/4 mx-auto p-5 mb-10 text-2xl">
-                <p className="mb-5">
-                  {user.civility || null} {user.firstName || "Pas de prénom"}{" "}
-                  {user.name || "Pas de nom"}
-                </p>
-                <p className="mb-5">{user.mail}</p>
-                <p className="mb-5">{user.address || "Pas d'adresse"}</p>
-                <p>
-                  {user.postalCode || "Pas de code postal"},{" "}
-                  {user.city || "Pas de ville"}
-                </p>
-              </div>
+      <div>
+        {user ? (
+          <div className="flex flex-col items-center justify-center">
+            <div className="border rounded w-3/4 mx-auto p-5 mb-10 text-2xl">
+              <p className="mb-5">
+                {renderCivility(user.civility)}{" "}
+                {user.firstname || "Pas de prénom"}{" "}
+                {user.lastname || "Pas de nom"}
+              </p>
+              <p className="mb-5">{user.mail}</p>
+              <p className="mb-5">{user.address || "Pas d'adresse"}</p>
+              <p>
+                {user.postalCode || "Pas de code postal"},{" "}
+                {user.city || "Pas de ville"}
+              </p>
+            </div>
 
-              <Link href={`/users/${userId}/modify`}>
-                <a
-                  className="bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white transition-all">
-                  Modifier mes informations
-                </a>
-              </Link>
-            </div>
-          ) : (
-            <div className="flex items-center justify-center">
-              <CircularProgress
-                sx={{
-                  color: "#cc0023"
-                }}
-              />
-              <p className="ml-3">Chargement des informations...</p>
-            </div>
-          )}
-        </div>
-      )}
+            <Link href={`/users/${userId}/modify`}>
+              <a className="bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white transition-all">
+                Modifier mes informations
+              </a>
+            </Link>
+          </div>
+        ) : (
+          <div className="flex items-center justify-center">
+            <CircularProgress
+              sx={{
+                color: "#cc0023",
+              }}
+            />
+            <p className="ml-3">Chargement des informations...</p>
+          </div>
+        )}
+      </div>
     </Layout>
   )
 }

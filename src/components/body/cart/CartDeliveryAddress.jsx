@@ -9,7 +9,6 @@ import AccountForm from "../AccountForm"
 const CartDeliveryAddress = () => {
   const { session, router } = useContext(AppContext)
   const [user, setUser] = useState(null)
-  const [apiError, setApiError] = useState(null)
 
   let accountId = null
 
@@ -18,10 +17,10 @@ const CartDeliveryAddress = () => {
   }
 
   useEffect(() => {
-    if (accountId && !isNaN(accountId)) {
-      // TODO
+    if (session) {
+      setUser(JSON.parse(session))
     }
-  }, [accountId])
+  }, [session])
 
   if (!accountId) {
     return (
@@ -39,23 +38,12 @@ const CartDeliveryAddress = () => {
     )
   }
 
-  if (apiError) {
-    return (
-      <section>
-        <div
-          className="w-full mb-7 py-2 bg-red-200 flex items-center justify-center text-red-600 text-center font-bold text-2xl rounded">
-          <FiAlertTriangle className="text-5xl mr-3" /> {apiError}
-        </div>
-      </section>
-    )
-  }
-
   if (isNaN(accountId)) {
     return (
       <section>
-        <div
-          className="w-full mb-7 py-2 bg-red-200 flex items-center justify-center text-red-600 text-center font-bold text-2xl rounded">
-          <FiAlertTriangle className="text-5xl mr-3" /> User Id must be a number
+        <div className="w-full mb-7 py-2 bg-red-200 flex items-center justify-center text-red-600 text-center font-bold text-2xl rounded">
+          <FiAlertTriangle className="text-5xl mr-3" /> L'identifiant de
+          l'utilisateur est invalide
         </div>
       </section>
     )
@@ -66,7 +54,7 @@ const CartDeliveryAddress = () => {
       <div className="flex items-center justify-center">
         <CircularProgress
           sx={{
-            color: "#cc0023"
+            color: "#cc0023",
           }}
         />
         <p className="ml-3">Chargement...</p>
@@ -97,8 +85,7 @@ const CartDeliveryAddress = () => {
         </p>
       </div>
       <Link href="/cart/payment">
-        <a
-          className="bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white transition-all">
+        <a className="bg-secondary hover-text-primary hover-bg-tertiary px-10 py-2 rounded-full text-white transition-all">
           Confirmer et payer
         </a>
       </Link>

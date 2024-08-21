@@ -8,65 +8,43 @@ import FormField from "../FormField"
 const UserForm = ({ user }) => {
   const { router } = useContext(AppContext)
 
-  const handleFormSubmit = useCallback(
-    async ({ mail, password, admin }) => {
-      // TODO user => put or !user => post
-      router.push("/administration/users")
-    },
-    [router, user]
-  )
+  const handleFormSubmit = useCallback(async () => {
+    // TODO user => put or !user => post
+    router.push("/administration/users")
+  }, [router, user])
 
-  let displayingErrorMessagesSchema
+  let displayingErrorMessagesSchema = Yup.object().shape({
+    mail: Yup.string()
+      .email("Le mail est invalide !")
+      .required("Le champ est requis !"),
+    password: Yup.string()
+      .min(6, "Le mot de passe doit contenir minimum 6 caractères !")
+      .max(50, "Le mot de passe doit contenir maximum 50 caractères !")
+      .matches(
+        /^.*(?=.*[a-z]).*$/g,
+        "Le mot de passe doit contenir au moins 1 minuscule !"
+      )
+      .matches(
+        /^.*(?=.*[A-Z]).*$/g,
+        "Le mot de passe doit contenir au moins 1 majuscule !"
+      )
+      .matches(
+        /^.*(?=.*[0-9]).*$/g,
+        "Le mot de passe doit contenir au moins 1 chiffre !"
+      ),
+  })
 
-  user
-    ? (displayingErrorMessagesSchema = Yup.object().shape({
-      mail: Yup.string()
-        .email("Le mail est invalide !")
-        .required("Le champ est requis !"),
-      password: Yup.string()
-        .min(6, "Le mot de passe doit contenir minimum 6 caractères !")
-        .max(50, "Le mot de passe doit contenir maximum 50 caractères !")
-        .matches(
-          /^.*(?=.*[a-z]).*$/g,
-          "Le mot de passe doit contenir au moins 1 minuscule !"
-        )
-        .matches(
-          /^.*(?=.*[A-Z]).*$/g,
-          "Le mot de passe doit contenir au moins 1 majuscule !"
-        )
-        .matches(
-          /^.*(?=.*[0-9]).*$/g,
-          "Le mot de passe doit contenir au moins 1 chiffre !"
-        )
-    }))
-    : (displayingErrorMessagesSchema = Yup.object().shape({
-      mail: Yup.string()
-        .email("Le mail est invalide !")
-        .required("Le champ est requis !"),
-      password: Yup.string()
-        .min(6, "Le mot de passe doit contenir minimum 6 caractères !")
-        .max(50, "Le mot de passe doit contenir maximum 50 caractères !")
-        .matches(
-          /^.*(?=.*[a-z]).*$/g,
-          "Le mot de passe doit contenir au moins 1 minuscule !"
-        )
-        .matches(
-          /^.*(?=.*[A-Z]).*$/g,
-          "Le mot de passe doit contenir au moins 1 majuscule !"
-        )
-        .matches(
-          /^.*(?=.*[0-9]).*$/g,
-          "Le mot de passe doit contenir au moins 1 chiffre !"
-        )
-        .required("Le champ est requis !")
-    }))
+  if (!user) {
+    displayingErrorMessagesSchema.password =
+      displayingErrorMessagesSchema.password.required("Le champ est requis !")
+  }
 
   return (
     <Formik
       initialValues={{
-        mail: user ? user.mail : "",
+        mail: user ? user.email : "",
         password: "",
-        admin: user ? user.admin : false
+        admin: user ? user.isAdmin : false,
       }}
       validationSchema={displayingErrorMessagesSchema}
       onSubmit={handleFormSubmit}

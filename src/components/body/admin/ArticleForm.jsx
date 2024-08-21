@@ -8,6 +8,7 @@ import { ImCross } from "react-icons/im"
 import { FiAlertTriangle } from "react-icons/fi"
 import AppContext from "../../AppContext"
 import FormField from "../FormField"
+import { supabase } from "../../../utils/supabase"
 
 const displayingErrorMessagesSchema = Yup.object().shape({
   name: Yup.string()
@@ -29,14 +30,14 @@ const displayingErrorMessagesSchema = Yup.object().shape({
     .typeError("Le stock doit être un nombre")
     .min(0, "Le stock doit être supérieur ou égal à 0")
     .max(999999, "Le stock doit être inférieur ou égal à 999999")
-    .required("Le champ est requis !")
+    .required("Le champ est requis !"),
 })
 
 const ArticleForm = ({ article }) => {
   const { router } = useContext(AppContext)
 
   const [pictureError, setPictureError] = useState(null)
-  const [pictureList, setPicturesList] = useState([])
+  const [articleImage, setArticleImage] = useState([])
   const [pictureUrl, setPictureUrl] = useState("")
 
   const [categories, setCategories] = useState(null)
@@ -52,28 +53,35 @@ const ArticleForm = ({ article }) => {
     { value: "brown", name: "Maron" },
     { value: "gray", name: "Gris" },
     { value: "white", name: "Blanc" },
-    { value: "black", name: "Noir" }
+    { value: "black", name: "Noir" },
   ]
 
   useEffect(() => {
-    // TODO
+    getCategories()
   }, [])
 
-  useEffect(() => article && setPicturesList(article.images), [article])
+  useEffect(() => article && setArticleImage(article.articleImage), [article])
 
-  const handleFormSubmit = useCallback(
-    async ({ name, description, category, color, price, stock }) => {
-      if (pictureList.length < 2) {
-        setPictureError("Vous devez mettre au moins 2 images")
+  const getCategories = async () => {
+    const { data, error } = await supabase
+      .from("category")
+      .select("name")
+      .order("name", { ascending: true })
 
-        return
-      }
+    error && setApiError(error.message)
+    data && setCategories(data)
+  }
 
-      // TODO article => put or !article => post
-      router.push("/administration/articles")
-    },
-    [article, pictureList, router]
-  )
+  const handleFormSubmit = useCallback(async () => {
+    if (articleImage.length < 2) {
+      setPictureError("Vous devez mettre au moins 2 images")
+
+      return
+    }
+
+    // TODO article => put or !article => post
+    router.push("/administration/articles")
+  }, [article, articleImage, router])
 
   if (apiError) {
     return (
@@ -91,7 +99,7 @@ const ArticleForm = ({ article }) => {
       <div className="w-full flex items-center justify-center mt-10 p-5">
         <CircularProgress
           sx={{
-            color: "#cc0023"
+            color: "#cc0023",
           }}
           className="mr-5"
         />
@@ -118,10 +126,10 @@ const ArticleForm = ({ article }) => {
       initialValues={{
         name: article ? article.name : "",
         description: article ? article.description : "",
-        category: article ? article.category.id : categories[0].id,
+        category: article ? article.category : categories[0].name,
         color: article ? article.color : "red",
         price: article ? article.price : 0,
-        stock: article ? article.stock : 0
+        stock: article ? article.stock : 0,
       }}
       validationSchema={displayingErrorMessagesSchema}
       onSubmit={handleFormSubmit}
@@ -157,7 +165,7 @@ const ArticleForm = ({ article }) => {
                 as="select"
               >
                 {categories.map((item) => (
-                  <option key={item.id} value={item.id} name="category">
+                  <option key={item.name} value={item.name} name="category">
                     {item.name}
                   </option>
                 ))}
@@ -211,21 +219,21 @@ const ArticleForm = ({ article }) => {
                 className={`w-10/12 border-2 rounded py-1 px-2 ${
                   pictureError && "border-red-600"
                 } ${
-                  pictureList.length >= 4 && "opacity-25 cursor-not-allowed"
+                  articleImage.length >= 4 && "opacity-25 cursor-not-allowed"
                 }`}
-                disabled={pictureList.length >= 4 ? true : false}
+                disabled={articleImage.length >= 4}
                 onChange={(e) => {
                   setPictureUrl(e.target.value)
                 }}
               ></Field>
-              {pictureList.length < 4 ? (
+              {articleImage.length < 4 ? (
                 <button
                   className="ml-1 w-2/12 rounded bg-blue-600 text-white transition-all hover:bg-blue-300"
                   onClick={(e) => {
                     e.preventDefault()
-                    setPicturesList((arr) => [...arr, { url: pictureUrl }])
+                    setArticleImage((arr) => [...arr, { url: pictureUrl }])
 
-                    if (pictureList.length >= 1) {
+                    if (articleImage.length >= 1) {
                       setPictureError(null)
                     }
                   }}
@@ -243,21 +251,21 @@ const ArticleForm = ({ article }) => {
                 </button>
               )}
             </div>
-            {pictureError && pictureList.length < 4 && (
+            {pictureError && articleImage.length < 4 && (
               <div className="errorField mt-1 text-red-600">{pictureError}</div>
             )}
           </div>
 
           <ul className="w-5/6 grid grid-cols-3 place-content-around place-items-center gap-y-5">
-            {pictureList.map((item, index) => (
+            {articleImage.map((item, index) => (
               <li key={index} className="shadow-lg relative">
                 <img src={item.url} width="250" alt="product image" />
                 <button
                   className="absolute bg-red-600 text-white p-2 rounded-full -right-4 -top-4 transition-all hover:scale-110"
                   onClick={(e) => {
                     e.preventDefault()
-                    setPicturesList(
-                      pictureList.filter((el, id) => id !== index)
+                    setArticleImage(
+                      articleImage.filter((el, id) => id !== index)
                     )
                   }}
                 >

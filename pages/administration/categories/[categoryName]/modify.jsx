@@ -3,20 +3,32 @@ import { useEffect, useState } from "react"
 import Layout from "../../../../src/components/Layout"
 import CategoryForm from "../../../../src/components/body/admin/CategoryForm"
 import CircularProgress from "@mui/material/CircularProgress"
+import { supabase } from "../../../../src/utils/supabase"
 
 const ModifyCategoryPage = () => {
   const {
-    query: { categoryId }
+    query: { categoryName },
   } = useRouter()
 
   const [category, setCategory] = useState(null)
   const [apiError, setApiError] = useState(null)
 
   useEffect(() => {
-    if (categoryId && !isNaN(categoryId)) {
-      // TODO
+    if (categoryName) {
+      getCategoryByName()
     }
-  }, [categoryId])
+  }, [categoryName])
+
+  const getCategoryByName = async () => {
+    const { data, error } = await supabase
+      .from("category")
+      .select("name")
+      .eq("name", categoryName)
+      .single()
+
+    error && setApiError(error.message)
+    data && setCategory(data)
+  }
 
   return (
     <Layout
@@ -25,10 +37,10 @@ const ModifyCategoryPage = () => {
       diplayadminheader={1}
       diplayfooter={1}
     >
-      {categoryId ? (
+      {categoryName && (
         <>
           <h2 className="my-5 text-3xl text-center font-bold">
-            Modifier la categorie "{categoryId}"
+            Modifier la categorie "{categoryName}"
           </h2>
           {apiError && <p>{apiError}</p>}
           {category ? (
@@ -37,22 +49,13 @@ const ModifyCategoryPage = () => {
             <div className="flex items-center justify-center mt-20">
               <CircularProgress
                 sx={{
-                  color: "#cc0023"
+                  color: "#cc0023",
                 }}
               />
               <p className="ml-3">Chargement du formulaire...</p>
             </div>
           )}
         </>
-      ) : (
-        <div className="flex items-center justify-center mt-20">
-          <CircularProgress
-            sx={{
-              color: "#cc0023"
-            }}
-          />
-          <p className="ml-3">Chargement du formulaire...</p>
-        </div>
       )}
     </Layout>
   )

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { useState } from "react"
-import { MdOutlineCategory, MdOutlineArticle } from "react-icons/md"
+import { MdOutlineArticle, MdOutlineCategory } from "react-icons/md"
 import { FiUsers } from "react-icons/fi"
 import { FaFileInvoiceDollar } from "react-icons/fa"
 import Layout from "../src/components/Layout"
@@ -36,9 +36,7 @@ const AdministrationPage = () => {
           <Link href="/administration/orders">
             <a
               onMouseEnter={() => {
-                setInfo(
-                  "Afficher ou supprimer les commande ou télécharger les factures"
-                )
+                setInfo("Afficher les commandes ou télécharger les factures")
               }}
               onMouseLeave={() => {
                 setInfo(null)
@@ -68,9 +66,7 @@ const AdministrationPage = () => {
           <Link href="/administration/users">
             <a
               onMouseEnter={() => {
-                setInfo(
-                  "Ajouter, modifier, supprimer ou afficher les utilisateurs"
-                )
+                setInfo("modifier, supprimer ou afficher les utilisateurs")
               }}
               onMouseLeave={() => {
                 setInfo(null)

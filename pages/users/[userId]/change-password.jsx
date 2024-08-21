@@ -82,7 +82,7 @@ const UserInformationsPage = () => {
     >
       <AccountNav
         userId={userId}
-        userIsAdmin={user && user.admin}
+        userIsAdmin={user && user.isAdmin}
         selected={3}
       />
       <h2 className="text-center text-3xl mb-5 font-bold">

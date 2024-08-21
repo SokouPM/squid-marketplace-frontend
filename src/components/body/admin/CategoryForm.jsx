@@ -8,24 +8,21 @@ const displayingErrorMessagesSchema = Yup.object().shape({
   name: Yup.string()
     .required("Le champ est requis !")
     .min(3, "Minimum 3 caractères")
-    .max(40, "Maximum 40 caractères")
+    .max(40, "Maximum 40 caractères"),
 })
 
 const CategoriesForm = ({ category }) => {
   const { router } = useContext(AppContext)
 
-  const handleFormSubmit = useCallback(
-    async ({ name }) => {
-      // TODO category => put or !category => post
-      router.push("/administration/categories")
-    },
-    [category, router]
-  )
+  const handleFormSubmit = useCallback(async () => {
+    // TODO category => put or !category => post
+    router.push("/administration/categories")
+  }, [router])
 
   return (
     <Formik
       initialValues={{
-        name: category ? category.name : ""
+        name: category ? category.name : "",
       }}
       validationSchema={displayingErrorMessagesSchema}
       onSubmit={handleFormSubmit}
